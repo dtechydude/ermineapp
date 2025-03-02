@@ -1,0 +1,31 @@
+.room-list-bx{
+	img{
+		width:9.375rem;
+		height:4.813rem;
+	}	
+}
+//reviw 
+.stars{
+	display:flex;
+	margin-bottom: 1rem;
+	li{
+		a{
+			padding: 0 0.3rem;
+			font-size: 1rem;
+		}	
+	}
+}
+.job-desk1{
+	width:40%;	
+}
+.review-tbl{
+	tr{
+		td{
+			vertical-align:top!important;
+		}	
+	}	
+}
+.comments{
+	max-width:200px;
+	display:block;
+}

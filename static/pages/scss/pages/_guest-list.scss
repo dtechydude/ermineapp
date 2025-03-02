@@ -1,0 +1,70 @@
+.guest-calendar{
+	.reportrange{
+		padding: 1rem 2.875rem;
+		background: var(--secondary);
+		border-radius: 0.8rem;
+		color: white;	
+		font-size:1rem;
+	}	
+	@include respond ('laptop'){
+		.reportrange{
+			padding: 0.6rem 2.875rem;	
+		}	
+	}
+	@include respond ('tab-land'){
+		margin-bottom:1rem;	
+		margin-top:1rem;	
+	}
+}
+.newest{
+	.default-select{
+		padding: 0 1.5rem;
+		padding-right:2.2rem;
+		line-height: 3.5rem;
+		height:3.5rem;
+		border: 1px solid var(--secondary);
+		border-radius: 0.8rem;
+		.current{
+			color:var(--secondary);
+			font-size: 1rem;
+			font-weight: 600;
+			margin-right:0.375rem;
+		}
+		&:after{
+			border-color:#CCCCCC;	
+		}
+	}
+	@include respond ('laptop'){
+		.default-select{
+			line-height: 2.7rem;
+			height:2.7rem;
+		}	
+	} 
+}
+.concierge-bx{
+	img{
+		height:2.813rem;
+		width:2.813rem;
+		
+	}	
+}
+.request{
+	.btn-sm{
+		background: var(--rgba-secondary-1) !important;	
+		font-weight:500;
+		font-size: 16px!important;
+	}	
+	.btn-md{
+		background: var(--rgba-primary-1) !important;	
+		font-weight:500;
+		font-size: 16px!important;
+	}
+}
+.job-desk{
+	min-width:200px;
+	display:block;
+}
+.facility{
+	min-width:200px;
+	display:block;	
+}

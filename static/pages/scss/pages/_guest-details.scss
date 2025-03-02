@@ -1,0 +1,179 @@
+.guest-profile{
+	border-bottom:2px solid #EBEBEB;
+	padding-bottom: 2rem;
+	img{
+		height:9.75rem;	
+		width:9.75rem;
+		border-radius:0.75rem;
+		margin-right: 3rem;
+	}	
+	.call{
+		margin-top:1rem;
+		a{
+			height:3.688rem;	
+			width:3.688rem;	
+			border-radius:0.75rem;
+			border:1px solid var(--secondary);
+			display:block;
+			line-height:3.688rem;
+			text-align:center;
+			font-size:1.5rem;
+			
+		}	
+	}
+	@include respond ('laptop'){
+		img{
+			margin-right:1rem;
+		}		
+	}
+	@include respond ('phone'){
+		img{
+			height:4.75rem;	
+			width:4.75rem;
+		}	
+		.call{
+			a{
+				height:2.688rem;	
+				width:2.688rem;		
+				line-height:2.688rem;
+				font-size:1rem;
+			}	
+		}
+	}
+}
+.check-status{
+	margin-right:4rem;	
+}
+.facilities{
+	a{
+		font-weight:600;
+		margin-right:0.5rem;
+		margin-bottom:0.8rem;
+	}	
+}
+
+.guest-carousel{
+	height: 100%;
+	.owl-stage-outer,
+	.owl-stage,
+	.owl-item,
+	.item,
+	img{
+		height: 100%;
+		object-fit:cover;
+		border-radius:0;
+	}
+	.owl-nav{
+		position:absolute;
+		top:70%;
+		transform:translateY(-50%);
+		width:100%;
+		.owl-prev,
+		.owl-next{
+			position: absolute;
+			width: 3.5rem;
+			height: 3.5rem;
+			line-height: 3.5rem;
+			border-radius: 0.75rem;
+			background:rgba(239, 239, 239, 0.02);	
+			border:1px solid rgba(239, 239, 239, 0.02);
+			top: 50%;
+			color: #fff;
+			font-size: 1.125rem;
+			margin-top: -1.875rem;
+			text-align: center;
+			-webkit-transition: all 0.5s;
+			-ms-transition: all 0.5s;
+			transition: all 0.5s;
+			cursor: pointer;
+			
+			&:hover{
+				border:1px solid $white;
+				background:rgba(239, 239, 239, 0.22);	
+			}
+		}
+		.owl-next{
+			right:5rem;
+		}
+		.owl-prev{
+			left:5rem;
+		}
+	}
+	.rooms{
+		height:100%;	
+		position:relative;
+		overflow: hidden;
+		.img-content{
+			position:absolute;
+			bottom:2rem;
+			left:0;
+			padding:0 5.313rem;
+			z-index:1;
+		}
+		&:after{
+			position:absolute;
+			height:100%;
+			content:"";
+			width:100%;
+			top:0;
+			left:0;
+			/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.1+1,0.66+100 */
+			background: -moz-linear-gradient(top,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 1%, rgba(0,0,0,0.66) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 1%,rgba(0,0,0,0.66) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 1%,rgba(0,0,0,0.66) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#a8000000',GradientType=0 ); /* IE6-9 */
+		}
+		.booked{
+			p{
+				position:absolute;
+				height:3rem;
+				width:12rem;
+				background:#5AD07A;
+				top:1.875rem;
+				right:-2.75rem;
+				text-align: center;
+				line-height: 3rem;
+				color: white;
+				transform: rotate(45deg);
+			}
+		}
+	}
+	@include respond ('phone'){
+		.rooms{
+			.img-content{
+				padding:0 1.313rem;	
+			}	
+		}
+		.owl-nav{
+			.owl-prev,
+			.owl-next{
+				margin-top: -7.875rem;	
+			}
+			.owl-next{
+				right:1rem;
+			}
+			.owl-prev{
+				left:1rem;
+			}
+		}	
+	}
+	
+}
+.purchase-history{
+	img{
+		width:17.063rem;
+		height:7.063rem;
+		object-fit:cover;
+		border-radius:0.5rem;
+	}
+	@include respond ('tab-land'){
+		margin-bottom:0.8rem;	
+	}
+}
+.guest-text{
+	font-size:1.25rem;
+	color:black;
+	@include respond ('laptop'){
+		font-size:1rem;	
+	}
+}

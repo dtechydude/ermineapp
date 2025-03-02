@@ -1,0 +1,14 @@
+{% extends 'admin/base.html'%}
+{% load static %}
+
+{% block branding %}
+<h1 id="head" style="color:white;"> Ermine App</h1>
+{% endblock branding %}
+{% block extrahead %}
+    <link rel="shortcut icon" href="{% static 'portal/images/favicon.png' %}" />
+{% endblock extrahead %}
+
+{% block userlinks %}
+{{ block.super }}
+{% include "admin/color_theme_toggle.html" %}
+{% endblock %}
