@@ -7,10 +7,10 @@ from .utils import generate_ref_code
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=12, blank=True)
-    recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rec_by')
+    recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,  related_name='ref_by' )
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     middle_name = models.CharField(max_length=20, blank=True)
-    date_of_birth = models.DateField(null=False)
+    date_of_birth = models.DateField(null=True)
     nin = models.CharField(max_length=6, blank=True)
     phone = models.CharField(max_length=11, blank=True)
     altenate_phone = models.CharField(max_length=11, blank=True)
@@ -141,4 +141,3 @@ class Profile(models.Model):
             self.code = code
         super().save(*args, **kwargs)
 
-    
