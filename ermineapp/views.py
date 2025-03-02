@@ -34,7 +34,9 @@ def main_view(request, *args, **kwargs):
         profile = Profile.objects.get(code=code)
         request.session['ref_profile'] = profile.id
         print('id', profile.id)
+    
     except:
         pass
-    print(request.session.get_expiry_age{})
+    
+    # print(request.session.get_expiry_age{})
     return render(request, 'main.html', {})

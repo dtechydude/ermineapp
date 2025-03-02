@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import main_view, signup_view
+from .views import main_view,  signup_view
 from users.views import my_recommendations_view
 
 urlpatterns = [

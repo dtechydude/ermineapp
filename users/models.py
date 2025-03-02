@@ -4,14 +4,16 @@ from django.contrib.auth.models import User
 from .utils import generate_ref_code
 
 
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=12, blank=True)
-    recommended_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rec_by')
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     middle_name = models.CharField(max_length=20, blank=True)
+    date_of_birth = models.DateField(null=False)
+    nin = models.CharField(max_length=6, blank=True)
+    phone = models.CharField(max_length=11, blank=True)
+    altenate_phone = models.CharField(max_length=11, blank=True)
     
     select = 'Select'
     female = 'Female'
@@ -23,31 +25,90 @@ class Profile(models.Model):
         ('Male', male),      
     ]
     gender = models.CharField(max_length=15, choices=gender, default=select)
-    nin = models.CharField(max_length=6, blank=True)
-    phone = models.CharField(max_length=11, blank=True)
-    altenate_phone = models.CharField(max_length=11, blank=True)
-    address = models.CharField(max_length=20, blank=True, null=True)
-    bio = models.TextField(max_length=150, blank=True)
 
     select = 'Select'
-    southwest = 'SouthWest'
-    southeast = 'SouthEast'
-    southsouth = 'SouthSouth'
-    northwest = 'NorthWest'
-    northeast = 'NorthEast'
-    northcentral = 'NorthCentral'
+    abia = 'Abia'
+    adamawa = 'Adamawa'
+    akwa_ibom = 'Akwa_Ibom'
+    anambra = 'Anambra'
+    bauchi = 'Bauchi'
+    bayelsa = 'Bayelsa'
+    benue = 'Benue'
+    borno = 'Borno'
+    cross_river = 'Cross_river'
+    delta = 'Delta'
+    ebonyi = 'Ebonyi'
+    edo = 'Edo'
+    ekiti = 'Ekiti'
+    enugu = 'Enugu'
+    fct_abuja = 'Fct_abuja'
+    gombe = 'Gombe'
+    imo = 'Imo'
+    jigawa = 'Jigawa'
+    kaduna = 'Kaduna'
+    kano = 'Kano'
+    katsina = 'Katsina'
+    kebbi = 'Kebbi'
+    kogi = 'Kogi'
+    kwara = 'Kwara'
+    lagos = 'Lagos'
+    nasarawa = 'Nasarawa'
+    niger = 'Niger'
+    ogun = 'Ogun'
+    ondo = 'Ondo'
+    osun = 'Osun'
+    oyo = 'Oyo'
+    plateau = 'Plateau'
+    rivers = 'Rivers'
+    sokoto = 'Sokoto'
+    taraba = 'Taraba'
+    yobe = 'Yobe'
+    zamfara = 'Zamfara'
     
     state = [
         ('Select', select),
-        ('SouthWest', southwest),
-        ('SouthEast', southeast),
-        ('SouthSouth', southsouth),
-        ('NorthWest', northwest),
-        ('NorthEast', northeast),
-        ('NorthCentral', northcentral),
+        ('Abia', abia),
+        ('Adamawa', adamawa),
+        ('Akwa_ibom', akwa_ibom),
+        ('Anambra', anambra),
+        ('Bauchi', bauchi),
+        ('Bayelsa', bayelsa),
+        ('Benue', benue),
+        ('Borno', borno),
+        ('Cross_river', cross_river),
+        ('Delta', delta),
+        ('Ebonyi', ebonyi),
+        ('Edo', edo),
+        ('Ekiti', ekiti),
+        ('Enugu', enugu),
+        ('Fct_abuja', fct_abuja),
+        ('Gombe', gombe),
+        ('Imo', imo),
+        ('Jigawa', jigawa),
+        ('Kaduna', kaduna),
+        ('Katsina', katsina),
+        ('Kebbi', kebbi),
+        ('Kogi', kogi),
+        ('Kwara', kwara),
+        ('Lagos', lagos),
+        ('Nasarawa', nasarawa),
+        ('Niger', niger),
+        ('Ogun', ogun),
+        ('Ondo', ondo),
+        ('Osun', osun),
+        ('Oyo', oyo),
+        ('Plateau', plateau),
+        ('Rivers', rivers),
+        ('Sokoto', sokoto),
+        ('Taraba', taraba),
+        ('Yobe', yobe),
+        ('Zamfara', zamfara),
+        
     ]
-
+ 
     state = models.CharField(max_length=15, choices=state, default=select)
+    address = models.CharField(max_length=20, blank=True, null=True)
+    bio = models.TextField(max_length=150, blank=True)
 
     agent_option = models.BooleanField(default=False)
     merchant_option = models.BooleanField(default=False)
@@ -58,7 +119,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ['user']
-
 
 #this function returns the profile name in the admin panel profile table
     def __str__ (self):
