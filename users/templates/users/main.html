@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+
 
 {% block title %} My Recommendations {% endblock title %} 
 
@@ -8,9 +8,11 @@
     <ul>
         {% for p in my_recs %}
         <li> {{ p.user }}</li>
+        {% endfor %}
     </ul>
     {% else %}
         <hi> You have no recommendations yet.</hi>
-    {% endif %}
+    
+        {% endif %}
 
 {% endblock content %} 

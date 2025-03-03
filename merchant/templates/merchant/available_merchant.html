@@ -1,0 +1,309 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- old content deleted here -->
+	
+	<!-- PAGE TITLE HERE -->
+	 {% block title %}
+	<title>Available Merchant</title>
+	{% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+	{% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png' %}" />
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+	{% endblock favicon %}
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+	
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+                    
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+       
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+		{% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Available</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Merchants</a></li>
+					</ol>
+                </div>
+				
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/1.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                        </ul>
+                                        <span class="price">$761.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/2.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span class="price">$159.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/3.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span class="price">$357.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/4.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                        </ul>
+                                        <span class="price">$654.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/5.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span class="price">$369.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/6.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span class="price">$245.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/7.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                        </ul>
+                                        <span class="price">$364.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="new-arrival-product">
+                                    <div class="new-arrivals-img-contnent">
+                                        <img class="img-fluid" src="{% static 'pages/images/product/1.jpg' %}" alt="">
+                                    </div>
+                                    <div class="new-arrival-content text-center mt-3">
+                                        <h4><a href="ecom-product-detail.html">Available Cash</a></h4>
+                                        <ul class="star-rating">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                            <li><i class="fa fa-star-half-empty"></i></li>
+                                        </ul>
+                                        <span class="price">$548.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		{% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+     
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+	{% block script %}
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>	
+	{% endblock script %}
+</body>
+</html>

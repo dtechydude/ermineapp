@@ -17,7 +17,11 @@ urlpatterns = [
     #other module links
     path('', include('pages.urls', namespace='pages')),
     path('users/', include('users.urls')),
+    path('merchant/', include('merchant.urls')),
+    path('subscriber/', include('subscriber.urls')),
+    path('transaction/', include('transaction.urls')),
 ]
+
 
 
 
