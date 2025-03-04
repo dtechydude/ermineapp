@@ -15,3 +15,7 @@ def lockscreen(request):
 
 def logout(request):
     return render(request, 'pages/logout.html')
+
+# @login_required
+def help_center(request):
+    return render(request, 'pages/help_center.html')

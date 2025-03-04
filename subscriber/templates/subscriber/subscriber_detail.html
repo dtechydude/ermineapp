@@ -2,463 +2,304 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:title" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:image" content="https://travl.dexignlab.com/xhtml/social-image.png" />
-	<meta name="format-detection" content="telephone=no">
 
 	<!-- PAGE TITLE HERE -->
-     {% block title %}
-	<title>Subscriber Detail</title>
-    {% endblock title %}
+	{% block title %}
+	<title>Merchant Details</title>
+	{% endblock title %}
 	
 	<!-- FAVICONS ICON -->
-    {% block favicon %}
-	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png' %}" />
+	{% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="{% static 'pagesvendor/star-rating/star-rating-svg.css' %}">
 	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
-	<link href="{% static 'pages/vendor/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
-	<link href="{% static 'pages/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
-    {% endblock favicon %}
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+	{% endblock favicon %}
 
-	<!-- Style css -->
-	<link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
-	
 </head>
+
 <body>
 
-	<!--*******************
-		Preloader start
-	********************-->
-	<div id="preloader">
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
 		<div class="lds-ripple">
 			<div></div>
 			<div></div>
 		</div>
-	</div>
-	<!--*******************
-		Preloader end
-	********************-->
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
 
-	<!--**********************************
-		Main wrapper start
-	***********************************-->
-    {% block mainwrapper %}
-	<div id="main-wrapper">
-        {% endblock mainwrapper %}
 
-		<!--**********************************
-			Nav header start
-		***********************************-->
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+	{% block mainwrapper %}
+    <div id="main-wrapper">
+		{% endblock mainwrapper %}
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		
+        <!--**********************************
+            Nav header end
+        ***********************************-->
 		
 		<!--**********************************
-			Nav header end
-		***********************************-->
-		
-		<!--**********************************
-			Chat box start
-		***********************************-->
-		
-		<!--**********************************
-			Chat box End
-		***********************************-->
-		
-		<!--**********************************
-			Header start
-		***********************************-->
-		
-		<!--**********************************
-			Header end ti-comment-alt
-		***********************************-->
+            Chat box start
+        ***********************************-->
 
 		<!--**********************************
-			Sidebar start
-		***********************************-->
+            Chat box End
+        ***********************************-->
+
+
 		
-		<!--**********************************
-			Sidebar end
-		***********************************-->
 		
-		<!--**********************************
-			Content body start
-		***********************************-->
-        {% block contentbody %}
-		<div class="content-body">
-			<!-- row -->
-			<div class="container-fluid">
-				<div class="row mt-4">
-					<div class="col-xl-12">
-						<div class="row">
-							<div class="col-xl-12">
-								<div class="card overflow-hidden">
-									<div class="row m-0">
-										<div class="col-xl-6 p-0">
-											<div class="card-body">
-												<div class="guest-profile">
-													<div class="d-flex">
-														<img src="{% static 'pages/images/profile/pic1.jpg' %}" alt="">
-														<div>
-															<h2 class="font-w600">Roberto Mansini</h2>
-															<span class="text-secondary">ID 1234124512551</span>
-															<div class="call d-flex align-items-center"> 
-															<a href="javascript:void(0);"><i class="fas fa-phone-alt text-secondary"></i></a>
-																<button class="btn btn-secondary ms-3">
-																	<svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24.18" viewBox="0 0 24 24.18">
-																	  <g id="_032-speech-bubble" data-name="032-speech-bubble" transform="translate(-1.63 0)">
-																		<g id="Group_9" data-name="Group 9" transform="translate(1.63 0)">
-																		  <path id="Path_118" data-name="Path 118" d="M22.193,3.6A12,12,0,0,0,1.636,12.361a11.434,11.434,0,0,0,.82,4.015,11.885,11.885,0,0,0,1.7,2.969l-.99,2.347a1.778,1.778,0,0,0,1.951,2.46l4.581-.792A12.013,12.013,0,0,0,22.193,3.6ZM12.749,16.8H9.61a.9.9,0,1,1,0-1.81h3.139a.911.911,0,0,1,.9.9A.893.893,0,0,1,12.749,16.8Zm4.892-3.676H9.61a.911.911,0,0,1-.9-.9.893.893,0,0,1,.9-.9h8.031a.9.9,0,1,1,0,1.81Zm0-3.7H9.61a.9.9,0,1,1,0-1.81h8.031a.911.911,0,0,1,.9.9A.93.93,0,0,1,17.641,9.421Z" transform="translate(-1.63 0)" fill="#fff"/>
-																		</g>
-																	  </g>
-																	</svg>
-																	Send Message
-																</button>	
+        <!--**********************************
+            Header start
+        ***********************************-->
+      
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+     
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+		{% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Subscriber</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Details</a></li>
+					</ol>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade show active" id="first">
+                                                <img class="img-fluid" src="{% static 'pages/images/product/1.jpg' %}" alt="">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="second">
+                                                <img class="img-fluid" src="{% static 'pages/images/product/2.jpg' %}" alt="">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="third">
+                                                <img class="img-fluid" src="{% static 'pages/images/product/3.jpg' %}" alt="">
+                                            </div>
+											<div role="tabpanel" class="tab-pane fade" id="for">
+                                                <img class="img-fluid" src="{% static 'pages/images/product/4.jpg' %}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="tab-slide-content new-arrival-product mb-4 mb-xl-0">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav slide-item-list mt-3" role="tablist">
+                                                <li role="presentation" class="show">
+                                                    <a href="#first" role="tab" data-bs-toggle="tab">
+                                                        <img class="img-fluid" src="{% static 'pages/images/tab/1.jpg' %}" alt="" width="50">
+                                                    </a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#second" role="tab" data-bs-toggle="tab"><img class="img-fluid" src="{% static 'pages/images/tab/2.jpg' %}" alt="" width="50"></a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#third" role="tab" data-bs-toggle="tab"><img class="img-fluid" src="{% static 'pages/images/tab/3.jpg' %}" alt="" width="50"></a>
+                                                </li>
+												<li role="presentation">
+                                                    <a href="#for" role="tab" data-bs-toggle="tab"><img class="img-fluid" src="{% static 'pages/images/tab/4.jpg' %}" alt="" width="50"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!--Tab slider End-->
+                                    <div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
+                                        <div class="product-detail-content">
+                                            <!--Product details-->
+                                            <div class="new-arrival-content pr">
+                                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
+                                                <div class="comment-review star-rating">
+													<ul>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+
+													</ul>
+													<span class="review-text">(34 reviews) / </span><a class="product-review" href=""  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
+												</div>
+												<div class="d-table mb-2">
+													<p class="price float-start d-block">$325.00</p>
+                                                </div>
+                                                <p>Availability: <span class="item"> In stock <i
+                                                            class="fa fa-shopping-basket"></i></span>
+                                                </p>
+                                                <p>Product code: <span class="item">0405689</span> </p>
+                                                <p>Brand: <span class="item">Lee</span></p>
+                                                <p>Product tags:&nbsp;&nbsp;
+                                                    <span class="badge badge-success light">bags</span>
+                                                    <span class="badge badge-success light">clothes</span>
+                                                    <span class="badge badge-success light">shoes</span>
+                                                    <span class="badge badge-success light">dresses</span>
+                                                </p>
+                                                <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                                    If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+												<div class="d-flex align-items-end flex-wrap mt-4">
+													<div class="filtaring-area me-3">
+														<div class="size-filter">
+															<h4 class="m-b-15">Select size</h4>
+															
+															
+															<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+															  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
+															  <label class="btn btn-outline-primary" for="btnradio1">XS</label>
+
+															  <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
+															  <label class="btn btn-outline-primary" for="btnradio2">SM</label>
+
+															  <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
+															  <label class="btn btn-outline-primary" for="btnradio3">MD</label>
+															  
+															  <input type="radio" class="btn-check" name="btnradio" id="btnradio4">
+															  <label class="btn btn-outline-primary" for="btnradio4">LG</label>
+															  
+															  <input type="radio" class="btn-check" name="btnradio" id="btnradio5">
+															  <label class="btn btn-outline-primary" for="btnradio5">XL</label>
 															</div>
-														</div>
-														<div class="dropdown dropend ms-auto">
-															<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-																<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																	<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																	<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																	<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																</svg>
-
-															</a>
-															<div class="dropdown-menu">
-																<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-																<a class="dropdown-item" href="javascript:void(0);">Delete</a>
-															</div>
+															
 														</div>
 													</div>
-													<div class="d-flex">
-														<div class="mt-4 check-status">
-															<span class="d-block mb-2">Check In</span>	
-															<span class="font-w500 fs-16">October 30th, 2021 | 08:23 AM</span>
-														</div>
-														<div class="mt-4">
-															<span class="d-block mb-2">Check Out</span>	
-															<span class="font-w500 fs-16">November 2th, 2021</span>
-														</div>
+													<!--Quantity start-->
+													<div class="col-2 px-0  mb-2 me-3">
+														<input type="number" name="num" class="form-control input-btn input-number" value="1">
+													</div>
+													<!--Quanatity End-->
+													<div class="shopping-cart  mb-2 me-3">
+														<a class="btn btn-primary" href="javascript:void();"><i
+																class="fa fa-shopping-basket me-2"></i>Add
+															to cart</a>
 													</div>
 												</div>
-												<div class="d-flex flex-wrap">
-													<div class="mt-4 check-status">
-														<span class="d-block mb-2">Room Info</span>	
-														<h4 class="font-w500 fs-24">Deluxe Z - 002424</h4>
-													</div>
-													<div class="mt-4 ms-3">
-														<span class="d-block mb-2 text-black">Price</span>	
-														<span class="font-w500 fs-24 text-black">$145<small class="fs-14 ms-2 text-secondary">/night</small></span>
-													</div>
-												</div>
-												<p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-												<div class="facilities">
-													<div class="mb-3 ">
-														<span class="d-block mb-3">Facilities</span>
-														<a href="javascript:void(0);" class="btn btn-secondary light btn-lg">
-														<svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20">
-															<g>
-															<path  d="M27,14V7a1,1,0,0,0-1-1H6A1,1,0,0,0,5,7v7a3,3,0,0,0-3,3v8a1,1,0,0,0,2,0V24H28v1a1,1,0,0,0,2,0V17A3,3,0,0,0,27,14ZM7,8H25v6H24V12a2,2,0,0,0-2-2H19a2,2,0,0,0-2,2v2H15V12a2,2,0,0,0-2-2H10a2,2,0,0,0-2,2v2H7Zm12,6V12h3v2Zm-9,0V12h3v2ZM4,17a1,1,0,0,1,1-1H27a1,1,0,0,1,1,1v5H4Z" transform="translate(-2 -6)" fill="#135846"/>
-															</g>
-														</svg>
-														3 Bed Space</a>
-														<a href="javascript:void(0);" class="btn btn-secondary light btn-lg">
-														<svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="23.512" viewBox="0 0 20 23.512">
-														  <g id="_010-security" data-name="010-security" transform="translate(-310.326 -159.324)">
-															<path id="Path_1958" data-name="Path 1958" d="M330.326,165.226a2.952,2.952,0,0,0-1.71-2.8l-7.5-2.951a2.139,2.139,0,0,0-1.581,0l-7.5,2.951a2.951,2.951,0,0,0-1.709,2.8v5.318a10.445,10.445,0,0,0,4.372,8.772l5.142,3.372a.871.871,0,0,0,.971,0l5.143-3.372a10.448,10.448,0,0,0,4.372-8.772Zm-2,0a.591.591,0,0,0-.342-.561l-7.5-2.951a.432.432,0,0,0-.317,0l-7.5,2.951a.59.59,0,0,0-.341.561v5.318a7.985,7.985,0,0,0,3.343,6.707l4.657,3.054,4.656-3.054a7.986,7.986,0,0,0,3.344-6.707Zm-8.657,7.273,4.949-5.843a.9.9,0,0,1,1.415,0,1.338,1.338,0,0,1,0,1.67L320.376,175a.9.9,0,0,1-1.414,0l-2.829-3.338a1.337,1.337,0,0,1,0-1.669.9.9,0,0,1,1.414,0Z" transform="translate(0 0)" fill="#135846" fill-rule="evenodd"/>
-														  </g>
-														</svg>
-														24 Hours Guard</a>
-														<a href="javascript:void(0);" class="btn btn-secondary light btn-lg">
-														<svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15.75" viewBox="0 0 20 15.75">
-														  <g id="internet" transform="translate(0 -2.15)">
-															<g id="Group_22" data-name="Group 22">
-															  <path id="Path_1969" data-name="Path 1969" d="M18.3,7.6a11.709,11.709,0,0,0-16.6,0,.967.967,0,0,1-1.4,0,.967.967,0,0,1,0-1.4,13.641,13.641,0,0,1,19.4,0,.99.99,0,0,1-1.4,1.4Z" fill="#135846"/>
-															</g>
-															<g id="Group_23" data-name="Group 23">
-															  <path id="Path_1970" data-name="Path 1970" d="M15.4,10.4a7.667,7.667,0,0,0-10.7,0A.99.99,0,0,1,3.3,9,9.418,9.418,0,0,1,16.8,9a.99.99,0,0,1-1.4,1.4Z" fill="#135846"/>
-															</g>
-															<g id="Group_24" data-name="Group 24">
-															  <path id="Path_1971" data-name="Path 1971" d="M12.6,13.4a3.383,3.383,0,0,0-4.9,0,.967.967,0,0,1-1.4,0,1.087,1.087,0,0,1,0-1.5,5.159,5.159,0,0,1,7.7,0,1.088,1.088,0,0,1,0,1.5A.967.967,0,0,1,12.6,13.4Z" fill="#135846"/>
-															</g>
-															<circle id="Ellipse_10" data-name="Ellipse 10" cx="1.9" cy="1.9" r="1.9" transform="translate(8.2 14.1)" fill="#135846"/>
-														  </g>
-														</svg>
-														Free Wifi</a>
-													</div>	
-													<a href="javascript:void(0);" class="btn btn-secondary light">2 Bathroom</a>
-													<a href="javascript:void(0);" class="btn btn-secondary light">Air Conditioner</a>
-													<a href="javascript:void(0);" class="btn btn-secondary light">Television</a>
-												</div>
-											</div>
-										</div>
-										<div class="col-xl-6 p-0">
-											<div class="guest-carousel owl-carousel owl-carousel owl-loaded owl-drag owl-dot">
-												<div class="item">
-													<div class="rooms">
-														<img src="images/gallery/hotel1.jpg" alt="">
-														<div class="booked">
-															<p class="fs-20 font-w500">BOOKED</p>
-														</div>
-														<div class="img-content">
-															<h4 class="fs-24 font-w600 text-white">Bed Room</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
-														</div>
-													</div>
-												</div>
-												<div class="item">
-													<div class="rooms">
-														<img src="images/gallery/hotel2.jpg" alt="">
-														<div class="img-content">
-															<h4 class="fs-24 font-w500 text-white">Bed Room</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
-														</div>
-													</div>
-												</div>
-												<div class="item">
-													<div class="rooms">
-														<img src="images/gallery/hotel3.jpg" alt="">
-														<div class="img-content">
-															<h4 class="fs-24 font-w500 text-white">Bed Room</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!-- review -->
+					<div class="modal fade" id="reviewModal">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Review</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal">
+									</button>
 								</div>
-							</div>
-							<div class="col-xl-12">
-								<div class="card">
-									<div class="card-header border-0">
-										<h4 class="fs-20">Purchase History</h4>
-										<div class="newest ms-3">
-											<select class="default-select">
-												<option>Newest</option>
-												<option>Oldest</option>
-											</select>
-										</div>	
-									</div>
-									<div class="card-body pt-0">
-										<div class="row align-items-center">
-											<div class="col-xl-4 col-sm-7">
-												<div class="purchase-history d-flex align-items-center">
-													<img src="images/gallery/hotel1.jpg" alt="">
-													<div class="ms-3">
-														<h4 class="guest-text font-w500">Deluxe A-91234</h4>
-														<span class="fs-14 d-block mb-2 text-secondary">#000123456</span>
-														<span class="fs-16 text-nowrap">Oct 30th 2020 09:21 AM</span>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-5 col-6">
-												<div class="ms-0 ms-sm-2">
-													<span class="d-block">Check In</span>
-													<span class="guest-text font-w500">Nov 2th, 2020</span>
-													<span class="fs-14 d-block">9.46 PM</span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div>
-													<span class="d-block">Check Out</span>
-													<span class="guest-text font-w500">Nov 2th, 2020</span>
-													<span class="fs-14 d-block">9.46 PM</span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div class="mt-sm-0 mt-3">
-													<span class="d-block mb-2 text-black">Price</span>	
-													<span class="font-w500 fs-24 text-black">$145<small class="fs-14 ms-2 text-secondary">/night</small></span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div class="d-flex align-items-center mt-sm-0 mt-3">
-													<a href="javascript:void(0);" class="btn btn-secondary light">View Notes</a>
-													<div class="dropdown dropend ms-auto">
-														<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-															</svg>
-														</a>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
-														</div>
-													</div>
+								<div class="modal-body">
+									<form>
+										<div class="text-center mb-4">
+											<img class="img-fluid rounded" width="78" src="./images/avatar/1.jpg" alt="DexignLab">
+										</div>
+										<div class="mb-3">
+											<div class="rating-widget mb-4 text-center">
+												<!-- Rating Stars Box -->
+												<div class="rating-stars">
+													<ul id="stars">
+														<li class="star" title="Poor" data-value="1">
+															<i class="fa fa-star fa-fw"></i>
+														</li>
+														<li class="star" title="Fair" data-value="2">
+															<i class="fa fa-star fa-fw"></i>
+														</li>
+														<li class="star" title="Good" data-value="3">
+															<i class="fa fa-star fa-fw"></i>
+														</li>
+														<li class="star" title="Excellent" data-value="4">
+															<i class="fa fa-star fa-fw"></i>
+														</li>
+														<li class="star" title="WOW!!!" data-value="5">
+															<i class="fa fa-star fa-fw"></i>
+														</li>
+													</ul>
 												</div>
 											</div>
 										</div>
-										<div class="row align-items-center mt-5">
-											<div class="col-xl-4 col-sm-7">
-												<div class="purchase-history d-flex align-items-center">
-													<img src="images/gallery/hotel2.jpg" alt="">
-													<div class="ms-3">
-														<h4 class="guest-text font-w500">Deluxe A-91234</h4>
-														<span class="fs-14 d-block mb-2 text-secondary">#000123456</span>
-														<span class="fs-16 text-nowrap">Oct 30th 2020 09:21 AM</span>
-													</div>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-5 col-6">
-												<div class="ms-2">
-													<span class="d-block">Check In</span>
-													<span class="guest-text font-w500">Nov 2th, 2020</span>
-													<span class="fs-14 d-block">9.46 PM</span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div class="mt-sm-0 mt-2">
-													<span class="d-block">Check Out</span>
-													<span class="guest-text font-w500">Nov 2th, 2020</span>
-													<span class="fs-14 d-block">9.46 PM</span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div class="mt-sm-0 mt-3">
-													<span class="d-block mb-2 text-black">Price</span>	
-													<span class="font-w500 fs-24 text-black">$145<small class="fs-14 ms-2 text-secondary">/night</small></span>
-												</div>
-											</div>
-											<div class="col-xl-2 col-sm-4 col-6">
-												<div class="d-flex align-items-center mt-sm-0 mt-3">
-													<a href="javascript:void(0);" class="btn btn-secondary light">View Notes</a>
-													<div class="dropdown dropend ms-auto">
-														<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																<path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																<path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-																<path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-															</svg>
-														</a>
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-															<a class="dropdown-item" href="javascript:void(0);">Delete</a>
-														</div>
-													</div>
-												</div>
-											</div>
+										<div class="mb-3">
+											<textarea class="form-control" placeholder="Comment" rows="5"></textarea>
 										</div>
-									</div>
+										<button class="btn btn-success btn-block">RATE</button>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-        {% endblock contentbody %}
-		<!--**********************************
-			Content body end
-		***********************************-->
-		
-		
-		
-		<!--**********************************
-			Footer start
-		***********************************-->
+                </div>
+            </div>
+        </div>
+		{% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+  
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+	 {% block script %}
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+	<!-- Rating -->
+	<script src="{% static 'pages/vendor/star-rating/jquery.star-rating-svg.js' %}"></script>
 	
-		<!--**********************************
-			Footer end
-		***********************************-->
-
-		<!--**********************************
-		   Support ticket button start
-		***********************************-->
-		
-		<!--**********************************
-		   Support ticket button end
-		***********************************-->
-
-
-	</div>
-	<!--**********************************
-		Main wrapper end
-	***********************************-->
-
-	<!--**********************************
-		Scripts
-	***********************************-->
-	<!-- Required vendors -->
-    {% block script %}
-	<script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
-
 	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
-	
-	<!-- Apex Chart -->
-	
-	<script src="{% static 'pages//vendor/apexchart/apexchart.js' %}"></script>
-	
-	
-	<!-- Chart piety plugin files -->
-	
-	
-	<!-- Dashboard 1 -->
-	<script src="{% static 'pages/js/dashboard/dashboard-1.js' %}"></script>
-	
-	<script src="{% static 'pages/vendor/owl-carousel/owl.carousel.js' %}"></script>
-	<script src="{% static 'pages/vendor/bootstrap-datetimepicker/js/moment.js' %}"></script>
-	<script src="{% static 'pages/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-	
-	<script src="{% static 'pages/js/custom.min.js' %}"></script>
+
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
 	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
 	<script src="{% static 'pages/js/demo.js' %}"></script>
-	<script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
-	<script>
-		function TravlCarousel()
-			{
-
-				/*  testimonial one function by = owl.carousel.js */
-				jQuery('.guest-carousel').owlCarousel({
-					loop:false,
-					margin:15,
-					nav:true,
-					autoplaySpeed: 3000,
-					navSpeed: 3000,
-					paginationSpeed: 3000,
-					slideSpeed: 3000,
-					smartSpeed: 3000,
-					autoplay: false,
-					animateOut: 'fadeOut',
-					dots:true,
-					navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
-					responsive:{
-						0:{
-							items:1
-						},
-						
-						480:{
-							items:1
-						},			
-						
-						767:{
-							items:1
-						},
-						1750:{
-							items:1
-						},
-						1920:{
-							items:1
-						},
-					}
-				})
-			}
-
-			jQuery(window).on('load',function(){
-				setTimeout(function(){
-					TravlCarousel();
-				}, 1000); 
-			});
-	</script>
-    {% endblock script %}
-
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+	{% endblock script %}
 </body>
 </html>

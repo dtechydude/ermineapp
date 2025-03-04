@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-@login_required
+# @login_required
 def transaction_history(request):
     return render(request, 'transaction/transaction_history.html')
+
+# @login_required
+def transaction_status(request):
+    return render(request, 'transaction/transaction_status.html')

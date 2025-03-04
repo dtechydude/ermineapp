@@ -38,3 +38,7 @@ def user_logout(request):
 #     def get(self, request):
 #         logout(request)
 #         return redirect('users:login')
+
+# @login_required
+def members_list(request):
+    return render(request, 'users/members_list.html')
