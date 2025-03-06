@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import Profile
+from import_export.admin import ImportExportModelAdmin
 
 
-class UserProfileAdmin(admin.ModelAdmin):
+class UserProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('user', 'code')
-    list_filter  = ['user',]
+    list_display=('user', 'code', 'gender', 'created', 'merchant_option', 'subscriber_option')
+    list_filter  = ['gender', 'merchant_option', 'subscriber_option']
     search_fields = ('user__username', 'code')
 
 admin.site.register(Profile, UserProfileAdmin)
