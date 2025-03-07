@@ -7,7 +7,18 @@ from users.models import Profile
 
 class Merchant(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    business_type = models.CharField(max_length=20, blank=True)
+    select = 'Select'
+    sales = 'Sales'
+    services = 'Services'
+    product_services = 'Product_Service'  
+
+    business_type = [
+        ('Select', select),
+        ('Sales', sales),
+        ('Services', services),
+        ('Product_Service', product_services),       
+    ]
+    business_type = models.CharField(max_length=25, choices=business_type, default=select)
     business_name = models.CharField(max_length=20, blank=True)
     business_reg_no = models.CharField(max_length=20, blank=True)
     business_address = models.CharField(max_length=20, blank=True)
