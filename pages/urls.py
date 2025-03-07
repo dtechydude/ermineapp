@@ -11,6 +11,10 @@ urlpatterns = [
      path('helpcenter/', page_views.help_center, name='help-center'),
      path('lockscreen/', page_views.lockscreen, name='lock-screen'),
      path('logout/', page_views.logout, name='logout'),
+
+     path('company_charges/', page_views.company_charges_chart, name='company-charges'),
+     path('subscriber_charges/', page_views.subscriber_charges_chart, name='subscriber-charges-chart'),
+     path('bank_detail/', page_views.subscriber_charges_chart, name='subscriber-charges-chart'),
      
 
 ]

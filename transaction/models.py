@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from pages.models import CompanyBankDetail
 from django.conf import settings
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator 
 from django.db.models import F, Sum, Q
@@ -47,7 +48,31 @@ class MerchantSetTransact(models.Model):
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.trans_id)
     #     super().save(*args, **kwargs)
+
     
+    @property
+    def merchant_commission(self):
+       return self.max_amount * 0.5
+    
+    @property
+    def company_charges(self):
+       return self.max_amount * 0.5
+
+ # Merchant Makes Payment Before Transaction Is Visible   
+class MerchantCommssion(models.Model):
+    transaction = models.ForeignKey(MerchantSetTransact, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    payment_date = models.DateTimeField(default=timezone.now)
+    amount_paid = models.IntegerField(help_text='Enter Maximum Amount')
+    bank_ref = models.ForeignKey(CompanyBankDetail, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    payment_confirmed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-payment_date']
+
+    def __str__(self):
+        return f'{self.transaction} - {self.bank_ref}'
+
+
 # # Subscriber set transaction //Response from subscriber
 class SubscriberTransact(models.Model):
     subscriber = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
@@ -93,6 +118,11 @@ class SubscriberTransact(models.Model):
         self.current_location = slugify("transaction by" + "-" + str(self.subscriber) + str(self.trans_date))
         super().save(*args, **kwargs)
 
+    @property
+    def mandatory_charges(self):
+       return self.trans_amount * 0.5
+
+#transaction completge
 class TransactionComplete(models.Model):
     trans_name = models.ForeignKey(SubscriberTransact, on_delete=models.CASCADE, related_name='replies')
     remark = models.TextField(max_length=200)
@@ -102,6 +132,8 @@ class TransactionComplete(models.Model):
 
     def __str__(self):
         return f'{self.author} - {self.trans_success}'
+    
+
 
 
 

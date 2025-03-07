@@ -11,7 +11,7 @@
 	<meta name="description" content="Ermine : Ermine Web Application" />
 	<meta property="og:title" content="Ermine : Ermine Web Application" />
 	<meta property="og:description" content="Ermine : Ermine Web Application" />
-	<meta property="og:image" content="https://travl.dexignlab.com/xhtml/social-image.png" />
+	<meta property="og:image" content="https://ermine.ng/social-image.png" />
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
@@ -441,9 +441,9 @@
 				<nav class="navbar navbar-expand">
 					<div class="collapse navbar-collapse justify-content-between">
 						<div class="header-left">
-							<div class="dashboard_bar">
+							<div class="dashboard_bar"> 
 								Dashboard
-								{% block sub-title%}
+								{% block sub-title%}								
 								{% endblock sub-title%}
 							</div>
 						</div>
@@ -539,10 +539,10 @@
 							</li>
 							<li class="nav-item dropdown header-profile">
 								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-									<img src="images/profile/pic1.jpg" width="20" alt=""/>
+									<img src="{{user.profile.image.url}}" width="20" alt=""/>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
-									<a href="./app-profile.html" class="dropdown-item ai-icon">
+									<a href="{% url 'users:profile' %}" class="dropdown-item ai-icon">
 										<svg id="icon-user2" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 										<span class="ms-2">Profile </span>
 									</a>
@@ -550,7 +550,7 @@
 										<svg id="icon-inbox1" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
 										<span class="ms-2">Inbox </span>
 									</a>
-									<a href="./login.html" class="dropdown-item ai-icon">
+									<a href="{% url 'users:logout' %}" class="dropdown-item ai-icon">
 										<svg  xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
 										<span class="ms-2">Logout </span>
 									</a>
@@ -573,7 +573,7 @@
 		<div class="dlabnav">
 			<div class="dlabnav-scroll">
 				<ul class="metismenu" id="menu">
-					<li><a href="widget-basic.html" class="" aria-expanded="false">
+					<li><a href="{% url 'pages:dashboard' %}" class="" aria-expanded="false">
 						<i class="flaticon-013-checkmark"></i>
 						<span class="nav-text">Dashboard</span>
 					</a>
@@ -730,11 +730,11 @@
 				
 				<div class="dropdown header-profile2 ">
 					<div class="header-info2 text-center">
-						<img src="images/profile/pic1.jpg" alt=""/>
+						<img src="{{ user.profile.image }}" alt="profile image"/>
 						<div class="sidebar-info">
 							<div>
-								<h5 class="font-w500 mb-0">William Johanson</h5>
-								<span class="fs-12">williamjohn@mail.com</span>
+								<h5 class="font-w500 mb-0">{{ user.username}}</h5>
+								<span class="fs-12">{{ user.email}}</span>
 							</div>	
 						</div>
 						<div>
@@ -770,30 +770,13 @@
 											<div class="card-body">
 												<div class="booking-status d-flex align-items-center">
 													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20">
-														  <path  d="M27,14V7a1,1,0,0,0-1-1H6A1,1,0,0,0,5,7v7a3,3,0,0,0-3,3v8a1,1,0,0,0,2,0V24H28v1a1,1,0,0,0,2,0V17A3,3,0,0,0,27,14ZM7,8H25v6H24V12a2,2,0,0,0-2-2H19a2,2,0,0,0-2,2v2H15V12a2,2,0,0,0-2-2H10a2,2,0,0,0-2,2v2H7Zm12,6V12h3v2Zm-9,0V12h3v2ZM4,17a1,1,0,0,1,1-1H27a1,1,0,0,1,1,1v5H4Z" transform="translate(-2 -6)" fill="var(--primary)"/>
+														<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+														  <path  data-name="Path 1957" d="M129.035,178.842v2.8a5.6,5.6,0,0,0,5.6,5.6h14a5.6,5.6,0,0,0,5.6-5.6v-16.8a5.6,5.6,0,0,0-5.6-5.6h-14a5.6,5.6,0,0,0-5.6,5.6v2.8a1.4,1.4,0,0,0,2.8,0v-2.8a2.8,2.8,0,0,1,2.8-2.8h14a2.8,2.8,0,0,1,2.8,2.8v16.8a2.8,2.8,0,0,1-2.8,2.8h-14a2.8,2.8,0,0,1-2.8-2.8v-2.8a1.4,1.4,0,0,0-2.8,0Zm10.62-7-1.81-1.809a1.4,1.4,0,1,1,1.98-1.981l4.2,4.2a1.4,1.4,0,0,1,0,1.981l-4.2,4.2a1.4,1.4,0,1,1-1.98-1.981l1.81-1.81h-12.02a1.4,1.4,0,1,1,0-2.8Z" transform="translate(-126.235 -159.242)" fill="var(--primary)" fill-rule="evenodd"/>
 														</svg>
 													</span>
 													<div class="ms-4">
-														<h4 class="mb-0 font-w600">dtechydude</h4>
-														<p class="mb-0 text-nowrap">My ID</p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-xl-3 col-sm-6">
-										<div class="card booking">
-											<div class="card-body">
-												<div class="booking-status d-flex align-items-center">
-													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20">
-														  <path  d="M27,14V7a1,1,0,0,0-1-1H6A1,1,0,0,0,5,7v7a3,3,0,0,0-3,3v8a1,1,0,0,0,2,0V24H28v1a1,1,0,0,0,2,0V17A3,3,0,0,0,27,14ZM7,8H25v6H24V12a2,2,0,0,0-2-2H19a2,2,0,0,0-2,2v2H15V12a2,2,0,0,0-2-2H10a2,2,0,0,0-2,2v2H7Zm12,6V12h3v2Zm-9,0V12h3v2ZM4,17a1,1,0,0,1,1-1H27a1,1,0,0,1,1,1v5H4Z" transform="translate(-2 -6)" fill="var(--primary)"/>
-														</svg>
-													</span>
-													<div class="ms-4">
-														<h3 class="mb-0 font-w600">8,461</h3>
-														<p class="mb-0 text-nowrap ">Total Transaction</p>
+														<h4 class="mb-0 font-w600">{{user.username}}</h4>
+														<p class="mb-0 text-nowrap">My Username</p>
 													</div>
 												</div>
 											</div>
@@ -809,8 +792,25 @@
 														</svg>
 													</span>
 													<div class="ms-4">
-														<h2 class="mb-0 font-w600">753</h2>
-														<p class="mb-0">Check In</p>
+														<h6 class="mb-0 font-w600">{{ user.profile.code}}</h6>
+														<p class="mb-0 text-nowrap ">My RefCode</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xl-3 col-sm-6">
+										<div class="card booking">
+											<div class="card-body">
+												<div class="booking-status d-flex align-items-center">
+													<span>
+														<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+														  <path  data-name="Path 1957" d="M129.035,178.842v2.8a5.6,5.6,0,0,0,5.6,5.6h14a5.6,5.6,0,0,0,5.6-5.6v-16.8a5.6,5.6,0,0,0-5.6-5.6h-14a5.6,5.6,0,0,0-5.6,5.6v2.8a1.4,1.4,0,0,0,2.8,0v-2.8a2.8,2.8,0,0,1,2.8-2.8h14a2.8,2.8,0,0,1,2.8,2.8v16.8a2.8,2.8,0,0,1-2.8,2.8h-14a2.8,2.8,0,0,1-2.8-2.8v-2.8a1.4,1.4,0,0,0-2.8,0Zm10.62-7-1.81-1.809a1.4,1.4,0,1,1,1.98-1.981l4.2,4.2a1.4,1.4,0,0,1,0,1.981l-4.2,4.2a1.4,1.4,0,1,1-1.98-1.981l1.81-1.81h-12.02a1.4,1.4,0,1,1,0-2.8Z" transform="translate(-126.235 -159.242)" fill="var(--primary)" fill-rule="evenodd"/>
+														</svg>
+													</span>
+													<div class="ms-4">
+														<h2 class="mb-0 font-w600">333</h2>
+														<p class="mb-0">Successful Trans.</p>
 													</div>
 												</div>
 											</div>
@@ -828,7 +828,7 @@
 													</span>
 													<div class="ms-4">
 														<h2 class="mb-0 font-w600">516</h2>
-														<p class="mb-0">Check Out</p>
+														<p class="mb-0">Failed Trans.</p>
 													</div>
 												</div>
 											</div>
@@ -841,21 +841,24 @@
 									<div class="col-xl-6">
 										<div class="card">
 											<div class="card-header border-0 pb-0">
-												<h4 class="fs-20">Recent Booking Schedule</h4>
+												<h4 class="fs-20">Recent Transaction Schedule</h4>
 											</div>
 											<div class="card-body pb-2 loadmore-content" id="BookingContent">
 												<div class="text-center event-calender border-bottom booking-calender">
 													<input type='text' class="form-control d-none " id='datetimepicker1' />
 												</div>	
+												<div class="card-header border-0 pb-0">
+													<h4 class="fs-20">Outstanding Merchants</h4>
+												</div>
 												<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
 													<div class="d-flex align-items-center mb-3">
-														<img src="images/room/room1.jpg" alt="">
+														<!-- <img src="{% static 'pages/images/room/room1.jpg' %}" alt=""> -->
 														<div class="ms-4 bed-text">
-															<h4>Queen Bed A-12324</h4>
+															<h6>mummyB - 12,324 trans.</h6>
 															<div class="users d-flex align-items-center">
-																<img src="images/users/user1.jpg" alt="">
+																<img src="{% static 'pages/images/users/user1.jpg' %}" alt="">
 																<div>
-																	<span class="fs-16 font-w500 me-3">James Sukardi</span>
+																	<span class="fs-16 font-w500 me-3">Gloria Sukardi</span>
 																	<span>12min ago</span>
 																</div>
 															</div>
@@ -865,30 +868,30 @@
 												</div>
 												<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
 													<div class="d-flex align-items-center mb-3">
-														<img src="images/room/room2.jpg" alt="">
+														<!-- <img src="{% static 'pages/images/room/room2.jpg' %}" alt=""> -->
 														<div class="ms-4 bed-text">
-															<h4>Deluxe Room B-1324</h4>
+															<h6>agenlamos -10,456 trans.</h6>
 															<div class="users d-flex align-items-center">
-																<img src="images/users/user2.jpg" alt="">
+																<img src="{% static 'pages/images/users/user2.jpg' %}" alt="">
 																<div>
 																	<span class="fs-16 font-w500 me-3">Angela Moss</span>
-																	<span>12min ago</span>
+																	<span>26min ago</span>
 																</div>
 															</div>
 														</div>
 													</div>
-													<span class="date2 bg-primary mb-3">16, 17, 18</span>
+													<span class="date bg-primary mb-3">5</span>
 												</div>
 												<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
 													<div class="d-flex align-items-center mb-3">
-														<img src="images/room/room3.jpg" alt="">
+														<!-- <img src="{% static 'pages/images/room/room3.jpg' %}" alt=""> -->
 														<div class="ms-4 bed-text">
-															<h4>King Big C-2445</h4>
+															<h6>kingmayour 8,445 trans.</h6>
 															<div class="users d-flex align-items-center">
-																<img src="images/users/user3.jpg" alt="">
+																<img src="{% static 'pages/images/users/user3.jpg' %}" alt="">
 																<div >
-																	<span class="fs-16 font-w500 me-3">JGeovanny</span>
-																	<span>12min ago</span>
+																	<span class="fs-16 font-w500 me-3">Chukwu Johnson</span>
+																	<span>30min ago</span>
 																</div>
 															</div>
 														</div>
@@ -906,7 +909,7 @@
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header border-0 flex-wrap">
-														<h4 class="fs-20">Reservation Stats</h4>
+														<h4 class="fs-20">Transaction Stats</h4>
 														<div class="card-action coin-tabs">
 															<ul class="nav nav-tabs" role="tablist">
 																<li class="nav-item">
@@ -928,14 +931,14 @@
 																  <rect  width="13" height="13" fill="#135846"/>
 																</svg>
 
-																Check In
+																Success
 															</span>
 															<span class="fs-16 font-w600 me-4">23,451 <small class="text-success fs-12 font-w400">+0.4%</small></span>
 															<span class="me-sm-5 ms-0 font-w500">
 																<svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
 																  <rect  width="13" height="13" fill="#E23428"/>
 																</svg>
-																Check Out
+																Failed
 															</span>
 															<span class="fs-16 font-w600">20,441</span>
 														</div>	
@@ -957,7 +960,7 @@
 												<div class="card bg-secondary">
 													<div class="card-body">
 														<div class="d-flex align-items-end pb-4 justify-content-between">
-															<span class="fs-14 font-w500 text-white">Available Room Today</span>
+															<span class="fs-14 font-w500 text-white">Successful Transactions Today</span>
 															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>683</span>
 														</div>
 														<div class="progress default-progress h-auto">
@@ -973,7 +976,7 @@
 												<div class="card bg-secondary">
 													<div class="card-body">
 														<div class="d-flex align-items-end pb-4 justify-content-between">
-															<span class="fs-14 font-w500 text-white">Sold Out Room Today</span>
+															<span class="fs-14 font-w500 text-white">Pending Transaction Today</span>
 															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>156</span>
 														</div>
 														<div class="progress default-progress h-auto">
@@ -992,31 +995,31 @@
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
 																	<h3 class="fs-28 font-w600">569</h3>
-																	<span class="fs-16">Total Concierge</span>
+																	<span class="fs-16">Total Merchants</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
 																	<h3 class="fs-28 font-w600">2,342</h3>
-																	<span class="fs-16">Total Customer</span>
+																	<span class="fs-16">Total Subscribers</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
 																	<h3 class="fs-28 font-w600">992</h3>
-																	<span class="fs-16">Total Room</span>
+																	<span class="fs-16">Total Agents</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	<h3 class="fs-28 font-w600">76k</h3>
+																	<h3 class="fs-28 font-w600">769</h3>
 																	<span class="fs-16 wspace-no">Total Transaction</span>
 																</div>
 															</div>
 															<div class="mb-5 mt-4 d-flex align-items-center">
 																<div>
-																	<h4><a href="javascript:void(0);" class="text-secondary">Let Travl Generate Your Annualy Report Easily</a></h4>
-																	<span class="fs-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 		incididunt ut labo
+																	<h4><a href="javascript:void(0);" class="text-secondary">"Ermine", Takes The Worries Away!</a></h4>
+																	<span class="fs-12">Lowest Charges on withdrawals & No Charges on Deposits, Your WITHDRAWAL & DEPOSITS needs at one click! 
 																	</span>
 																</div>
 																<div><a href="javascript:void(0);" class="ms-5"><i class="fas fa-arrow-right fs-20"></i></a></div>
@@ -1032,7 +1035,7 @@
 							<div class="col-xl-12">
 								<div class="card">
 									<div class="card-header border-0 pb-0">
-										<h4 class="fs-20">Latest Review by Customers</h4>
+										<h4 class="fs-20">Latest Reviews</h4>
 									</div>
 									<div class="card-body pt-0">
 										<div class="front-view-slider owl-carousel owl-carousel owl-loaded owl-drag owl-dot">
@@ -1041,7 +1044,7 @@
 													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
-														<img src="images/users/user5.jpg" alt="">
+														<img src="{% static 'pages/images/users/user5.jpg' %}" alt="">
 														<div class="ms-3">
 															<h5 class="mb-0"><a href="javascript:void(0);">Kusnaidi Anderson</a></h5>
 															<span>4m ago</span>
@@ -1059,9 +1062,9 @@
 													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
-														<img src="images/users/user6.jpg" alt="">
+														<img src="{% static 'pages/images/users/user6.jpg' %}" alt="">
 														<div class="ms-3">
-															<h5 class="mb-0"><a href="javascript:void(0);">Kusnaidi Anderson</a></h5>
+															<h5 class="mb-0"><a href="javascript:void(0);">Adepegba Badmos</a></h5>
 															<span>4m ago</span>
 														</div>
 														</div>
