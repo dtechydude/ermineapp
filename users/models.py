@@ -110,9 +110,30 @@ class Profile(models.Model):
     address = models.CharField(max_length=20, blank=True, null=True)
     bio = models.TextField(max_length=150, blank=True)
 
-    agent_option = models.BooleanField(default=False)
-    merchant_option = models.BooleanField(default=False)
-    subscriber_option = models.BooleanField(default=False)
+    
+    select = 'Select'
+    agent = 'Agent'
+    merchant = 'Merchant'
+    subscriber = 'Subscriber' 
+
+    user_status = [
+        ('Select', select),
+        ('Agent', agent),
+        ('Merchant', merchant),  
+        ('Subscriber', subscriber),      
+    ]
+    user_role = models.CharField(max_length=15, choices=user_status, default=select)
+
+    inactive = 'Inactive'
+    active = 'Active'
+    suspended = 'Suspended' 
+
+    user_status = [
+        ('Inactive', inactive),
+        ('Active', active),
+        ('Suspended', suspended),      
+    ]
+    user_status = models.CharField(max_length=15, choices=user_status, default=inactive)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

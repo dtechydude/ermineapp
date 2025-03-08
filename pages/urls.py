@@ -15,6 +15,7 @@ urlpatterns = [
      path('company_charges/', page_views.company_charges_chart, name='company-charges'),
      path('subscriber_charges/', page_views.subscriber_charges_chart, name='subscriber-charges-chart'),
      path('bank_detail/', page_views.subscriber_charges_chart, name='subscriber-charges-chart'),
+     path('privacy_policy/', page_views.privacy_policy, name='privacy-policy'),
      
 
 ]

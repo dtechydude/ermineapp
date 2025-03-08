@@ -8,7 +8,7 @@
 	
 	<!-- PAGE TITLE HERE -->
     {% block title %}
-	<title>Company Charges Chart</title>
+	<title>Merchant List</title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
@@ -83,8 +83,8 @@
 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Company</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Charges Chart</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Merchant</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">List</a></li>
 					</ol>
                 </div>
                 <div class="row">
@@ -112,7 +112,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="customers">
-                                            {% for m in allcharges %}
+                                            {% for m in allmerchant %}
                                             <tr class="btn-reveal-trigger">
                                                 <td class="py-2">
                                                     <div class="form-check custom-checkbox mx-2">

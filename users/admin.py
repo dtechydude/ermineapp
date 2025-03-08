@@ -5,8 +5,8 @@ from import_export.admin import ImportExportModelAdmin
 
 class UserProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('user', 'code', 'gender', 'created', 'merchant_option', 'subscriber_option')
-    list_filter  = ['gender', 'merchant_option', 'subscriber_option']
+    list_display=('user', 'code', 'gender', 'created', 'user_role',)
+    list_filter  = ['gender', 'user_role']
     search_fields = ('user__username', 'code')
 
 admin.site.register(Profile, UserProfileAdmin)

@@ -597,6 +597,7 @@
 							<span class="nav-text">Members Mgt.</span>
 						</a>
 						<ul aria-expanded="false">
+							<li><a href="{% url 'users:members-list' %}">All Members List</a></li>
 							<li><a href="./app-profile.html">Merchant List</a></li>
 							<li><a href="./post-details.html">Agent List</a></li>
 							<li><a href="./post-details.html">Subscriber List</a></li>
@@ -701,8 +702,9 @@
 						</a>
 						<ul aria-expanded="false">
 							<li><a href="table-bootstrap-basic.html">Send Complaint</a></li>
-							<li><a href="table-datatable-basic.html">Help Center</a></li>
+							<li><a href="{% url 'pages:help-center' %}">Help Center</a></li>
 							<li><a href="table-datatable-basic.html">Submit FeedBack</a></li>
+							<li><a href="{% url 'pages:privacy-policy' %}">Terms & Policies</a></li>
 						</ul>
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

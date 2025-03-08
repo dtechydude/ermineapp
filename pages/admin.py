@@ -4,12 +4,13 @@ from import_export.admin import ImportExportModelAdmin
 
 
 class CompanyBankDetailAdmin(ImportExportModelAdmin, admin.ModelAdmin):         
-    list_display=('acc_name', 'acc_number',)
+    list_display=('acc_name', 'acc_number', 'bank')
+    exclude =['slug',]
     list_filter  = ['acc_name', 'acc_number',]
     search_fields = ('acc_name', 'acc_number',)
 
 class CompanyChargesAdmin(ImportExportModelAdmin, admin.ModelAdmin):         
-    list_display=('name', 'base_amount',)
+    list_display=('name', 'base_amount', 'charges_percentage', 'charges_amount')
     list_filter  = ['name', 'base_amount',]
     search_fields = ('name', 'base_amount',)
 

@@ -8,6 +8,7 @@ urlpatterns = [
 
      path('available/', merchant_views.available_merchant, name='available-merchant'),
      path('detail/', merchant_views.merchant_detail, name='merchant-detail'),
+     path('merchant_list/', merchant_views.merchant_list, name='merchant-list'),
      
 
 ]

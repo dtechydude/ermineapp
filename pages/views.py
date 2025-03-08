@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from users.models import Profile
+from django.contrib.auth.models import User
 
 
 def ermine_home(request):
@@ -22,10 +24,19 @@ def help_center(request):
 
 # @login_required
 def company_charges_chart(request):
-    return render(request, 'pages/company_charges_chart.html')
+    allcharges = User.objects.all().order_by('-id')
+    context = {
+        'allcharges': allcharges
+
+    }
+    # return render(request, 'merchant/merchant_list.html', context)
+    return render(request, 'pages/company_charges_chart.html', context)
 
 def subscriber_charges_chart(request):
     return render(request, 'pages/subscriber_charges_chart.html')
 
 def company_bank_detail(request):
     return render(request, 'pages/company_bank_detail.html')
+
+def privacy_policy(request):
+    return render(request, 'pages/privacy_policy.html')
