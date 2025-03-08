@@ -11,7 +11,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     middle_name = models.CharField(max_length=20, blank=True)
     date_of_birth = models.DateField(null=True)
-    nin = models.CharField(max_length=6, blank=True)
+    nin = models.CharField(max_length=13, blank=True)
     phone = models.CharField(max_length=11, blank=True)
     altenate_phone = models.CharField(max_length=11, blank=True)
     
@@ -135,6 +135,7 @@ class Profile(models.Model):
     ]
     user_status = models.CharField(max_length=15, choices=user_status, default=inactive)
 
+    nin_verified = models.BooleanField(default=False, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

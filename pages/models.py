@@ -27,7 +27,7 @@ class CompanyCharges(models.Model):
 class CompanyBankDetail(models.Model):
     acc_name = models.CharField(max_length=20, blank=True)
     bank = models.CharField(max_length=20, blank=True)
-    acc_number = models.IntegerField(blank=True)
+    acc_number = models.IntegerField(blank=True,)
     slug = models.CharField(max_length=20, blank=True)
     
     

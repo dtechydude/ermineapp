@@ -5,7 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 
 class UserProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('user', 'code', 'gender', 'created', 'user_role',)
+    list_display=('user', 'code', 'nin', 'nin_verified', 'gender', 'user_role', 'created')
     list_filter  = ['gender', 'user_role']
     search_fields = ('user__username', 'code')
 

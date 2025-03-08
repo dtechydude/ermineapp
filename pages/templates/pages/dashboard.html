@@ -21,7 +21,7 @@
 	
 	<!-- FAVICONS ICON -->
 	{% block favicon %}
-	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png' %}" />
+	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png'%}" />
 	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
 	<link href="{% static 'pages/vendor/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
 	<link href="{% static 'pages/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
@@ -583,9 +583,9 @@
 							<span class="nav-text">Biz. Report</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="index.html">Company Income</a></li>						
-							<li><a href="guest-list.html">Merchant Earning</a></li>
-							<li><a href="guest-details.html">Agent Earning</a></li>
+							<li><a href="{% url 'transaction:company-income' %}">Company Income</a></li>						
+							<li><a href="{% url 'transaction:merchant-earning' %}">Merchant Earning</a></li>
+							<li><a href="{% url 'transaction:agent-earning' %}">Agent Earning</a></li>
 							<!-- <li><a href="concierge-list.html">Concierge List</a></li>
 							<li><a href="room-list.html">Room List</a></li>
 							<li><a href="reviews.html">Reviews</a></li>	 -->

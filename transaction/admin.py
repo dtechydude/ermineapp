@@ -5,13 +5,13 @@ from import_export.admin import ImportExportModelAdmin
 
 class MerchantSetTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('merchant', 'trans_id', 'trans_date', 'max_amount', 'min_amount', 'prefered_method')
+    list_display=('merchant', 'trans_id', 'trans_date', 'max_amount', 'min_amount', 'company_charges', 'merchant_commission')
     list_filter  = ['merchant',]
     search_fields = ('merchant',)
 
 class SubscriberTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('subscriber', 'trans_ref', 'trans_date', 'trans_amount',)
+    list_display=('subscriber', 'trans_ref', 'trans_date', 'trans_amount',  'mandatory_charges')
     list_filter  = ['subscriber',]
     search_fields = ('subscriber',)
 

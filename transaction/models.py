@@ -52,11 +52,11 @@ class MerchantSetTransact(models.Model):
     
     @property
     def merchant_commission(self):
-       return self.max_amount * 0.5
+       return self.max_amount * 0.01
     
     @property
     def company_charges(self):
-       return self.max_amount * 0.5
+       return self.merchant_commission * 0.3
 
  # Merchant Makes Payment Before Transaction Is Visible   
 class MerchantCommssion(models.Model):
@@ -120,7 +120,7 @@ class SubscriberTransact(models.Model):
 
     @property
     def mandatory_charges(self):
-       return self.trans_amount * 0.5
+       return self.trans_amount * 0.01
 
 #transaction completge
 class TransactionComplete(models.Model):

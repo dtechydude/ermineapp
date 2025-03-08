@@ -1,0 +1,197 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ 
+	
+	<!-- PAGE TITLE HERE -->
+     {% block title %}
+	<title>Agent Earnings</title>
+    {% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+    {% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <!-- Datatable -->
+    <link href="{% static 'pages/vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+    
+    {% endblock favicon %}
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+
+
+		
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+       
+                    
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+<!-- 				
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Datatable</a></li>
+					</ol>
+                </div> -->
+                <!-- row -->
+
+
+					<div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Commission Table</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example4" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>Transaction No</th>
+                                                <th>Merchant Detail</th>
+                                                <th>Subscriber Detail</th>
+                                                <th>Trans. Amount </th>
+												<th>Payment Mode </th>                                                
+                                                <th> Earning </th>
+                                                <th>Date</th>
+												<th>Status </th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>#54605</td>
+                                                <td>Library</td>
+                                                <td>Cash</td>                                                                                          
+                                                <td><strong>120$</strong></td>
+                                                <td>2011/04/25</td>  
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                
+                                            </tr>
+                                            
+                                           
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        {% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+   
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% block script %}
+    <!-- Required vendors -->
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+    <script src="{% static 'pages/vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'pages/vendor/apexchart/apexchart.js' %}"></script>
+	
+    <!-- Datatable -->
+    <script src="{% static 'pages/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'pages/js/plugins-init/datatables.init.js' %}"></script>
+
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}
+</body>
+</html>
