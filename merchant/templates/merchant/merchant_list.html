@@ -2,210 +2,437 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+	<meta charset="utf-8">
 
 	
 	<!-- PAGE TITLE HERE -->
     {% block title %}
-	<title>Merchant List</title>
+	<title>Merchant-List</title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
      {% block favicon %}
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png' %}" />
 	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
-    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'pages/vendor/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+	<link href="{% static 'pages/vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+	
+	<!-- Style css -->
+	<link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
     {% endblock favicon %}
+	
 </head>
-
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-   <div id="preloader">
+	<!--*******************
+		Preloader start
+	********************-->
+	<div id="preloader">
 		<div class="lds-ripple">
 			<div></div>
 			<div></div>
 		</div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
+	</div>
+	<!--*******************
+		Preloader end
+	********************-->
 
+	<!--**********************************
+		Main wrapper start
+	***********************************-->
+	<div id="main-wrapper">
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
-
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-       
-        <!--**********************************
-            Nav header end
-        ***********************************-->
+		<!--**********************************
+			Nav header start
+		***********************************-->
 		
 		<!--**********************************
-            Chat box start
-        ***********************************-->
+			Nav header end
+		***********************************-->
 		
 		<!--**********************************
-            Chat box End
-        ***********************************-->
-
+			Chat box start
+		***********************************-->
 		
-        <!--**********************************
-            Header start
-        ***********************************-->
-    
-                    
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
+		<!--**********************************
+			Chat box End
+		***********************************-->
+		
+		<!--**********************************
+			Header start
+		***********************************-->
+		
+		<!--**********************************
+			Header end ti-comment-alt
+		***********************************-->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
-     
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
+		<!--**********************************
+			Sidebar start
+		***********************************-->
+		
+		<!--**********************************
+			Sidebar end
+		***********************************-->
+		
+		<!--**********************************
+			Content body start
+		***********************************-->
         {% block contentbody %}
-        <div class="content-body">
-            <div class="container-fluid">
-				
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Merchant</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">List</a></li>
-					</ol>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-sm mb-0 table-striped">
-                                        <thead>
-                                            
-                                            <tr>
-                                                <th class=" pe-3">
-													<div class="form-check custom-checkbox mx-2">
-														<input type="checkbox" class="form-check-input" id="checkAll">
-														<label class="form-check-label" for="checkAll"></label>
-													</div>
-                                                </th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th class=" ps-5" style="min-width: 200px;">Billing Address
-                                                </th>
-                                                <th>Joined</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="customers">
-                                            {% for m in allmerchant %}
-                                            <tr class="btn-reveal-trigger">
-                                                <td class="py-2">
-                                                    <div class="form-check custom-checkbox mx-2">
-														<input type="checkbox" class="form-check-input" id="checkbox1">
-														<label class="form-check-label" for="checkbox1"></label>
-													</div>
-                                                </td>
-                                                <td class="py-3">
-                                                    <a href="#">
-                                                        <div class="media d-flex align-items-center">
-                                                            <div class="avatar avatar-xl me-2">
-                                                                <div class=""><img class="rounded-circle img-fluid"
-                                                                        src="{% static 'pages/images/avatar/5.png' %}" width="30" alt="" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h5 class="mb-0 fs--1">{{m.username}}</h5>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                                <td class="py-2"><a
-                                                        href="mailto:">{{ m.email }}</a></td>
-                                                <td class="py-2"> <a href="tel:2012001851">{{ m.profile.phone }}</a></td>
-                                                <td class="py-2 ps-5">{{ m.profile.address }}</td>
-                                                <td class="py-2">{{ m.profile.created }}</td>
-                                                <td class="py-2 text-end">
-                                                    <div class="dropdown"><button class="btn btn-primary tp-btn-light sharp" type="button" data-bs-toggle="dropdown"><span class="fs--1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></span></button>
-                                                        <div class="dropdown-menu dropdown-menu-end border py-0">
-                                                            <div class="py-2"><a class="dropdown-item"  href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                              
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="content-body">
+			<!-- row -->
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center flex-wrap">
+					<div class="card-action coin-tabs mb-3">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Merchant</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Merchant</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Merchant</a>
+							</li>
+						</ul>
+					</div>
+					<div class="d-flex align-items-center mb-3"> 
+						<a href="javascript:void(0);" class="btn btn-secondary">+ New Subscribers</a>
+						<div class="newest ms-3">
+							<select class="default-select">
+								<option>Newest</option>
+								<option>Oldest</option>
+							</select>
+						</div>	
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-xl-12">
+						<div class="card">
+							<div class="card-body p-0">
+								<div class="tab-content">	
+									<div class="tab-pane active show" id="AllEmployee">
+										<div class="table-responsive">
+											<table class="table card-table display mb-4 shadow-hover table-responsive-lg" id="guestTable-all">
+												<thead>
+													<tr>
+														<th class="bg-none">
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="" id="checkAll">
+															</div>
+														</th>
+														<th>Name & ID</th>
+														<th>State</th>
+														<th>Reg. Date</th>
+														<th>Phone</th>
+                                                        <th>Business</th>
+														<th>Status</th>
+														<th class="bg-none"></th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for m in allmerchant %}
+													
+													<tr>
+														<td>
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="">
+															</div>
+														</td>
+														<td>
+															<div class="concierge-list-bx d-flex align-items-center">
+																<img class="me-3 rounded" src="{{ m.profile.image.url }}" alt="">
+																<div>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'merchant:merchant-detail' m.id %}">{{m.profile.user.username}}</a></h5>
+																	<span class=" text-secondary fs-14 d-block">{{ m.profile.user.first_name }} - {{ m.profile.user.last_name}} </span>
+																	<span class=" fs-14  text-nowrap">{{ m.business_type }}</span>
+																</div>
+															</div>
+														</td>
+														<td class="text-nowrap">
+															<p class="mb-0">{{ m.profile.state }}</p>
+														</td>
+														<td>
+															<div>
+																<h5 class="text-nowrap">{{ m.profile.created | date:"d/m/Y"}}</h5>
+																<span class="tex-secondary text-nowrap"></span>
+															</div>
+														</td>
+														<td>
+															<div>
+																
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>{{ m.profile.phone }}</span>
+															</div>
+														</td>
+                                                        <td>
+															<span  class="font-w600 text-warning">{{ m.business_type }}</span>
+														</td>
+														<td>
+															<span  class="font-w600 text-success">{{ m.profile.user_status }}</span>
+														</td>
+														<td>
+															<div class="dropdown dropend">
+																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																	</svg>
+																</a>
+																<div class="dropdown-menu">
+																	<a class="dropdown-item" href="https://fizcos.com">Edit</a>
+																	<a class="dropdown-item" href="https://schoolly.com.ng">Delete</a>
+																</div>
+															</div>
+														</td>
+													</tr>
+													
+													{% endfor %}
+													
+												</tbody>
+											</table>
+										</div>	
+									</div>
+									<!-- <div class="tab-pane" id="ActiveEmployee">
+										<div class="table-responsive">
+											<table class="table card-table display mb-4 shadow-hover table-responsive-lg" id="guestTable-all2">
+												<thead>
+													<tr>
+														<th class="bg-none">
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="" id="checkAll1">
+															</div>
+														</th>
+														<th>Name</th>
+														<th>Job Desk</th>
+														<th>Schedule</th>
+														<th>Contact</th>
+														<th>Status</th>
+														<th class="bg-none"></th>
+													</tr>
+												</thead>
+												<tbody>
+                                                   
+													<tr>
+														<td>
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="">
+															</div>
+														</td>
+														<td>
+															<div class="concierge-list-bx d-flex align-items-center">
+																<img class="me-3 rounded" src="images/avatar/pic1.jpg" alt="">
+																<div>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Adeola Ayodele</a></h5>
+																	<span class=" text-secondary fs-14 d-block">#12341225</span>
+																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
+																</div>
+															</div>
+														</td>
+														<td class="job-desk3">
+															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
+														</td>
+														<td>
+															<div>
+																<h5 class="text-nowrap">Monday, Friday</h5>
+																<span class="tex-secondary text-nowrap">Check schedule</span>
+															</div>
+														</td>
+														<td>
+															<div>
+																
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
+															</div>
+														</td>
+														<td>
+															<span  class="font-w600 text-success">ACTIVE</span>
+														</td>
+														<td>
+															<div class="dropdown dropend">
+																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																	</svg>
+																</a>
+																<div class="dropdown-menu">
+																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																</div>
+															</div>
+														</td>
+													</tr>
+													
+												</tbody>
+											</table>
+										</div>		
+									</div> -->
+									<!-- <div class="tab-pane" id="InactiveEmployee">
+										<div class="table-responsive">
+											<table class="table card-table display mb-4 shadow-hover table-responsive-lg" id="guestTable-all3">
+												<thead>
+													<tr>
+														<th class="bg-none">
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="" id="checkAll2">
+															</div>
+														</th>
+														<th>Name</th>
+														<th>Job Desk</th>
+														<th>Schedule</th>
+														<th>Contact</th>
+														<th>Status</th>
+														<th class="bg-none"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<div class="form-check style-1">
+															  <input class="form-check-input" type="checkbox" value="">
+															</div>
+														</td>
+														<td>
+															<div class="concierge-list-bx d-flex align-items-center">
+																<img class="me-3 rounded" src="{% static 'pages/images/avatar/pic1.jpg'%}" alt="">
+																<div>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Hamzat Idris</a></h5>
+																	<span class=" text-secondary fs-14 d-block">#12341225</span>
+																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
+																</div>
+															</div>
+														</td>
+														<td class="job-desk3">
+															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
+														</td>
+														<td>
+															<div>
+																<h5 class="text-nowrap">Monday, Friday</h5>
+																<span class="tex-secondary text-nowrap">Check schedule</span>
+															</div>
+														</td>
+														<td>
+															<div>
+																
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
+															</div>
+														</td>
+														<td>
+															<span  class="font-w600 text-success">ACTIVE</span>
+														</td>
+														<td>
+															<div class="dropdown dropend">
+																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+																	</svg>
+																</a>
+																<div class="dropdown-menu">
+																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																</div>
+															</div>
+														</td>
+													</tr>
+													
+												</tbody>
+											</table>
+										</div>		
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
         {% endblock contentbody %}
-        <!--**********************************
-            Content body end
-        ***********************************-->
+		<!--**********************************
+			Content body end
+		***********************************-->
+		
+		
+		
+		<!--**********************************
+			Footer start
+		***********************************-->
+	
+		<!--**********************************
+			Footer end
+		***********************************-->
+
+		<!--**********************************
+		   Support ticket button start
+		***********************************-->
+		
+		<!--**********************************
+		   Support ticket button end
+		***********************************-->
 
 
-        <!--**********************************
-            Footer start
-        ***********************************-->
-   
-        <!--**********************************
-            Footer end
-        ***********************************-->
+	</div>
+	<!--**********************************
+		Main wrapper end
+	***********************************-->
 
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
+	<!--**********************************
+		Scripts
+	***********************************-->
     {% block script %}
-    <!-- Required vendors -->
-    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
-    <script src="{% static 'pages/vendor/chart.js/Chart.bundle.min.js' %}"></script>
-	<!-- Apex Chart -->
-	<script src="{% static 'pages/vendor/apexchart/apexchart.js' %}"></script>
-
-    <script src="{% static 'pages/vendor/highlightjs/highlight.pack.min.js' %}"></script>
-    <!-- Circle progress -->
+	<!-- Required vendors -->
+	<script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
 
 	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+	
+	<!-- Apex Chart -->
+			
+	<!-- Chart piety plugin files -->	
+	
+	<!-- Dashboard 1 -->
+	<!-- momment js is must -->
+    <script src="{% static 'pages/vendor/moment/moment.min.js' %}"></script>
+    <script src="{% static 'pages/vendor/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+	
 
-    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+	
+	<script src="{% static 'pages/js/custom.min.js' %}"></script>
 	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
 	<script src="{% static 'pages/js/demo.js' %}"></script>
-    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
-    {% endblock script %}
+	<script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+	<script src="{% static 'pages/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'pages/js/plugins-init/datatables.init.js' %}"></script>
 	
+	<script>
+		$(function() {
+
+			var start = moment().subtract(29, 'days');
+			var end = moment();
+
+			function cb(start, end) {
+				$('#reportrange span').html(start.format('D MMMM YYYY') + ' &nbsp - &nbsp ' + end.format('D MMMM YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+    
+});
+</script>
+{% endblock script %}
+
 </body>
 </html>

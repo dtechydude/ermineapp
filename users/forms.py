@@ -21,15 +21,15 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = [ 'email', 'last_name', 'first_name', ]
 
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['phone', 'address', 'image', 'bio', ]
+        fields = [ 'middle_name', 'gender', 'phone', 'address', 'state', 'nin', 'date_of_birth', 'bio', 'image', ]
         widgets = {
-            'dob': forms.DateInput(
+            'date_of_birth': forms.DateInput(
                 format=('%d/%m/%Y'),
                 attrs={'class': 'form-control', 
                        'placeholder': 'Select a date',

@@ -4,21 +4,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:title" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:image" content="https://travl.dexignlab.com/xhtml/social-image.png" />
-	<meta name="format-detection" content="telephone=no">
+
 	
 	<!-- PAGE TITLE HERE -->
-     {% block title %}
-	<title>Merchant Earnings</title>
+    {% block title %}
+	<title>Select Transaction </title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
@@ -29,7 +19,6 @@
     <!-- Custom Stylesheet -->
 	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
     <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
-    
     {% endblock favicon %}
 </head>
 
@@ -57,7 +46,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-		
+	
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -65,19 +54,17 @@
 		<!--**********************************
             Chat box start
         ***********************************-->
-		
+	
 		<!--**********************************
             Chat box End
         ***********************************-->
-
-
-		
+	
 		
         <!--**********************************
             Header start
         ***********************************-->
-       
-                    
+
+                     
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -99,61 +86,75 @@
 <!-- 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Datatable</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">History</a></li>
 					</ol>
                 </div> -->
                 <!-- row -->
 
 
-					<div class="col-12">
+                <div class="row">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" style="color: brown;">Merchant Earnings Table</h4>
+                                <h4 class="card-title">Select Merchant For Transaction</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example4" class="display" style="min-width: 845px">
+                                    <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Transaction No</th>
+                                                <th>Trans-ID</th>
                                                 <th>Merchant</th>
-                                                <th>Subscriber</th>
-                                                <th>Amount </th>
-												<th>Method </th>                                                
-                                                <th>Charges</th>
-                                                <th>Total</th>
-                                                <th>Date</th>
-												<th>Status </th>
-                                                
+                                                <th>Location</th>
+                                                <th>Available</th>
+                                                <th>Min. Trans</th>
+                                                <th>Status</th>
+                                                <th>Remote</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for earn in merchantearn %}
-                                            <tr>
-                                                <td>{{ earn.trans_ref.trans_id }}</td>
-                                                <td>{{ earn.trans_ref.merchant }}</td>
-                                                <td>{{ earn.subscriber }}</td>
-                                                <td>{{ earn.trans_amount }}</td>
-                                                <td>{{ earn.payment_method }}</td>                                                                                          
-                                                <td><strong>{{ earn.mandatory_charges }}</strong></td>
-                                                <td><strong>{{ earn.total_due }}</strong></td>
-                                                <td>{{earn.trans_date | date:"d/m/Y"}}</td>  
-                                                {% if earn.trans_status %}
-                                                <td>Paid</span></td>  
+                                            {% for merch in selectmerchant %}
+                                            <tr>                                               
+                                                <td>{{ merch.trans_id}}</td>
+                                                <td>{{ merch.merchant }}  <br />{{ merch.merchant.profile.phone }}</td>
+                                                <td>{{ merch.current_location }} <br />{{ merch.merchant.profile.address }}</td>
+                                                <td>{{ merch.max_amount}}</td>
+                                                <td>{{ merch.min_amount }}</td>
+                                                {% if merch.trans_status == True %}
+                                                <td style="color: green;">Active</td>
                                                 {% else %}
-                                                <td>failed   </td>                   
-                                                {% endif %}
-                                                </tr>
+                                                <td style="color: red;">Inactive</td>
+                                                {% endif%}
+                                                {% if merch.remote_option == True %}
+                                                <td>YES</td>
+                                                {% else %}
+                                                <td>NO</td>
+                                                {% endif %}                                               
+                                                                                                 
+                                            </tr>
                                             {% endfor %}
-                                           
-                                        
+                                     
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Trans-ID</th>
+                                                <th>Merchant</th>
+                                                <th>Location</th>
+                                                <th>Available</th>
+                                                <th>Min. Trans</th>
+                                                <th>Status</th>
+                                                <th>Remote</th>
+                                                
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                  
+											
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -169,7 +170,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-   
+ 
         <!--**********************************
             Footer end
         ***********************************-->

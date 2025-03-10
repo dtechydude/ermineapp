@@ -4,17 +4,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:title" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:description" content="Travl : Hotel Admin Dashboard Bootstrap 5 Template" />
-	<meta property="og:image" content="https://travl.dexignlab.com/xhtml/social-image.png" />
-	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
      {% block title %}
@@ -48,7 +37,6 @@
         Preloader end
     ********************-->
 
-
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -69,9 +57,7 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
-
-
-		
+	
 		
         <!--**********************************
             Header start
@@ -116,11 +102,12 @@
                                     <table id="example4" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                                <th>S/No.</th>
                                                 <th>Transaction No</th>
-                                                <th>Merchant Detail</th>
-                                                <th>Invoice number</th>
-                                                <th>Trans. Amount </th>
-												<th>Payment Mode </th>                                                
+                                                <th>M. Detail</th>
+                                                
+                                                <th>Total Amount </th>
+												<th>M. Commission </th>                                                
                                                 <th>Ermine Earn</th>
                                                 <th>Date</th>
 												<th>Status </th>
@@ -128,18 +115,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for income in allincome %}
                                             <tr>
-                                                <td>01</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>#54605</td>
-                                                <td>Library</td>
-                                                <td>Cash</td>                                                                                          
-                                                <td><strong>120$</strong></td>
-                                                <td>2011/04/25</td>  
+                                                <td>{{ income.id }}</td>
+                                                <td>{{ income.trans_id }}</td>
+                                                <td>{{ income.merchant.username }} <br/>{{ income.merchant.first_name }} {{ income.merchant.last_name }}</td>
+                                              
+                                                <td>{{ income.max_amount }}</td>
+                                                <td>{{ income.merchant_commission }}</td>                                                                                          
+                                                <td><strong>{{income.company_charges}}</strong></td>
+                                                <td>{{income.trans_date | date:"d/m/Y"}}</td>  
                                                 <td><span class="badge light badge-success">Paid</span></td>
                                                 
                                             </tr>
-                                            
+                                            {% endfor %}
                                            
                                         
                                         </tbody>

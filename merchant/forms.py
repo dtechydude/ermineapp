@@ -2,13 +2,13 @@ from tkinter import Widget
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import SubscriberList
+from .models import Merchant
 
 
 class SubscriberRegisterForm(forms.ModelForm):
 
     class Meta:
-        model = SubscriberList
+        model = Merchant
         fields = ('profile',)
         
         widgets = {
@@ -30,10 +30,10 @@ class SubscriberRegisterForm(forms.ModelForm):
 
        # Widget = {'date_employed': forms.DateInput()}
 
-class SubscriberUpdateForm(forms.ModelForm):
+class MerchantUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = SubscriberList
+        model = Merchant
         fields = '__all__'
         # exclude = ('user',)
 

@@ -37,7 +37,7 @@ class MerchantSetTransact(models.Model):
         ordering = ['-trans_date']
 
     def __str__(self):
-        return f'{self.merchant} - {self.trans_date}'
+        return f'{self.merchant} - {self.trans_id}'
     
     def save(self, *args, **kwargs):
         if self.trans_id =="":
@@ -121,6 +121,10 @@ class SubscriberTransact(models.Model):
     @property
     def mandatory_charges(self):
        return self.trans_amount * 0.01
+    
+    @property
+    def total_due(self):
+       return self.trans_amount + self.mandatory_charges
 
 #transaction completge
 class TransactionComplete(models.Model):

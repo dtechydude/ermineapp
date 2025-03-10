@@ -89,10 +89,10 @@
 								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Subscribers</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Members</a>
+								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Subscribers</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Members</a>
+								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Subscribers</a>
 							</li>
 						</ul>
 					</div>
@@ -123,8 +123,8 @@
 														</th>
 														<th>Name & ID</th>
 														<th>State & Address</th>
-														<th>Schedule</th>
-														<th>Contact</th>
+														<th>Date Joined</th>
+														<th>Phone</th>
 														<th>Status</th>
 														<th class="bg-none"></th>
 													</tr>
@@ -140,11 +140,11 @@
 														</td>
 														<td>
 															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="{{ sub.profile.image }}" alt="">
+																<img class="me-3 rounded" src="{{ sub.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'subscriber:subscriber-detail' sub.id %}">{{sub.profile}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block">{{ sub.profile.user.username }} - {{ sub.job_status }}</span>
-																	<span class=" fs-14  text-nowrap">{{ sub.profile.created }}</span>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'subscriber:subscriber-detail' sub.id %}">{{sub.profile.user.username}}</a></h5>
+																	<span class=" text-secondary fs-14 d-block">{{ sub.profile.user.first_name }} - {{ sub.profile.user.last_name}} </span>
+																	<span class=" fs-14  text-nowrap">{{ sub.job_status }}</span>
 																</div>
 															</div>
 														</td>
@@ -153,8 +153,8 @@
 														</td>
 														<td>
 															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
+																<h5 class="text-nowrap">{{ sub.profile.created | date:"d/m/Y"}}</h5>
+																<span class="tex-secondary text-nowrap"></span>
 															</div>
 														</td>
 														<td>
@@ -164,7 +164,7 @@
 															</div>
 														</td>
 														<td>
-															<span  class="font-w600 text-success">{{ p.merchant_option }}</span>
+															<span  class="font-w600 text-success">{{ sub.profile.user_status }}</span>
 														</td>
 														<td>
 															<div class="dropdown dropend">

@@ -11,6 +11,7 @@ urlpatterns = [
      path('company_income/', transaction_views.company_income, name='company-income'),
      path('merchant_earning/', transaction_views.merchant_earning, name='merchant-earning'),
      path('agent_earning/', transaction_views.agent_earning, name='agent-earning'),
+     path('select_merchant/', transaction_views.select_merchant, name='select-merchant'),
      
 
 ]

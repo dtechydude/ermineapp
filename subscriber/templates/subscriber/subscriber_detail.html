@@ -136,7 +136,7 @@
                                         <div class="product-detail-content">
                                             <!--Product details-->
                                             <div class="new-arrival-content pr">
-                                                <h4>Solid Women's V-neck Dark T-Shirt</h4>
+                                                <h3>{{ subscriberlist.profile.user.first_name }} {{ subscriberlist.profile.middle_name }} {{ subscriberlist.profile.user.last_name }}</h3>
                                                 <div class="comment-review star-rating">
 													<ul>
 														<li><i class="fa fa-star"></i></li>
@@ -149,13 +149,21 @@
 													<span class="review-text">(34 reviews) / </span><a class="product-review" href=""  data-bs-toggle="modal" data-bs-target="#reviewModal">Write a review?</a>
 												</div>
 												<div class="d-table mb-2">
-													<p class="price float-start d-block">$325.00</p>
+													<p class="price float-start d-block"><span style="font-size: 16px; color: black;">Username: </span>{{ subscriberlist.profile.user.username }}</p>
                                                 </div>
-                                                <p>Availability: <span class="item"> In stock <i
+                                                <p style="font-size: 14px;"><strong>Referral Code:</strong> <span class="item" style="font-size: 14px; color: brown;"> <strong>{{ subscriberlist.profile.code}}</strong> <i
                                                             class="fa fa-shopping-basket"></i></span>
                                                 </p>
-                                                <p>Product code: <span class="item">0405689</span> </p>
-                                                <p>Brand: <span class="item">Lee</span></p>
+                                                <p style="font-size: 14px;"><strong>Phone:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.phone}}</span> </p>
+                                                <p style="font-size: 14px;"><strong>Email:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.user.email }}</span></p>
+                                                <p style="font-size: 14px;"><strong>Subscriber Since:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.created}}</span></p>
+                                                <p style="font-size: 14px;"><strong>Recommended By:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.Recommended_by}}</span></p>
+                                                <p style="font-size: 14px;"><strong>Resident State:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.state}}</span></p>
+                                                <p style="font-size: 14px;"><strong>Contact Address:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.address}}</span></p>
+                                                <p style="font-size: 14px;"><strong>Resident State:</strong> <span class="item" style="font-size: 14px; color: brown;">{{ subscriberlist.profile.state}}</span></p>
+
+
+
                                                 <p>Product tags:&nbsp;&nbsp;
                                                     <span class="badge badge-success light">bags</span>
                                                     <span class="badge badge-success light">clothes</span>
@@ -195,9 +203,8 @@
 													</div>
 													<!--Quanatity End-->
 													<div class="shopping-cart  mb-2 me-3">
-														<a class="btn btn-primary" href="javascript:void();"><i
-																class="fa fa-shopping-basket me-2"></i>Add
-															to cart</a>
+														<a class="btn btn-primary" href="{% url  'subscriber:subscriber-update' subscriberlist.id %}"><i
+																class="fa fa-user me-2"></i>Update Profile</a>
 													</div>
 												</div>
                                             </div>

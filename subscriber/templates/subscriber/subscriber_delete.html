@@ -1,0 +1,46 @@
+{% extends 'portal/portal-home.html' %}
+{% load static %}
+
+{% block contentbody %}
+{% if user.is_authenticated and user.is_superuser %}
+
+   </div>
+</div>
+
+    <body class="vh-100">    
+        <div class="authincation h-100">
+            <div class="container h-100">
+                <div class="row justify-content-center h-100 align-items-center">
+                    <div class="col-md-5">
+                        <div class="form-input-content text-center error-page">
+                            <h2 class="error-text fw-bold">Oops!</h2>
+                            <h3>Are you sure you want to delete this STUDENT?<br>
+                                USERNAME:<span style="color:red">"{{ object.user }}"</span></h3>
+                            <form method="post">
+                                {% csrf_token %}
+                           
+                         
+                                <button class="btn btn-danger" type="submit">Delete Student</button>
+                                </form>
+                        
+                            <p>Note: You cannot reverse the delete!</p> 
+                            <div>
+                                <button class="btn btn-info"><a href="{% url 'subscriber:subscriber-detail' object.id  %}">No! Cancel</a></button>
+                            </div>	
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endblock contentbody %}
+
+
+    {% block script %}
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+    <script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}

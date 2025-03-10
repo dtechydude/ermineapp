@@ -26,5 +26,8 @@ class SubscriberList(models.Model):
         ordering = ['profile']
 
     def __str__(self):
+
         return f'{self.profile.user.username} - {self.profile.code}'
+    def get_absolute_url(self):
+        return reverse('subscriber:subscriber-detail', kwargs={'id':self.id})
 

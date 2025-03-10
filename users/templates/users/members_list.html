@@ -123,15 +123,16 @@
 														</th>
 														<th>Name & ID</th>
 														<th>State & Address</th>
-														<th>Schedule</th>
-														<th>Contact</th>
+														<th>User Role</th>
+														<th>Phone No.</th>
 														<th>Status</th>
 														<th class="bg-none"></th>
 													</tr>
 												</thead>
 												<tbody>
 													{% for p in allusers %}
-													{% if p.merchant_option == True%}
+
+													
 													<tr>
 														<td>
 															<div class="form-check style-1">
@@ -140,21 +141,25 @@
 														</td>
 														<td>
 															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="{{ p.user.profile.image }}" alt="">
+																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">{{p.user}}</a></h5>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="#">{{p.user}}</a></h5>
 																	<span class=" text-secondary fs-14 d-block">{{ p.user.first_name }} - {{ p.user.last_name }}</span>
 																	<span class=" fs-14  text-nowrap">{{ p.user.profile.created }}</span>
 																</div>
 															</div>
 														</td>
 														<td class="job-desk3">
-															<p class="mb-0">{{ p.state }} <br />{{ p.address }}</p>
+															<p class="mb-0"><b>State:</b> {{ p.state }} <br />{{ p.address }} <br />{{ p.user.email }}</p>
 														</td>
 														<td>
 															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
+																<h5 class="text-nowrap">{{ p.user_role }}</h5>
+																{% if p.nin_verified %}
+																<span class="tex-secondary text-nowrap" style="color: green;">Verified</span>
+																{% else %}
+																<span class="tex-secondary text-nowrap" style="color: red;">Not Verified Yet</span>
+																{% endif %}
 															</div>
 														</td>
 														<td>
@@ -164,7 +169,14 @@
 															</div>
 														</td>
 														<td>
-															<span  class="font-w600 text-success">{{ p.merchant_option }}</span>
+															{% if p.user.is_staff and p.user.is_active %}
+															<span  class="font-w600 text-success">STAFF</span>															
+															{% elif p.user.is_active %}
+															<span  class="font-w600 text-warning">ACTIVE</span>
+															{% else %}
+															<span  class="font-w600 text-danger">INACTIVE</span>
+															
+															{% endif %}
 														</td>
 														<td>
 															<div class="dropdown dropend">
@@ -182,7 +194,7 @@
 															</div>
 														</td>
 													</tr>
-													{% endif %}
+												
 													{% endfor %}
 													
 												</tbody>
@@ -208,6 +220,12 @@
 													</tr>
 												</thead>
 												<tbody>
+												
+													{% for sub in subscriber %}
+													
+
+													
+													
 													<tr>
 														<td>
 															<div class="form-check style-1">
@@ -218,7 +236,7 @@
 															<div class="concierge-list-bx d-flex align-items-center">
 																<img class="me-3 rounded" src="images/avatar/pic1.jpg" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Adeola Ayodele</a></h5>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">{{ sub.user }}</a></h5>
 																	<span class=" text-secondary fs-14 d-block">#12341225</span>
 																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
 																</div>
@@ -258,6 +276,9 @@
 															</div>
 														</td>
 													</tr>
+											
+													{% endfor %}												
+													
 													
 												</tbody>
 											</table>

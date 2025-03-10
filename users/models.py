@@ -116,13 +116,13 @@ class Profile(models.Model):
     merchant = 'Merchant'
     subscriber = 'Subscriber' 
 
-    user_status = [
+    user_role = [
         ('Select', select),
         ('Agent', agent),
         ('Merchant', merchant),  
         ('Subscriber', subscriber),      
     ]
-    user_role = models.CharField(max_length=15, choices=user_status, default=select)
+    user_role = models.CharField(max_length=15, choices=user_role, default=select)
 
     inactive = 'Inactive'
     active = 'Active'

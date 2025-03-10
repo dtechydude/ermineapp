@@ -54,4 +54,14 @@ class SubscriberDeleteView(LoginRequiredMixin, DeleteView):
     def get_object(self):
         id_ = self.kwargs.get("id")
         return get_object_or_404(SubscriberList, id=id_)
+    
+
+# class StudentDeleteView(LoginRequiredMixin, DeleteView):
+#     template_name = 'subscriber/subscriber_delete.html'
+#     success_url = reverse_lazy('subscriber:subscriber-list')
+    
+#     def get_object(self):
+#         id_ = self.kwargs.get("id")
+#         return get_object_or_404(SubscriberList, id=id_)
+#     # queryset = StudentDetail.objects.all()
 

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from .forms import UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -69,8 +70,10 @@ def user_logout(request):
 # @login_required
 def members_list(request):
     allusers = Profile.objects.all().order_by('-id')
+    subscriber = Profile.objects.filter(user_role='subscriber').order_by('-id')
     context = {
         'allusers':allusers,
+        'subscriber':subscriber,
     }
     return render(request, 'users/members_list.html', context)
 
@@ -79,3 +82,57 @@ class UsersListView(LoginRequiredMixin, ListView):
     model = Profile
     # template_name = 'curriculum/class_list.html'
     template_name = 'users/members_list.html'
+
+
+class UserDetailView(DetailView):
+    template_name = 'users/profile_detail.html'
+    queryset = Profile.objects.all()
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Profile, id=id_)
+    
+# class UserUpdateView(LoginRequiredMixin, UpdateView):
+#     form_class = ProfileUpdateForm
+#     template_name = 'users/users_update_form.html'
+#     # queryset = Profile.objects.all()
+
+
+    # def get_object(self):
+    #     id_ = self.kwargs.get("id")
+    #     return get_object_or_404(StudentDetail, id=id_)
+
+    # def form_valid(self, form):
+    #     print(form.cleaned_data)
+    #     return super().form_valid(form)
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'users/users_delete.html'
+    success_url = reverse_lazy('users:members-list')
+    
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Profile, id=id_)
+    # queryset = StudentDetail.objects.all()
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your profile has been updated successfully')
+            return redirect('users:members-list')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/profile_update_form.html', context)

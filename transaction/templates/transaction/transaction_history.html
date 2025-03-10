@@ -83,13 +83,13 @@
         {% block contentbody %}
         <div class="content-body">
             <div class="container-fluid">
-				
+<!-- 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction</a></li>
 						<li class="breadcrumb-item"><a href="javascript:void(0)">History</a></li>
 					</ol>
-                </div>
+                </div> -->
                 <!-- row -->
 
 
@@ -104,34 +104,44 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>S/No.</th>
+                                                <th>Trans-ID</th>
+                                                <th>Merchant</th>
+                                                <th>Subscriber</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for trans in transhistory %}
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
+                                                <td>{{ trans.id}}</td>
+                                                <td>{{ trans.trans_ref.trans_id}}</td>
+                                                <td>{{ trans.trans_ref.merchant }}</td>
+                                                <td>{{ trans.subscriber}}</td>
+                                                <td>{{ trans.trans_amount }}</td>
+                                                <td>{{ trans.trans_date | date:"d/m/Y" }}</td>
+                                                {% if trans.trans_status == True %}
+                                                <td style="color: green;">Successful</td>
+                                                {% else %}
+                                                <td style="color: red;">Unsuccessful</td>
+                                               
+                                                {% endif%}
+                                                
                                             </tr>
-                                    
+                                            {% endfor %}
                                      
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>S/No.</th>
+                                                <th>Trans-ID</th>
+                                                <th>Merchant</th>
+                                                <th>Subscriber</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -156,11 +166,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="https://dexignlab.com/" target="_blank">DexignLab</a> 2021</p>
-            </div>
-        </div>
+ 
         <!--**********************************
             Footer end
         ***********************************-->

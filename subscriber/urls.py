@@ -11,8 +11,8 @@ urlpatterns = [
      # path('detail/', subscriber_views.subscriber_detail, name='subscriber-detail'),
 
      path('<str:id>/', SubscriberDetailView.as_view(), name="subscriber-detail"),
-     path('<int:id>/update/', SubscriberUpdateView.as_view(), name="subscriber_update"),
-     path('<int:id>/delete/', SubscriberDeleteView.as_view(), name="subscriber_delete"), 
+     path('<int:id>/update/', SubscriberUpdateView.as_view(), name="subscriber-update"),
+     path('<int:id>/delete/', SubscriberDeleteView.as_view(), name="subscriber-delete"), 
          
 
 ]
