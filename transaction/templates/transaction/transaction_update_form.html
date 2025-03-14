@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+
+
+<form method="POST">
+    <div class="mb-3">
+        <!-- <form method="POST" enctype="multipart/form-data" class="needs-validation"> -->
+            {% csrf_token %}
+             {{ form |crispy }}
+    
+    </div>  											                                      
+
+<button class="btn btn-primary btn-lg btn-block" type="submit">Set Transaction</button>
+</form>

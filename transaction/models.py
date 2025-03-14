@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from pages.models import CompanyBankDetail
 from django.conf import settings
+from django.urls import reverse
 from django.core.validators import MinLengthValidator, MaxValueValidator, MinValueValidator 
 from django.db.models import F, Sum, Q
 from django.template.defaultfilters import slugify
@@ -11,7 +12,7 @@ from .utils import generate_trans_id
 
 # # Merchant Initialize Transaction // Set Transaction
 class MerchantSetTransact(models.Model):
-    merchant = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    merchant = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     trans_date = models.DateTimeField(default=timezone.now)
     max_amount = models.IntegerField(help_text='Enter Maximum Amount')
     min_amount = models.IntegerField(help_text='Enter Minimum Amount')
@@ -29,15 +30,23 @@ class MerchantSetTransact(models.Model):
 
     ]
     prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
-    trans_status = models.BooleanField()
+    trans_status = models.BooleanField(blank=True, null=True)
     remote_option = models.BooleanField()
-    trans_remark = models.TextField(max_length=35, default='enter a remark')
+    trans_remark = models.TextField(max_length=35, default='enter a remark', blank=True)
+    # company charges
+    charges_pay_date = models.DateTimeField(default=timezone.now)
+    charges_amount_paid = models.IntegerField(help_text='Enter Maximum Amount', blank=True, null=True)
+    comp_bank_ref = models.ForeignKey(CompanyBankDetail, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    payment_confirmed = models.BooleanField(default=False, blank=True)
 
     class Meta:
         ordering = ['-trans_date']
 
     def __str__(self):
         return f'{self.merchant} - {self.trans_id}'
+    
+    def get_absolute_url(self):
+        return reverse( 'transaction:transaction-detail', kwargs={'id':self.id})
     
     def save(self, *args, **kwargs):
         if self.trans_id =="":
@@ -57,6 +66,7 @@ class MerchantSetTransact(models.Model):
     @property
     def company_charges(self):
        return self.merchant_commission * 0.3
+    
 
  # Merchant Makes Payment Before Transaction Is Visible   
 class MerchantCommssion(models.Model):
@@ -73,7 +83,7 @@ class MerchantCommssion(models.Model):
         return f'{self.transaction} - {self.bank_ref}'
 
 
-# # Subscriber set transaction //Response from subscriber
+# # Subscriber set transaction //Response from subscriber to Merchant
 class SubscriberTransact(models.Model):
     subscriber = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
     trans_ref = models.ForeignKey(MerchantSetTransact, on_delete=models.CASCADE, default=None, null=True, blank=True, related_name='trans_ref')

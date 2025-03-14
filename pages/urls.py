@@ -18,5 +18,6 @@ urlpatterns = [
      path('privacy_policy/', page_views.privacy_policy, name='privacy-policy'),
      path('referral_link/', page_views.referral_link, name='referral-link'),
      
+     path('error/', page_views.error_page, name='error-page'),
 
 ]

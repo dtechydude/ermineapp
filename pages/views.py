@@ -48,3 +48,7 @@ def privacy_policy(request):
 def referral_link(request):
     return render(request, 'pages/referral_link.html')
 
+
+def error_page (request):
+    return render(request, 'pages/error_page.html')
+

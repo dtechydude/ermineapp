@@ -1,13 +1,22 @@
 from django.contrib import admin
-from .models import MerchantSetTransact, SubscriberTransact, TransactionComplete
+from .models import MerchantSetTransact, SubscriberTransact, TransactionComplete, MerchantCommssion
 from import_export.admin import ImportExportModelAdmin
 
 
+# Payment Information
+class MerchantCommisionInline(admin.TabularInline):
+    model = MerchantCommssion
+    max_num = 1
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 class MerchantSetTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-           
+    inlines = [MerchantCommisionInline,]     
     list_display=('merchant', 'trans_id', 'trans_date', 'max_amount', 'min_amount', 'company_charges', 'merchant_commission')
     list_filter  = ['merchant',]
     search_fields = ('merchant',)
+
 
 class SubscriberTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            

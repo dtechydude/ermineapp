@@ -1,0 +1,9 @@
+
+
+My Transactions:
+{% for t in transaction %}
+{% if request.user == t.merchant %}
+<a href="{% url 'transaction:transaction-detail' t.id %}">{{ t.trans_date}}</a>
+{% endif %}
+{% endfor%}
+<a href=""></a>

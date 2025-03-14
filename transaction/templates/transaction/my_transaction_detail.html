@@ -1,0 +1,200 @@
+{% extends 'pages/dashboard.html'%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  	
+	<!-- PAGE TITLE HERE -->
+     {% block title %}
+	<title>Travl Hotel Admin Dashboard</title>
+    {% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+    
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+	
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+
+
+		
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+        
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+      
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction </a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Detail</a></li>
+					</ol>
+                </div>
+                <!-- row -->
+
+                <!-- row -->
+                <div class="row">
+                
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Your Transaction Details</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <div class="list-group">
+                                        <a href="javascript:void()" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-3 text-white">Transaction ID: {{ trans_detail.trans_id }}</h5>
+                                                <small> {{ trans_detail.trans_date }} </small>
+                                            </div>
+                                           
+                                        <a href="javascript:void()" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-3">Transaction</h5><small class="text-muted">3
+                                                    days ago</small>
+                                            </div>
+                                            <p class="mb-1">Transaction ID: {{ trans_detail.trans_id }}</p>
+                                            <p class="mb-1">Maximum Amount Set: N{{ trans_detail.max_amount }}</p>
+                                            <p class="mb-1">Minimum Amount Set: N{{ trans_detail.min_amount }}</p>
+                                            <p class="mb-1">Your Commmission: N{{ trans_detail.merchant_commission }}</p>
+                                            <p class="mb-1">{{ trans_detail.merchant }}</p>
+                                            <button class="btn btn-secondary btn-lg btn-block" type="submit">Update Transaction</button>
+                                            <a href="{% url 'transaction:transaction-update' trans_detail.id %}">update transaction</a>
+
+                                           
+                                        </a>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Pay To Ermine: N{{trans_detail.company_charges}}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-list-group">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">You must make the statutory charges payment</li>
+                                        <li class="list-group-item list-group-item-primary">- Proceed To Pay</li>
+                                        <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
+                                        <li class="list-group-item list-group-item-success">This is a success list group item</li>
+                                        
+                                        <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Charges To Activate Transaction</button>
+                                      
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+     
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% block script %}
+    <!-- Required vendors -->
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}
+</body>
+</html>

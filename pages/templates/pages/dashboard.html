@@ -58,7 +58,7 @@
 		***********************************-->
 		{% block navheader %}
 		<div class="nav-header">
-			<a href="index.html" class="">
+			<a href="{% url 'pages:dashboard' %}" class="">
 				<!-- <img src="{% static 'pages/images/logo2.png' %}"> -->
 				<!-- <svg class="logo-abbr" xmlns="http://www.w3.org/2000/svg" width="47.426" height="56.91" viewBox="0 0 47.426 56.91">
 				  <g id="Group_25" data-name="Group 25" transform="translate(-56 -32)">
@@ -631,9 +631,9 @@
 							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>
 							<li><a href="./chart-morris.html">Failed Transactions</a></li>
 							<li><a href="./chart-chartjs.html">Successful Transactions</a></li>
-							<li><a href="./chart-chartist.html">Set Transaction</a></li>
+							<li><a href="{% url 'transaction:transaction-create' %}">Set Transaction</a></li>
 							<li><a href="{% url 'merchant:available-merchant' %}">Available Merchant</a></li>
-							<li><a href="./chart-peity.html">Agent Income</a></li>
+							<li><a href="{% url 'transaction:transaction-list' %}">My Transaction List</a></li>
 						</ul>
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -674,7 +674,7 @@
 							
 						</ul>
 					</li>
-					<li><a href="widget-basic.html" class="" aria-expanded="false">
+					<li><a href="{% url 'pages:error-page' %}" class="" aria-expanded="false">
 							<i class="flaticon-013-checkmark"></i>
 							<span class="nav-text">Cooperative</span>
 						</a>

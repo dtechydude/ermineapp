@@ -164,22 +164,24 @@
 
 
 
-                                                <p>Product tags:&nbsp;&nbsp;
-                                                    <span class="badge badge-success light">bags</span>
+                                                <p><span><strong>Subscriber Bio:</strong>&nbsp;&nbsp;</span>
+                                                    <!-- <span class="badge badge-success light">bags</span>
                                                     <span class="badge badge-success light">clothes</span>
                                                     <span class="badge badge-success light">shoes</span>
-                                                    <span class="badge badge-success light">dresses</span>
+                                                    <span class="badge badge-success light">dresses</span> -->
                                                 </p>
                                                 <p class="text-content">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
                                                     If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
 												<div class="d-flex align-items-end flex-wrap mt-4">
 													<div class="filtaring-area me-3">
 														<div class="size-filter">
-															<h4 class="m-b-15">Select size</h4>
+															<!-- <h4 class="m-b-15">Select size</h4> -->
 															
 															
 															<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-															  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
+                                                                <a class="btn btn-primary" href="{% url  'subscriber:subscriber-update' subscriberlist.id %}"><i
+                                                                    class="fa fa-user me-2"></i>Update Profile</a>
+															  <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
 															  <label class="btn btn-outline-primary" for="btnradio1">XS</label>
 
 															  <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
@@ -192,19 +194,19 @@
 															  <label class="btn btn-outline-primary" for="btnradio4">LG</label>
 															  
 															  <input type="radio" class="btn-check" name="btnradio" id="btnradio5">
-															  <label class="btn btn-outline-primary" for="btnradio5">XL</label>
+															  <label class="btn btn-outline-primary" for="btnradio5">XL</label> -->
 															</div>
 															
 														</div>
 													</div>
 													<!--Quantity start-->
 													<div class="col-2 px-0  mb-2 me-3">
-														<input type="number" name="num" class="form-control input-btn input-number" value="1">
+														<!-- <input type="number" name="num" class="form-control input-btn input-number" value="1"> -->
 													</div>
 													<!--Quanatity End-->
 													<div class="shopping-cart  mb-2 me-3">
 														<a class="btn btn-primary" href="{% url  'subscriber:subscriber-update' subscriberlist.id %}"><i
-																class="fa fa-user me-2"></i>Update Profile</a>
+																class="fa fa-user me-2"></i>Update KYC</a>
 													</div>
 												</div>
                                             </div>

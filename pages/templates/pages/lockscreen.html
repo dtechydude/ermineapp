@@ -37,7 +37,7 @@
 										<a href="index.html"><img src="{% static 'pages/images/logo-full.png' %}" alt=""></a>
 									</div>
                                     <h4 class="text-center mb-4">Account Locked, Please Login</h4>
-                                    <form action="index.html">
+                                    <form action="{% url 'pages:dashboard' %}">
                                         <div class="mb-3">
                                             <label><strong>Password</strong></label>
                                             <input type="password" class="form-control" value="Password">
