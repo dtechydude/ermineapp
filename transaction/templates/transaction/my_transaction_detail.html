@@ -114,8 +114,9 @@
                                             <p class="mb-1">Minimum Amount Set: N{{ trans_detail.min_amount }}</p>
                                             <p class="mb-1">Your Commmission: N{{ trans_detail.merchant_commission }}</p>
                                             <p class="mb-1">{{ trans_detail.merchant }}</p>
-                                            <button class="btn btn-secondary btn-lg btn-block" type="submit">Update Transaction</button>
-                                            <a href="{% url 'transaction:transaction-update' trans_detail.id %}">update transaction</a>
+                                            <a href="{% url 'transaction:transaction-update' trans_detail.id %}">
+                                                <button class="btn btn-secondary btn-lg btn-block" type="submit">Update Transaction</button>
+                                            </a>
 
                                            
                                         </a>
@@ -137,9 +138,9 @@
                                         <li class="list-group-item list-group-item-secondary">This is a secondary list group item</li>
                                         <li class="list-group-item list-group-item-success">This is a success list group item</li>
                                         
+                                        <a href="{% url 'transaction:transaction-charges' trans_detail.id %}">
                                         <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Charges To Activate Transaction</button>
-                                      
-                                        
+                                      </a>
                                     </ul>
                                 </div>
                             </div>

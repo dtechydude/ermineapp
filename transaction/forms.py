@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import MerchantSetTransact, MerchantCommssion, SubscriberTransact
+from .models import MerchantSetTransact, MerchantCommssion, SubscriberTransact, TransactionComplete
 
 # class MerchantSetTransactionForm(forms.ModelForm): 
 
@@ -58,3 +58,23 @@ class SubscriberTransactForm(forms.ModelForm):
 #         widgets = {
 #             'reply_body': forms.Textarea(attrs={'class':'form-control', 'rows':2, 'cols':10}),
 #         }
+
+
+
+class TransactionForm(forms.ModelForm):   
+    class Meta:
+        model = MerchantSetTransact
+        fields = ('max_amount', 'min_amount',)
+     
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = SubscriberTransact
+        fields = ('trans_amount', 'current_location',)
+
+
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = TransactionComplete
+        fields = ('remark', 'trans_success',)

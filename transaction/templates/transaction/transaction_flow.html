@@ -1,0 +1,22 @@
+{{ transaction_flow.trans_id}} <br />
+{{ transaction_flow.trans_id}} <br />
+{{ transaction_flow.trans_id}} <br />
+{{ transaction_flow.max_amount }} <br />
+{{ transaction_flow.trans_ref}} <br />
+Subscriber: {{ transaction_flow.subscribertransact.subscriber}} <br />
+
+<form method="POST">
+    {% csrf_token %}
+     {{ form.as_p }}
+     <button class="btn btn-primary btn-lg btn-block" type="submit">Update Transaction</button>
+
+</form>
+<form method="post">
+												
+    <input type="hidden", name="comment.id" value="{{comment.id}}">
+    <input type="hidden", name="comment.comm_name" value="{{comment.comm_name}}">
+    {% csrf_token %}
+    {{form2.as_p}}
+    <input type="submit" name="form2" value="Add Reply" class="btn btn-warning btn-sm">
+    
+    </form>

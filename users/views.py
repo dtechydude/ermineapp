@@ -77,6 +77,16 @@ def members_list(request):
     }
     return render(request, 'users/members_list.html', context)
 
+# Members KYC list
+def members_kyc_list(request):
+    allmembers = Profile.objects.all().order_by('-id')
+    context = {
+        'allmembers':allmembers,
+        
+    }
+    return render(request, 'users/members_kyc_list.html', context)
+
+
 class UsersListView(LoginRequiredMixin, ListView):
     context_object_name = 'members'
     model = Profile
@@ -87,6 +97,7 @@ class UsersListView(LoginRequiredMixin, ListView):
 class UserDetailView(DetailView):
     template_name = 'users/profile_detail.html'
     queryset = Profile.objects.all()
+    # context_object_name = 'profile'
 
     def get_object(self):
         id_ = self.kwargs.get("id")

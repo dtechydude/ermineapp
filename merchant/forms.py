@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Merchant
+from transaction.models import MerchantSetTransact
 
 
 class SubscriberRegisterForm(forms.ModelForm):
@@ -60,4 +61,22 @@ class MerchantUpdateForm(forms.ModelForm):
         #               }),
         # }
 
-       
+
+
+# class TransactionForm(forms.ModelForm):   
+#     class Meta:
+#         model = MerchantSetTransact
+#         fields = ('max_amount', 'min_amount',)
+     
+
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = SubscriberTransact
+#         fields = ('trans_amount', 'current_location',)
+
+
+
+# class ReplyForm(forms.ModelForm):
+#     class Meta:
+#         model = TransactionComplete
+#         fields = ('remark', 'trans_success',)

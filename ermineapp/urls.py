@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import main_view,  signup_view
 from users.views import my_recommendations_view
+from transaction.views import TransactionFlowView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('signup/', signup_view, name='signup-view'),
     path('refer/<str:ref_code>', main_view, name='main-view'),
     path('myrecs/', my_recommendations_view, name='myrecs-view'),
+     path('<int:pk>/', TransactionFlowView.as_view(), name='transaction-flow'), 
     
     #other module links
     path('', include('pages.urls', namespace='pages')),
@@ -20,6 +22,10 @@ urlpatterns = [
     path('merchant/', include('merchant.urls')),
     path('subscriber/', include('subscriber.urls')),
     path('transaction/', include('transaction.urls')),
+    path('order/', include('order.urls')),
+
+    # path('ckeditor', include('ckeditor_uploader.urls')),    #for ckeditor image upload
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
 
 

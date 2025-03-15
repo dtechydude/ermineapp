@@ -1,0 +1,211 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	
+	<!-- PAGE TITLE HERE -->
+    {% block title %}
+	<title>MEMBERS KYC LIST </title>
+    {% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+    {% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <!-- Datatable -->
+    <link href="{% static 'pages/vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+    {% endblock favicon %}
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+	
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+	
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+	
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+
+                     
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+<!-- 				
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">History</a></li>
+					</ol>
+                </div> -->
+                <!-- row -->
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">MEMBERS KYC</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>S/N</th>
+                                                <th>CODE</th>
+                                                <th>IDENTITY</th>
+                                                <th>DOB</th>
+                                                <th>NIN</th>
+                                                <th>PHONE</th>
+                                                <th>REG.DATE</th>
+                                                <th>GENDER</th>
+                                                <th>ROLE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for memb in allmembers %}
+                                            <tr>
+                                                <td>{{ memb.id}}</td>
+                                                <td>{{ memb.user.profile.code}}</td>
+                                                <td>{{ memb.user.first_name}} - {{ memb.user.profile.middle_name}}<br>
+                                                    {{ memb.user.last_name}}</td>
+                                                <td>{{ memb.user.profile.date_of_birth}}</td>
+                                                <td>{{ memb.user.profile.nin }}</td>
+                                                <td>{{ memb.user.profile.phone }}</td>
+                                                <td>{{ memb.created | date:"d/m/Y" }}</td>
+                                                <td style="color: green;">{{ memb.user.profile.gender }}</td>
+                                                <td style="color: green;">{{ memb.user.profile.user_role }}</td>
+                                                <!-- <td style="color: red;">Unsuccessful</td>
+                                                                                                -->
+                                            </tr>
+                                            {% endfor %}
+                                     
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <!-- <th>S/No.</th>
+                                                <th>Trans-ID</th>
+                                                <th>Merchant</th>
+                                                <th>Subscriber</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr> -->
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+											
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        {% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+ 
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% block script %}
+    <!-- Required vendors -->
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+    <script src="{% static 'pages/vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'pages/vendor/apexchart/apexchart.js' %}"></script>
+	
+    <!-- Datatable -->
+    <script src="{% static 'pages/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'pages/js/plugins-init/datatables.init.js' %}"></script>
+
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}
+</body>
+</html>

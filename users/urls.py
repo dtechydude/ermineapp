@@ -10,6 +10,7 @@ app_name ='users'
 urlpatterns = [
 
      path('members_list/', users_views.members_list, name='members-list'),
+     path('members_kyc_list/', users_views.members_kyc_list, name='members-kyc-list'),
      path('register/', users_views.register, name='register'),
      path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
      # path('logout/', auth_views.LogoutView.as_view(), name='logout'),

@@ -1,6 +1,6 @@
 from django.urls import path
 from transaction import views as transaction_views
-from .views import  MerchantTransactionDetailView, MerchantTransactionCreateView, MerchantTransactUpdateView, MerchantTransactListView
+from .views import MerchantTransactionDetailView, MerchantTransactionCreateView, MerchantTransactUpdateView, MerchantTransactListView, MerchantChargesUpdateView, TransactionFlowView
 
 
 
@@ -23,6 +23,10 @@ urlpatterns = [
     path('<int:pk>/', MerchantTransactionDetailView.as_view(), name='transaction-detail'), 
     path('new_transaction/', MerchantTransactionCreateView.as_view(), name="transaction-create"),
     path('<int:pk>/update/', MerchantTransactUpdateView.as_view(), name='transaction-update'),
+
+    path('<int:pk>/charges/', MerchantChargesUpdateView.as_view(), name='transaction-charges'),
+
+    path('<int:pk>/', TransactionFlowView.as_view(), name='transaction-flow'), 
      
 
 ]

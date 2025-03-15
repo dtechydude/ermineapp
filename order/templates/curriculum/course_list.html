@@ -1,0 +1,82 @@
+
+{% extends 'portal/portal-home.html' %}
+{% load static %}
+{% block title %}<title>Schoolly E-Learning Class List</title>{% endblock title %}
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+		{% block content_body %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Platform - </a></li>
+            <li>All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span></li>
+
+					</ol>
+                </div>
+                <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <!-- <h4 class="card-title">Click on the standard/class name to explore</h4> -->
+                                <h4 class="card-title">All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span> </h4>
+                              </div>
+                            {% if user.is_authenticated and user.staffprofile or user.is_superuser %}
+                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'curriculum:lesson_create' standard=subjects.standard.slug slug=subjects.slug %}"><span style="color:white;"><b>Create Lesson</b></span></a></button><br />
+                           
+                          </div>
+                          {%endif%}
+                           
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th style="width:80px;"><strong>ID</strong></th>                                                -->
+                                                <th>Chapter No.</th>
+                                                <th>Lesson Name</th>
+                                                <th>Action</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for lesson in subjects.lessons.all %} 
+                                            <tr>
+                                                <td>{{ lesson.position}}</td>
+                                                <td>{{lesson.name }}</td>
+                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'curriculum:lesson_detail' slug=lesson.slug subject=subjects.slug standard=lesson.standard.slug %}">Enter Class</button> </a></td>
+
+                                          
+                                        </td>
+												
+                                            </tr>
+											{% endfor %} 
+                      
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				
+                        <!-- /# card -->
+                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+		{% endblock content_body %}
+        <!--**********************************
+            Content body end
+        ***********************************-->

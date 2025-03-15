@@ -12,10 +12,10 @@ class MerchantCommisionInline(admin.TabularInline):
         return False
 
 class MerchantSetTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    inlines = [MerchantCommisionInline,]     
+    # inlines = [MerchantCommisionInline,]     
     list_display=('merchant', 'trans_id', 'trans_date', 'max_amount', 'min_amount', 'company_charges', 'merchant_commission')
     list_filter  = ['merchant',]
-    search_fields = ('merchant',)
+    search_fields = ('merchant', 'max_amount')
 
 
 class SubscriberTransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):

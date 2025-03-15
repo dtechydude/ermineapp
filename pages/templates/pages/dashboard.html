@@ -442,7 +442,15 @@
 					<div class="collapse navbar-collapse justify-content-between">
 						<div class="header-left">
 							<div class="dashboard_bar"> 
-								Dashboard
+								{% if user.is_superuser or user.is_staff %}
+								<span style="color: green;">Admin Dashboard</span>
+								{% elif user.profile.merchant %}
+								<span style="color:red">Merchant Dashboard</span>
+								{% elif user.profile.subscriber %}
+								<span  style="color: brown;">Subscriber Dashboard</span>
+								{% else %}
+								<span>Agent Dashboard</span>
+								{% endif %}
 								{% block sub-title%}								
 								{% endblock sub-title%}
 							</div>
@@ -544,7 +552,7 @@
 								<div class="dropdown-menu dropdown-menu-end">
 									<a href="{% url 'users:profile' %}" class="dropdown-item ai-icon">
 										<svg id="icon-user2" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-										<span class="ms-2">Profile </span>
+										<span class="ms-2">Edit Profile </span>
 									</a>
 									<a href="./email-inbox.html" class="dropdown-item ai-icon">
 										<svg id="icon-inbox1" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -665,7 +673,7 @@
 							<span class="nav-text">KYC Mgt.</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="./uc-select2.html">Approved ID List</a></li>
+							<li><a href="{% url 'users:members-kyc-list' %}">All ID List</a></li>
 							<li><a href="./uc-nestable.html">Cancelled KYC List</a></li>
 							<li><a href="./uc-noui-slider.html">Pending KYC List</a></li>
 							<li><a href="./uc-sweetalert.html">KYC Completed List</a></li>
@@ -713,8 +721,8 @@
 						</a>
 						<ul aria-expanded="false">							
 							<li><a href="./page-register.html">Reset Password</a></li>
-							<li><a href="./page-register.html">Edit Profile</a></li>
-							<li><a href="./page-login.html">Logout</a></li>
+							<li><a href="{% url 'users:profile' %}">Edit Profile</a></li>
+							<li><a href="{% url 'users:logout' %}">Logout</a></li>
 							<!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
 								<ul aria-expanded="false">
 									<li><a href="./page-error-400.html">Error 400</a></li>
@@ -810,9 +818,21 @@
 														  <path  data-name="Path 1957" d="M129.035,178.842v2.8a5.6,5.6,0,0,0,5.6,5.6h14a5.6,5.6,0,0,0,5.6-5.6v-16.8a5.6,5.6,0,0,0-5.6-5.6h-14a5.6,5.6,0,0,0-5.6,5.6v2.8a1.4,1.4,0,0,0,2.8,0v-2.8a2.8,2.8,0,0,1,2.8-2.8h14a2.8,2.8,0,0,1,2.8,2.8v16.8a2.8,2.8,0,0,1-2.8,2.8h-14a2.8,2.8,0,0,1-2.8-2.8v-2.8a1.4,1.4,0,0,0-2.8,0Zm10.62-7-1.81-1.809a1.4,1.4,0,1,1,1.98-1.981l4.2,4.2a1.4,1.4,0,0,1,0,1.981l-4.2,4.2a1.4,1.4,0,1,1-1.98-1.981l1.81-1.81h-12.02a1.4,1.4,0,1,1,0-2.8Z" transform="translate(-126.235 -159.242)" fill="var(--primary)" fill-rule="evenodd"/>
 														</svg>
 													</span>
+													
 													<div class="ms-4">
-														<h2 class="mb-0 font-w600">333</h2>
-														<p class="mb-0">Successful Trans.</p>
+														{% if user.is_superuser or user.is_staff %}
+														<h2 class="mb-0 font-w600">{{ users_num }}</h2>
+														<p class="mb-0">Total Members</p>
+														{% elif user.profile.merchant %}
+														<h2 class="mb-0 font-w600">{{ my_trans }}</h2>
+														<p class="mb-0">My Trans.M</p>
+														{% elif user.profile.subscriber %}
+														<h2 class="mb-0 font-w600">{{ sub_trans }}</h2>
+														<p class="mb-0">My Trans.S</p>
+														{% else %}
+														<h2 class="mb-0 font-w600">0</h2>
+														<p class="mb-0">Your Referrals.</p>
+														{% endif %}
 													</div>
 												</div>
 											</div>
@@ -829,8 +849,18 @@
 
 													</span>
 													<div class="ms-4">
-														<h2 class="mb-0 font-w600">516</h2>
-														<p class="mb-0">Failed Trans.</p>
+														{% if user.is_superuser or user.is_staff %}
+														<h2 class="mb-0 font-w600">{{ total_trans}}</h2>
+														<p class="mb-0">Total Trans.</p>
+														{% else %}
+														<h6 class="mb-0 font-w600">{{ user.profile.created | date:'d/m/Y'}}</h6>
+														<p class="mb-0">Member Since</p>
+														
+														{% endif%}
+														
+														<!-- <h2 class="mb-0 font-w600">00</h2>
+														<p class="mb-0">Total Transaction.</p>
+														 -->
 													</div>
 												</div>
 											</div>
@@ -838,6 +868,8 @@
 									</div>
 								</div>
 							</div>
+							<!-- start of section -->
+							{% if user.is_superuser or user.is_staff%}
 							<div class="col-xl-12">
 								<div class="row">
 									<div class="col-xl-6">
@@ -911,6 +943,8 @@
 											<div class="col-xl-12">
 												<div class="card">
 													<div class="card-header border-0 flex-wrap">
+														
+														 
 														<h4 class="fs-20">Transaction Stats</h4>
 														<div class="card-action coin-tabs">
 															<ul class="nav nav-tabs" role="tablist">
@@ -962,13 +996,13 @@
 												<div class="card bg-secondary">
 													<div class="card-body">
 														<div class="d-flex align-items-end pb-4 justify-content-between">
-															<span class="fs-14 font-w500 text-white">Successful Transactions Today</span>
-															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>683</span>
+															<span class="fs-14 font-w500 text-white">Successful Transactions</span>
+															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>{{ total_trans }}</span>
 														</div>
 														<div class="progress default-progress h-auto">
-															<div class="progress-bar bg-white progress-animated" style="width: 60%; height:13px;" role="progressbar">
+															<!-- <div class="progress-bar bg-white progress-animated" style="width: 60%; height:13px;" role="progressbar">
 																<span class="sr-only">60% Complete</span>
-															</div>
+															</div> -->
 														</div>
 														
 													</div>
@@ -978,13 +1012,13 @@
 												<div class="card bg-secondary">
 													<div class="card-body">
 														<div class="d-flex align-items-end pb-4 justify-content-between">
-															<span class="fs-14 font-w500 text-white">Pending Transaction Today</span>
-															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>156</span>
+															<span class="fs-14 font-w500 text-white">Pending Transaction</span>
+															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span>0</span>
 														</div>
 														<div class="progress default-progress h-auto">
-															<div class="progress-bar bg-white progress-animated" style="width: 30%; height:13px;" role="progressbar">
+															<!-- <div class="progress-bar bg-white progress-animated" style="width: 30%; height:13px;" role="progressbar">
 																<span class="sr-only">30% Complete</span>
-															</div>
+															</div> -->
 														</div>
 														
 													</div>
@@ -996,25 +1030,37 @@
 														<div class="row">
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	<h3 class="fs-28 font-w600">569</h3>
+																	{% if merchant_num %}
+																	<h3 class="fs-28 font-w600">{{ merchant_num }}</h3>
+																	{% else %}
+																	<h3 class="fs-28 font-w600">0</h3>
+																	{% endif %}
 																	<span class="fs-16">Total Merchants</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	<h3 class="fs-28 font-w600">2,342</h3>
+																	{% if sub_num %}
+																	<h3 class="fs-28 font-w600">{{ sub_num }}</h3>
+																	{% else %}
+																	<h3 class="fs-28 font-w600">0</h3>
+																	{% endif %}
 																	<span class="fs-16">Total Subscribers</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	<h3 class="fs-28 font-w600">992</h3>
+																	{% if agent_num %}
+																	<h3 class="fs-28 font-w600">{{ agent_num }}</h3>
+																	{% else %}
+																	<h3 class="fs-28 font-w600">0</h3>
+																	{% endif %}
 																	<span class="fs-16">Total Agents</span>
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	<h3 class="fs-28 font-w600">769</h3>
+																	<h3 class="fs-28 font-w600">{{ total_trans }}</h3>
 																	<span class="fs-16 wspace-no">Total Transaction</span>
 																</div>
 															</div>
@@ -1034,10 +1080,212 @@
 									</div>
 								</div>
 							</div>
+											{% else %}
+											<div class="col-xl-12">
+												<div class="row">
+													<div class="col-xl-6">
+														<div class="card">
+															<div class="card-header border-0 pb-0">
+																<h4 class="fs-20">Recent Transaction Schedule</h4>
+															</div>
+															<div class="card-body pb-2 loadmore-content" id="BookingContent">
+																<div class="text-center event-calender border-bottom booking-calender">
+																	<input type='text' class="form-control d-none " id='datetimepicker1' />
+																</div>	
+																<!-- <div class="card-header border-0 pb-0">
+																	<h4 class="fs-20">Outstanding Merchants</h4>
+																</div> -->
+																<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
+																	<div class="d-flex align-items-center mb-3">
+																		<!-- <img src="{% static 'pages/images/room/room1.jpg' %}" alt=""> -->
+																		<div class="ms-4 bed-text">
+																			<h6>MY DOB - {{ user.profile.date_of_birth }}.</h6>
+																			<div class="users d-flex align-items-center">
+																				<img src="{{ user.profile.image.url }}" alt="">
+																				<div>
+																					{% if user.profile.nin %}
+																					<span class="fs-16 font-w500 me-3">{{user.profile.nin}}</span>
+																					<span>MY NIN</span>
+																					{% else %}
+																					<span class="fs-16 font-w500 me-3 text-red">You have not updated your NIN</span>
+																					<span>:MY NIN</span>
+																					{% endif %}
+																				</div>
+																				
+																			</div>
+																			<div><a href="{% url 'users:profile' %}"><button type="button" class="btn btn-secondary">Update Profile</button></a></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
+																	<div class="d-flex align-items-center mb-3">
+																		<!-- <img src="{% static 'pages/images/room/room2.jpg' %}" alt=""> -->
+																		<div class="ms-4 bed-text">
+																																						
+																		</div>
+																	</div>
+																	
+																</div>
+																<div class="rooms mt-3 d-flex align-items-center justify-content-between flex-wrap">
+																	<div class="d-flex align-items-center mb-3">																		
+																		<div class="ms-4 bed-text">
+																			
+																		</div>
+																	</div>
+																	
+																</div>
+															</div>
+															
+														</div>
+													</div>
+													<div class="col-xl-6">
+														<div class="row">
+															<div class="col-xl-12">
+																<div class="card">
+																	<div class="card-header border-0 flex-wrap">
+												 
+											<h5 class="fs-20">Profile Information</h5>
+											<div class="card-action coin-tabs">
+												<ul class="nav nav-tabs" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link " data-bs-toggle="tab" href="#Daily1" role="tab"> {{ user.first_name }} {{ user.profile.middle_name }} {{ user.last_name }}</a>
+													</li>
+												
+												</ul>
+											</div>
+										</div>
+										<div class="card-body pb-0">
+											<div class="d-flex flex-wrap">
+												
+											</div>	
+											<div class="tab-content">
+												<h5><span>Referral Link: </span><span style="color: grey;"> <small>https://ermine.ng/users/{{ user.profile.code }} </small></span></h5>
+
+												
+												<div class="tab-pane fade show active" id="Daily1">
+													<!-- <div id="chartBar" class="chartBar"></div> -->
+													 <p>Use Your Link To Invite Others...</p>
+													
+												</div>
+												<div class="tab-pane fade " id="weekly1">
+													
+												</div>
+												<div class="tab-pane fade " id="monthly1">
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+			
+											
+											<div class="col-xl-6 col-sm-6">
+												<div class="card bg-secondary">
+													<div class="card-body">
+														<div class="d-flex align-items-end pb-4 justify-content-between">
+															{% if user.profile.nin_verified%}
+															<span class="fs-14 font-w500 text-white">YOU ARE VERIFIED - <span class="fs-20 text-white" >100%</span</span>
+															{% else %}
+															<span class="fs-14 font-w500 text-yellow">YOU ARE NOT VERIFIED! <span class="fs-20 text-white" >0%</span></span>
+															{% endif %}
+															<span class="fs-20 font-w600 text-white"><span class="pe-2"></span></span>
+														</div>
+														<div class="progress default-progress h-auto">
+														
+														</div>														
+													</div>
+												</div>
+											</div>
+											<div class="col-xl-6 col-sm-6">
+												<div class="card bg-secondary">
+													<div class="card-body">
+														<div class="d-flex align-items-end pb-4 justify-content-between">
+															<span class="fs-14 font-w500 text-white">STATUS:
+																<span class="text-yellow">
+																{% if user.is_active %} 
+																ACCOUNT IS ACTIVE
+																{% else %}
+																ACCOUNT DEACTIVATED
+																{% endif %}
+															</span></span>
+															<!-- <span class="fs-20 font-w600 text-white"><span class="pe-2"></span>ACTIVE</span> -->
+														</div>
+														<div class="progress default-progress h-auto">
+															<!-- <div class="progress-bar bg-white progress-animated" style="width: 30%; height:13px;" role="progressbar">
+																<span class="sr-only">30% Complete</span>
+															</div> -->
+														</div>
+														
+													</div>
+												</div>
+											</div>
+											<div class="col-xl-12">
+												<div class="card">
+													<div class="card-body">
+														<div class="row">
+															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+																<div class="text-center">																	
+																	<p class="fs-18 font-w400">{{ user.profile.gender }}<br>												
+																	<span class="fs-16 text-red">Gender</span></p>	
+																</div>
+															</div>
+															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+																<div class="text-center">
+																	<p class="fs-18 font-w400">{{ user.profile.phone }}	<br>															
+																	<span class="fs-16 text-red">My Phone</span> </p>	
+																</div>
+															</div>
+															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+																<div class="text-center">
+																	<p class="fs-18 font-w400">{{ user.profile.state }}	<br>															
+																	<span class="fs-16 text-red">Current State</span></p>	
+																</div>
+															</div>
+															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+																<div class="text-center">
+																	{% if user.email %}
+																	<p class="fs-18 font-w400">{{ user.email }}<br>
+																	<span class="fs-16 wspace-no text-red">My Email</span></p>
+																	{% else %}
+																	<p class="fs-18 font-w600">Provide Your Email<br>
+																	<span class="fs-16 wspace-no text-red">My Email</span></p>
+																	{% endif %}
+																</div>
+															</div>
+															<div class="mb-5 mt-4 d-flex align-items-center">
+																<div>
+																	<h4><a href="javascript:void(0);" class="text-secondary">"My Bio Info</a></h4>
+																	{% if user.profile.bio %}
+																	<span class="fs-18">Your bio info goes here </span>
+																	{% else %}
+																	<span class="fs-18">You've not updated your bio information </span>
+																	{% endif %}
+																																		
+																	<div><a href="{% url 'users:profile' %}"><button type="button" class="btn btn-secondary">Update Profile</button></a></div>
+																																	
+																</div>																
+																<div><a href="javascript:void(0);" class="ms-5"><i class="fas fa-arrow-right fs-20"></i></a></div>
+															
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endif %}
+
+							<!-- end of section  -->
 							<div class="col-xl-12">
 								<div class="card">
-									<div class="card-header border-0 pb-0">
+									<div class="card-header border-0 pb-0">										
+										{% if user.is_authenticated and user.merchant or user.subscriber %}
+										<h4 class="fs-20">Latest News</h4>
+										{% else%}
 										<h4 class="fs-20">Latest Reviews</h4>
+										{% endif %}
 									</div>
 									<div class="card-body pt-0">
 										<div class="front-view-slider owl-carousel owl-carousel owl-loaded owl-drag owl-dot">

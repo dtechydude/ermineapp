@@ -46,11 +46,14 @@ INSTALLED_APPS = [
     'subscriber.apps.SubscriberConfig',
     'merchant.apps.MerchantConfig',
     'pages.apps.PagesConfig',
+    'order.apps.OrderConfig',
 
     #installed_applications
     'crispy_forms',
     'crispy_bootstrap4',
     'import_export',
+    'embed_video',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [

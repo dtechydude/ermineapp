@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
 from django.contrib.auth.models import User
+from merchant.models import Merchant
+from subscriber.models import SubscriberList
+from users.models import Profile
+from transaction.models import MerchantSetTransact, SubscriberTransact
+from agent.models import AgentList
 
 
 def ermine_home(request):
@@ -10,7 +15,28 @@ def ermine_home(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'pages/dashboard.html')
+    users_num = User.objects.count()
+    merchant_num = Merchant.objects.count()
+    subscriber_num = SubscriberList.objects.count()
+    agent_num = AgentList.objects.count()
+    inactive_user = User.objects.filter(is_active=False).count()
+    total_trans = MerchantSetTransact.objects.count()
+    suspended_user = Profile.objects.filter(user_status='suspended').count()
+    my_trans = MerchantSetTransact.objects.filter(merchant=User.objects.get(username=request.user)).count()
+    sub_trans = SubscriberTransact.objects.filter(subscriber=User.objects.get(username=request.user)).count()
+
+    context = {
+        'merchant_num': merchant_num,
+        'inactive_user' : inactive_user,
+        'users_num': users_num,
+        'subscriber_num': subscriber_num,
+        'suspended_user': suspended_user,
+        'total_trans': total_trans,
+        'my_trans': my_trans,
+        'sub_trans': sub_trans,
+        'agent_num': agent_num,
+    }
+    return render(request, 'pages/dashboard.html', context)
 
 def lockscreen(request):
     return render(request, 'pages/lockscreen.html')

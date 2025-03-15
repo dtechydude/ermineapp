@@ -1,9 +1,229 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	
+	<!-- PAGE TITLE HERE -->
+    {% block title %}
+	<title>Transaction History </title>
+    {% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+    {% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <!-- Datatable -->
+    <link href="{% static 'pages/vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+    {% endblock favicon %}
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
 
 
-My Transactions:
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+	
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+	
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+	
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+
+                     
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+<!-- 				
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">History</a></li>
+					</ol>
+                </div> -->
+                <!-- row -->
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">My Transaction History</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>S/No.</th>
+                                                <th>Trans-ID</th>
+                                                <th>Max Amount</th>
+                                                <th>Min Amount</th>
+                                                <th>Commission</th>
+                                                <th>E-Charge</th>
+                                                <th>Remote</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for t in transaction %}
+                                            {% if request.user == t.merchant %}
+                                            <tr>
+                                                <td>{{ t.id}}</td>
+                                                <td><a href="{% url 'transaction:transaction-detail' t.id %}"><strong>{{ t.trans_id}}</strong></a></td>
+                                                <td>{{ t.max_amount }}</td>
+                                                <td>{{ t.min_amount}}</td>
+                                                <td>{{ t.merchant_commission }}</td>
+                                                <td>{{ t.company_charges }}</td>
+                                                {% if t.remote_option %}
+                                                <td>YES</td>
+                                                {% else %}
+                                                <td>NO</td>
+                                                {% endif%}
+                                                <td>{{ t.trans_date | date:"d/m/Y" }}</td>
+                                                {% if t.trans_status == True %}
+                                                <td style="color: green;">Completed</td>
+                                                {% else %}
+                                                <td style="color: red;">Uncompleted</td>
+                                               
+                                                {% endif%}
+                                                
+                                            </tr>
+                                            {% endif%}
+                                            {% endfor %}
+                                     
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>S/No.</th>
+                                                <th>Trans-ID</th>
+                                                <th>Merchant</th>
+                                                <th>Subscriber</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+											
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+        My Transactions:
 {% for t in transaction %}
 {% if request.user == t.merchant %}
 <a href="{% url 'transaction:transaction-detail' t.id %}">{{ t.trans_date}}</a>
 {% endif %}
 {% endfor%}
 <a href=""></a>
+
+
+        {% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+ 
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% block script %}
+    <!-- Required vendors -->
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+    <script src="{% static 'pages/vendor/chart.js/Chart.bundle.min.js' %}"></script>
+	<!-- Apex Chart -->
+	<script src="{% static 'pages/vendor/apexchart/apexchart.js' %}"></script>
+	
+    <!-- Datatable -->
+    <script src="{% static 'pages/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'pages/js/plugins-init/datatables.init.js' %}"></script>
+
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+
+    <script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}
+</body>
+</html>

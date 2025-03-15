@@ -1,0 +1,120 @@
+{% extends 'portal/portal-home.html'%}
+{% load static %}
+{% block title %}<title>Schoolly - Class Subjects List </title>{% endblock title %}
+
+{% block content_body %}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{standards.name}}</span></a>  E-learning</li>
+                
+                
+            </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-4 col-xxl-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header border-0 pb-0">
+                        <h4 class="card-title">Subjects List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height370">
+                            <ul class="timeline">
+                                {% for subject in standards.subjects.all %}
+                                <li>
+                                    <div class="timeline-badge primary"></div>
+                                    <a class="timeline-panel text-muted" href="{% url 'curriculum:lesson_list' slug=subject.slug standard=standards.slug %}">
+                                        
+                                        <h6 class="mb-0">{{ subject.name }} <strong class="text-primary">#</strong>.</h6>
+                                        <p><b>Description: </b>{{subject.description|truncatechars:20 }}<br /></p>
+                                    </a>
+                                </li>
+                                
+                               
+                               {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Class Instruction</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Please follow instructions as directed by the instructor</p>
+                    </div>
+                    <div class="card-footer d-sm-flex justify-content-between align-items-center">
+                        <div class="card-footer-link mb-4 mb-sm-0">
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_body %}
+{% block section%}
+<section class="pop-cour">
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2>List of subjects in -  <span>{{standards.name}}</span> </h2>
+                <p>Use the links below to explore courses in each class.</p>
+            </div>
+        </div>
+   
+
+		{% for subject in standards.subjects.all %}
+        <div class="row">
+			
+            <div class="col-md-6">
+                
+				
+				
+                <div>
+                    <!--POPULAR COURSES-->
+                    <div class="home-top-cour">
+                        <!--POPULAR COURSES IMAGE-->
+						 
+						
+                        <div class="col-md-3"> <img src="{% static 'demoschool/images/course/sm-1.jpg' %}" alt=""> </div>
+                        <!--POPULAR COURSES: CONTENT-->
+                        <div class="col-md-9 home-top-cour-desc">
+
+	
+							 								
+						<h3>{{subject.name}}</h3>
+								
+                        <p><b>Description: </b>{{subject.description|truncatechars:75 }}<br /></p> <span class="home-top-cour-rat">100%</span>
+                        
+                        <div class="hom-list-share">
+                                
+                                <ul>
+                                    <li><a href="{% url 'curriculum:lesson_list' slug=subject.slug standard=standards.slug %}">{{subject.name}}</a></li>
+                                    <li><a href="course-details.html"><i class="fa fa-eye" aria-hidden="true"></i>10 Aavailable</a> </li>
+                                    <li><a href="course-details.html"><i class="fa fa-share-alt" aria-hidden="true"></i> 570</a> </li>
+                                </ul>
+                           
+							
+                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+       
+   
+	{% endfor %}
+</section>
+	{% endblock section %}

@@ -144,7 +144,7 @@
 																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
 																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="#">{{p.user}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block">{{ p.user.first_name }} - {{ p.user.last_name }}</span>
+																	<span class=" text-secondary fs-14 d-block">{{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</strong></span>
 																	<span class=" fs-14  text-nowrap">{{ p.user.profile.created }}</span>
 																</div>
 															</div>
@@ -222,9 +222,7 @@
 												<tbody>
 												
 													{% for sub in subscriber %}
-													
-
-													
+																									
 													
 													<tr>
 														<td>
