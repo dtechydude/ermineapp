@@ -586,8 +586,10 @@
 						<span class="nav-text">Dashboard</span>
 					</a>
 				</li>
+				{% if user.is_superuser or user.is_staff %}
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-025-dashboard"></i>
+						<i class="flaticon-025-dashboard"></i>
+						
 							<span class="nav-text">Biz. Report</span>
 						</a>
 						<ul aria-expanded="false">
@@ -598,7 +600,7 @@
 							<li><a href="room-list.html">Room List</a></li>
 							<li><a href="reviews.html">Reviews</a></li>	 -->
 						</ul>
-
+						
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="flaticon-050-info"></i>
@@ -616,7 +618,9 @@
 									<li><a href="./email-inbox.html">Inbox</a></li>
 									<li><a href="./email-read.html">Read</a></li>
 								</ul>
+								
 							</li>
+							
 							<li><a href="./app-calender.html">Calendar</a></li>
 							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
 								<ul aria-expanded="false">
@@ -628,8 +632,10 @@
 									<li><a href="./ecom-invoice.html">Invoice</a></li>
 									<li><a href="./ecom-customers.html">Customers</a></li>
 								</ul>
+								
 							</li>
 						</ul>
+						{% endif %}
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-041-graph"></i>
@@ -654,18 +660,7 @@
 							<li><a href="./ui-badge.html">Cancelled Transactions</a></li>
 							<li><a href="./ui-button.html">Rated Merchant</a></li>
 							<li><a href="./ui-modal.html">Transactions Report</a></li>
-							<!-- <li><a href="./ui-button-group.html">Button Group</a></li>
-							<li><a href="./ui-list-group.html">List Group</a></li>
-							<li><a href="./ui-card.html">Cards</a></li>
-							<li><a href="./ui-carousel.html">Carousel</a></li>
-							<li><a href="./ui-dropdown.html">Dropdown</a></li>
-							<li><a href="./ui-popover.html">Popover</a></li>
-							<li><a href="./ui-progressbar.html">Progressbar</a></li>
-							<li><a href="./ui-tab.html">Tab</a></li>
-							<li><a href="./ui-typography.html">Typography</a></li>
-							<li><a href="./ui-pagination.html">Pagination</a></li>
-							<li><a href="./ui-grid.html">Grid</a></li> -->
-
+							
 						</ul>
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -682,7 +677,7 @@
 							
 						</ul>
 					</li>
-					<li><a href="{% url 'pages:error-page' %}" class="" aria-expanded="false">
+					<li><a href="{% url 'pages:cooperative' %}" class="" aria-expanded="false">
 							<i class="flaticon-013-checkmark"></i>
 							<span class="nav-text">Cooperative</span>
 						</a>
@@ -1224,34 +1219,32 @@
 													<div class="card-body">
 														<div class="row">
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
-																<div class="text-center">																	
-																	<p class="fs-18 font-w400">{{ user.profile.gender }}<br>												
-																	<span class="fs-16 text-red">Gender</span></p>	
+																<div class="text-left">
+																	<ul>
+																		<li class="fs-16 text-red">Email: <span class="fs-16 text-black">{{ user.email }}</span></li>
+																		<li class="fs-16 text-red">Phone: <span class="fs-16 text-black">{{ user.profile.phone }}</span></li>
+																		<li class="fs-16 text-red">Alt.Phone: <span class="fs-16 text-black"> {{ user.profile.alternate_phone }}</span></li>
+
+																	</ul>																	
+																
 																</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
-																<div class="text-center">
-																	<p class="fs-18 font-w400">{{ user.profile.phone }}	<br>															
-																	<span class="fs-16 text-red">My Phone</span> </p>	
-																</div>
+																<div class="text-left">
+																	<ul>
+																		<li class="fs-16 text-red">State:  <span class="fs-16 text-black">{{ user.profile.state }}</span></li>
+																		<li class="fs-16 text-red">Gender:  <span class="fs-16 text-black">{{ user.profile.gender }}</span></li>
+																		<li class="fs-16 text-red">Last Updated: <span class="fs-16 text-black">{{ user.profile.update |date:"d/m/Y" }}</span></li>
+																	</ul>
+																	</div>
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
-																<div class="text-center">
-																	<p class="fs-18 font-w400">{{ user.profile.state }}	<br>															
-																	<span class="fs-16 text-red">Current State</span></p>	
-																</div>
+															
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
-																<div class="text-center">
-																	{% if user.email %}
-																	<p class="fs-18 font-w400">{{ user.email }}<br>
-																	<span class="fs-16 wspace-no text-red">My Email</span></p>
-																	{% else %}
-																	<p class="fs-18 font-w600">Provide Your Email<br>
-																	<span class="fs-16 wspace-no text-red">My Email</span></p>
-																	{% endif %}
-																</div>
+																
 															</div>
+															<hr>
 															<div class="mb-5 mt-4 d-flex align-items-center">
 																<div>
 																	<h4><a href="javascript:void(0);" class="text-secondary">"My Bio Info</a></h4>

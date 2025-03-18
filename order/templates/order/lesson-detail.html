@@ -1,0 +1,148 @@
+{% extends 'pages/dashboard.html'%}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block title %}<title>Lesson Detail </title>{% endblock title%}
+
+{% block contentbody %}
+
+<div class="content-body">
+	<div class="container-fluid">
+		
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ lessons.subject }}</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ lessons.name }}</b><span> - Class : {{ lessons.standard }}</span></a></li>
+			</ol>
+		</div>
+		
+		<!-- row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="email-left-box generic-width px-0 mb-5">
+							<div class="p-0">
+								{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+								
+								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
+								<p>Use the buttons below to update or delete lessons</p>
+								<p><a href="{% url 'curriculum:lesson_update' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-info">Update Lesson</a><br></p>
+								<p><a href="{% url 'curriculum:lesson_delete' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-secondary">Delete Lesson</a></p>
+								{% else %}
+								<p><a href="#">Teacher's Contact</a><br></p>
+
+								{% endif %}
+							
+							</div>
+
+						</div>
+						<div class="email-right-box ms-0 ms-sm-4 ms-sm-0">
+							<div class="row">
+						
+										<div class="read-content">
+											<div class="media pt-3 d-sm-flex d-block justify-content-between">
+												<div class="clearfix mb-3 d-flex">
+													<div class="media-body me-2">
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ lessons.created_by}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ lessons.created_at}}</h5>
+														
+													</div>
+												</div>
+												<div class="clearfix mb-3">
+													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-reply"></i> </a>
+													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fas fa-arrow-right"></i> </a>
+													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-trash"></i></a>
+												</div>
+											</div>
+											<hr>
+											<div class="media mb-2 mt-3">
+												
+												<div class="media-body">
+													<h2 class="mb-4">Lesson Details:</h2>																								
+													
+													<p class="read-content-email">
+														Watch Lesson video here..</p>
+												</div>
+											</div>
+											<div>
+																					
+												<!-- make sure the video link looks like this https://www.youtube.com/embed/dGF1x14QNGA -->
+												<iframe width="620" height="345" 									
+												src="{{ lessons.video }}" frameborder="0" allowfullscreen>  
+												                     
+												
+												</iframe>                     
+												
+											</div>
+											
+											<div class="read-content-body">
+												<p class="mb-2"><strong>Teacher's Highlights:</strong><br> </p>
+												{{ lessons.comment | safe }}
+												<p class="mb-2"></p>
+																								
+												<hr>
+											</div>
+											<div class="read-content-attachment">
+												<h6><i class="fa fa-download mb-2"></i> Download or view Lesson Attachments</h6>
+													<div class="row attachment">
+													<div class="col-auto">
+														{% if lessons.ppt %}
+														<a href="{{ lessons.ppt.url }}"  download="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
+													</div>
+													<div class="col-auto" >
+														<a href="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;">Read Lesson</span></a>
+													</div>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="mb-3 pt-3">
+												
+													<h6>Comment Area</h6>
+													<div class="">
+														
+														<h6>Post your comment or question below:</h6>
+												<form method="post">
+												<div class="">
+												{% csrf_token %}
+												{{form.as_p}}
+												<input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
+												</div>
+												</form>
+												
+												{% for comment in lessons.comments.all %}
+												<h4>{{comment.author}}<small><i>Posted on {{comment.date_added}}</i></small></h4>
+												<p>{{comment.body}}</p>
+												{% for reply in comment.replies.all %}
+												<h5>{{reply.author}}<small><i>Posted on {{reply.date_added}}</i></small></h5>
+												<p>{{reply.reply_body}}</p>
+												
+												{% endfor %}
+												<!-- form to post reply -->
+												
+												
+												<form method="post">
+												
+												<input type="hidden", name="comment.id" value="{{comment.id}}">
+												<input type="hidden", name="comment.comm_name" value="{{comment.comm_name}}">
+												{% csrf_token %}
+												{{form2.as_p}}
+												<input type="submit" name="form2" value="Add Reply" class="btn btn-warning btn-sm">
+												
+												</form>
+												</div>
+												</div>
+												
+												
+												{% endfor %}
+
+								</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>  
+				</div>
+
+{% endblock contentbody %}

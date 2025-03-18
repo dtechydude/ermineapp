@@ -8,6 +8,7 @@ urlpatterns = [
 
      path('', page_views.ermine_home, name='ermine-home'),
      path('dashboard/', page_views.dashboard, name='dashboard'),
+     path('cooperative/', page_views.cooperative_page, name='cooperative'),
      path('helpcenter/', page_views.help_center, name='help-center'),
      path('lockscreen/', page_views.lockscreen, name='lock-screen'),
      path('logout/', page_views.logout, name='logout'),

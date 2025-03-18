@@ -1,0 +1,78 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+{% block title %}<title>Schoolly E-Learning Class List</title>{% endblock title %}
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+		{% block contentbody %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">My Current Class</a></li>
+					</ol>
+                </div>
+                <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <p class="">Click on the standard / your class name to explore the subjects for the e-learning</p>
+                              
+                            </div>
+                            
+							{% if user.is_authenticated and user.profile %}
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:80px;"><strong>ID</strong></th>
+                                                <th><strong>Standard Name</strong></th>
+                                                <th><strong>Description</strong></th>
+                                                <th><strong>STATUS</strong></th>
+                                              
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											{% for st in state %} 
+                                            <tr>
+												
+                                                <td><strong>{{ st.id}}</strong></td>
+                                                <td><a href="{% url 'order:subject_list' slug=st.slug %}"><h4>{{st.name }}</h4></a></td>
+                                                <td>{{ st.description }}</td>
+                                                <td>ACTIVE!</td>
+                                                                                                											
+                                            </tr>
+											{% endfor %} 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					{% endif %}
+                        <!-- /# card -->
+                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+
+		{% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+       
+
+

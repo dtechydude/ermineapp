@@ -78,3 +78,6 @@ def referral_link(request):
 def error_page (request):
     return render(request, 'pages/error_page.html')
 
+def cooperative_page(request):
+    return render(request, 'pages/cooperative.html')
+

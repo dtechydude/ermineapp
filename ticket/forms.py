@@ -9,7 +9,7 @@ class LessonForm(forms.ModelForm):
     class Meta:
         
         model = Lesson
-        fields = ('lesson_id', 'name', 'position', 'comment')
+        fields = ('lesson_id', 'name', 'position', 'video', 'comment')
         widgets = {
             'comment': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
         }

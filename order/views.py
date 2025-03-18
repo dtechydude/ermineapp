@@ -4,47 +4,48 @@ from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
-from .models import Lesson, Standard, Subject, save_lesson_files
+from .models import Lesson, State, Lga
 from .forms import CommentForm, LessonForm, ReplyForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from students.models import StudentDetail
+from users.models import Profile
 
 
 class StandardSelfListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
+    context_object_name = 'state'
+    model = State
     # template_name = 'curriculum/class_list.html'
-    template_name = 'curriculum/my_class.html'
+    template_name = 'order/my_class.html'
  
     # Student can only view their class elearning
     def get_queryset(self):
-        return Standard.objects.filter(name = self.request.user.studentdetail.current_class)
+        return State.objects.filter(name = self.request.user.profile.current_state)
+        # return State.objects.filter(name = self.request.user)
 
 # Standard list view for the admin and teachers
 class StandardListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
+    context_object_name = 'states'
+    model = State
     # template_name = 'curriculum/class_list.html'
-    template_name = 'curriculum/elearning_class.html'
+    template_name = 'order/elearning_class.html'
 
     
 class SubjectListView(DetailView):
-    context_object_name = 'standards'
-    model = Standard
-    template_name = 'curriculum/class_subjects.html'
+    context_object_name = 'states'
+    model = State
+    template_name = 'order/class_subjects.html'
 
 
 class LessonListView(DetailView):
-    context_object_name = 'subjects'
-    model = Subject
-    template_name = 'curriculum/course_list.html'
+    context_object_name = 'lgas'
+    model = Lga
+    template_name = 'order/course_list.html'
 
 
 class LessonDetailView(DetailView, FormView):
     context_object_name = 'lessons'
     model = Lesson
-    template_name = 'curriculum/lesson-detail.html'
+    template_name = 'order/lesson-detail.html'
     # for replies to lessons
     form_class = CommentForm
     second_form_class = ReplyForm
@@ -83,10 +84,10 @@ class LessonDetailView(DetailView, FormView):
 
     def get_success_url(self):
         self.object = self.get_object()
-        standard = self.object.standard
-        subject = self.object.subject
-        return reverse_lazy('curriculum:lesson_detail', kwargs={'standard':standard.slug,
-                                                            'subject':subject.slug,
+        state = self.object.state
+        lga = self.object.lga
+        return reverse_lazy('order:lesson_detail', kwargs={'state':state.slug,
+                                                            'lga':lga.slug,
                                                             'slug':self.object.slug})
 
     def form_valid(self, form):
@@ -112,20 +113,20 @@ class LessonDetailView(DetailView, FormView):
 class LessonCreateView(CreateView):
     form_class = LessonForm
     context_object_name = 'subject'
-    model = Subject
-    template_name = 'curriculum/lesson_create.html'
+    model = Lga
+    template_name = 'order/lesson_create.html'
 
     def get_success_url(self):
         self.object = self.get_object()
-        standard = self.object.standard
-        return reverse_lazy('curriculum:lesson_list',kwargs={'standard':standard.slug, 'slug':self.object.slug})
+        state = self.object.state
+        return reverse_lazy('order:lesson_list',kwargs={'state':state.slug, 'slug':self.object.slug})
 
     def form_valid(self, form, *args, **kwargs):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.created_by = self.request.user
-        fm.standard = self.object.standard
-        fm.subject = self.object
+        fm.state = self.object.state
+        fm.lga = self.object
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 

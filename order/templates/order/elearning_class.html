@@ -1,0 +1,78 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+{% block title %}<title>Schoolly E-Learning Class List</title>{% endblock title %}
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+		{% block contentbody %}
+        {% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+        <div class="content-body">
+            <div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Registered Standard List</a></li>
+					</ol>
+                </div>
+                <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title">Click on the standard/class name to explore the subjects</h6>
+                            </div>
+							{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:80px;"><strong>ID</strong></th>
+                                                <th><strong>Standard Name</strong></th>
+                                                <th><strong>Description</strong></th>
+                                                <th><strong>STATUS</strong></th>
+                                              
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											{% for standard in standards %} 
+                                            <tr>
+												
+                                                <td><strong>{{ standard.id}}</strong></td>
+                                                <td><a href="{% url 'curriculum:subject_list' slug=standard.slug %}"><span>{{standard.name }}</span></a></td>
+                                                <td><a href="{% url 'curriculum:subject_list' slug=standard.slug %}">{% if standard.description%}{{ standard.description }}{% else%}<span>E-learning class</span>{% endif%}</a></td>
+                                                <td>ACTIVE!</td>
+                                                <!-- <td><span class="badge light badge-success"><a href="{% url 'curriculum:subject_list' slug=standard.slug %}"><h4>EXPLORE</h4></a> </span></td> -->
+                                                                                                											
+                                            </tr>
+											{% endfor %} 
+                                        </tbody>
+                                    </table>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+					{% endif %}
+                        <!-- /# card -->
+         
+                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		{% endif %}
+
+		{% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+       

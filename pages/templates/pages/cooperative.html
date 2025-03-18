@@ -1,0 +1,213 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+	{% block title %}
+	<!-- PAGE TITLE HERE -->
+	<title>Ermine Cooperative</title>
+    {% endblock title %}
+	
+	<!-- FAVICONS ICON -->
+    {% block favicon %}
+	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png' %}" />
+	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
+    <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+    {% endblock favicon %}
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+   <div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+	
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box start
+        ***********************************-->
+		
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+		
+		
+        <!--**********************************
+            Header start
+        ***********************************-->
+       
+                    
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+       
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block contentbody %}
+<div class="content-body">
+            <div class="container-fluid">
+				<!-- <div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Ermine</a></li>
+						<li class="breadcrumb-item"><a href="{% url 'pages:dashboard' %}">Back To Dashboard</a></li>
+					</ol>
+                </div> -->
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Ermine Cooperative</h4>
+                            </div>
+                            <div class="card-body">
+                                <h3>How Ermine Cooperative</h3>
+
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, minima! Eligendi minima illum itaque harum aliquam vel, sunt magni dolorem! Cum quaerat est cupiditate saepe quidem, fugiat in at magni ad provident distinctio
+                                    eum tempore laboriosam adipisci, tempora cumque ex quis unde voluptatem consequuntur. Excepturi quibusdam accusamus deleniti officiis ullam repellendus magni unde? Saepe quibusdam vel, ipsum numquam ratione tempore.
+                                    Dolor optio aliquid in velit eaque, sed delectus reprehenderit quam quidem a eum id nostrum ullam obcaecati error deleniti modi quasi harum possimus voluptatum repellat saepe! Omnis dolor maiores eaque deserunt exercitationem
+                                    incidunt autem et voluptatibus molestias quod explicabo ipsam nam vitae a architecto, consectetur quas facilis sed nulla, placeat eum ex, ducimus in. Hic quo necessitatibus autem tempora provident!</p>
+                                <div class="bootstrap-modal">
+                              
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Modal centered</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Modal title</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                                                   
+                                
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header border-0 pb-0">
+                                                    <h5 class="card-title">Card title45</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text">He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff <br> sections. The bedding was hardly able to cover it and seemed ready to
+                                                        slide off any moment.
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer border-0 pt-0">
+                                                    <p class="card-text d-inline">Card footer</p>
+                                                    <a href="javascript:void(0);" class="card-link float-end">Card link</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="card-title">Card title46</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little <br> bit longer. Some quick example text to build the bulk</p>
+                                                </div>
+                                                <div class="card-footer d-sm-flex justify-content-between align-items-center">
+                                                    <div class="card-footer-link mb-4 mb-sm-0">
+                                                        <p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
+                                                    </div>
+                    
+                                                    <a href="javascript:void(0);" class="btn btn-primary">Go somewhere</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock contentbody %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+   
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    {% block script %}
+    <!-- Required vendors -->
+    <script src="{% static 'pages/vendor/global/global.min.js' %}"></script>
+	<script src="{% static 'pages/vendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'pages/js/custom.min.js' %}"></script>
+	<script src="{% static 'pages/js/dlabnav-init.js' %}"></script>
+	<script src="{% static 'pages/js/demo.js' %}"></script>
+    <script src="{% static 'pages/js/styleSwitcher.js' %}"></script>
+    {% endblock script %}
+</body>
+</html>

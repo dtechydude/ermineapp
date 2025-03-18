@@ -1,0 +1,205 @@
+{% extends 'pages/dashboard.html'%}
+{% load embed_video_tags %}
+
+{% load static %}
+{% block title %}<title>Schoolly Lesson Creation </title>{% endblock title %}
+
+{% block contentbody%}
+{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">E-Learning</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Lesson Creation Form</a></li>
+            </ol>
+        </div>
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-10 col-xxl-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Create Lesson</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="smartwizard" class="form-wizard order-create">
+                            <ul class="nav nav-wizard">
+                                <li>
+                                       <p>Complete accordingly to upload your lesson</p>
+                               
+                            </ul>
+                            <div class="tab-content">
+                                <!-- <div id="wizard_Service" class="tab-pane" role="tabpanel"> -->
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="mb-3">
+                                                <form method="post" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                <label class="text-label form-label">Lesson ID*</label>
+                                                <input type="text" name="lesson_id" maxlength="100" required id="id_lesson_id" class="form-control" placeholder="Lesson ID">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="mb-3">
+                                                <label class="text-label form-label">Lesson Name*</label>
+                                                <input type="text" name="name" maxlength="250" required id="id_name" class="form-control" placeholder="Lesson Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="mb-3">
+                                                <label class="text-label form-label">Chapter No*</label>
+                                                <input type="number" name="position" min="0" required id="id_position" class="form-control" placeholder="Chapter Number">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="mb-3">
+                                                <label class="text-label form-label">Other Information*</label>
+                                                <!-- <input type="text" name="phoneNumber" class="form-control" placeholder="Other Info" required> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-3">
+                                      
+                                            <div class="mb-3">
+                                                <label class="text-label form-label">Lesson Details*</label>
+                                                <!-- <input type="text" name="comment" maxlength="250" required id="id_comment" class="form-control"> -->
+                                                <textarea type="text" name="comment" maxlength="250" required id="id_comment" class="form-control" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                        <div class=" mb-3">
+                                            <label class="text-label form-label">Paste Video Link*</label>
+                                                <input type=text name="video" id="id_video" class="form-control">
+                                            </div>
+											
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 mb-2">
+                                        <div class="input-group mb-3">
+                                            
+                                            <div class="form-file">
+                                                <label class="text-label form-label">Upload Lesson File</label>
+                                                <input type="file" name="ppt" id="id_ppt" class="form-file-input form-control">
+                                            </div>
+											<span class="input-group-text">File</span>
+                                        </div>
+                                    </div>
+                                      
+                                    <div class="col-12">
+                                        <button type="submit" name="" value="Submit" class="btn btn-primary mb-2">Create New Lesson</button>
+                                    </div>
+                                </form>
+                                <hr>
+                                </div>
+                                                                        
+                                    </div>
+                                </div>                                                                                                    
+                                                                       
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                      {% endif %}        
+
+
+{% endblock contentbody %}
+{%block script%}
+<!-- Required vendors -->
+
+<script src="{% static 'portal/vendor/global/global.min.js' %}"></script>
+
+<script src="{% static 'portal/vendor/jquery-steps/build/jquery.steps.min.js' %}"></script>
+<script src="{% static 'portal/vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+<!-- Form validate init -->
+<script src="{% static 'portal/js/plugins-init/jquery.validate-init.js' %}"></script>
+
+
+<!-- Form Steps -->
+<script src="{% static 'portal/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js' %}"></script>
+<script src="{% static 'portalvendor/jquery-nice-select/js/jquery.nice-select.min.js' %}"></script>
+
+<script src="{% static 'portal/js/custom.min.js' %}"></script>
+<script src="{% static 'portal/js/dlabnav-init.js' %}"></script>
+<script src="{% static 'portal/js/demo.js' %}"></script>
+<script src="{% static 'portal/js/styleSwitcher.js' %}"></script>
+<!-- <script>
+    $(document).ready(function(){
+        // SmartWizard initialize
+        $('#smartwizard').smartWizard(); 
+    });
+</script> -->
+{% endblock script %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block section%}
+<section class="pop-cour">
+   
+    <div class="container com-sp pad-bot-70">
+        <div class="row justify-content-center">
+      
+        </div>
+		
+        <div class="row justify-content-center">
+
+            <div class="col-md-6">
+              
+               
+    
+                <!--Admin view the lesson, enter classroom-->
+                <div>
+                  <!--LESSON LIST-->
+                  <div class="row justify-content-center">
+                    {% comment %} <div class="pg-eve-desc pg-blog-desc"> {% endcomment %}
+                    <h3>Create New Lesson</h3>
+                    <p>Use the form below to create new lesson for the e-learning platform</p> 
+                      
+                  <div class="home-top-cour">
+                    
+                       <div class="col-md-12 home-top-cour-desc">                            
+            
+                        <form method="post" enctype="multipart/form-data">
+                         
+                            {% csrf_token %}
+
+
+                            {{ form.as_p }}
+                            <input type="submit" name="" value="Submit">
+                           
+                        </form>   
+                                        
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+</section>
+
+
+{% endblock section %}

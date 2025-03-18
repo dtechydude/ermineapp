@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
-from order import views as order_view
+from curriculum import views as curriculum_view
 
 
-app_name = 'order'
+app_name = 'curriculum'
 
 urlpatterns = [
     path('', views.StandardListView.as_view(), name='standard_list'),

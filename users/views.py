@@ -67,7 +67,7 @@ def user_logout(request):
 #         logout(request)
 #         return redirect('users:login')
 
-# @login_required
+@login_required
 def members_list(request):
     allusers = Profile.objects.all().order_by('-id')
     subscriber = Profile.objects.filter(user_role='subscriber').order_by('-id')
@@ -136,7 +136,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your profile has been updated successfully')
-            return redirect('users:members-list')
+            return redirect('pages:dashboard')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
