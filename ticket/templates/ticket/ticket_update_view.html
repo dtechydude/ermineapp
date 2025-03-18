@@ -1,15 +1,15 @@
-{% extends 'portal/portal-home.html'%}
+{% extends 'pages/dashboard.html'%}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block title %}<title>Schoolly - Lesson Update </title>{% endblock title %}
+{% block title %}<title>Ermine - Ticket Update </title>{% endblock title %}
 
 {% block content_body %}
-{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+{% if user.is_authenticated and user.is_superuser %}
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;"><h3>Update Lesson</h3></span></a></li>
+                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;"><h3>Update Ticket</h3></span></a></li>
                 
                 
             </ol>
@@ -19,7 +19,7 @@
             <div class="col-xl-4 col-xxl-6 col-lg-6">
                 <div class="card">
                     <div class="card-header border-0 pb-0">
-                        <h4 class="card-title">Lesson Update Form</h4>
+                        <h4 class="card-title">Ticket Update Form</h4>
                     </div>
                     <div>
                         {% if messages %}
@@ -35,10 +35,10 @@
                             {% csrf_token%}
                             {{ form|crispy}}
                             
-                            <button type="submit" name="submit" class="btn btn-success btn-block mt-3 mb-3" >Update Lesson</button>
+                            <button type="submit" name="submit" class="btn btn-success btn-block mt-3 mb-3" >Update Ticket</button>
                         </form>
                             <!-- <a href="{% url 'curriculum:lesson_detail standard=lessons.standard.slug subject=lessons.subject.slug' slug=lessons.slug' % }" class="btn btn-danger btn-block"> Cancel Update</a><BR> -->
-                            <a href="{% url 'curriculum:standard_list' %}" class="btn btn-danger btn-block">Cancel Update</a>
+                            <a href="{% url 'ticket:group_list' %}" class="btn btn-danger btn-block">Cancel Update</a>
 
                             {% endif %}
                        

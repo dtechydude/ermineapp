@@ -1,15 +1,15 @@
 # from xml.etree.ElementTree import Comment
 from django import forms
-from .models import Lesson, Comment, Reply
+from .models import Order, Comment, Reply
 
 
 
-class LessonForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
    
     class Meta:
         
-        model = Lesson
-        fields = ('lesson_id', 'name', 'position', 'comment')
+        model = Order
+        fields = ('order_id', 'name', 'comment')
         widgets = {
             'comment': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
         }

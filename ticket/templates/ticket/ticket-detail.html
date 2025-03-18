@@ -1,8 +1,8 @@
-{% extends 'portal/portal-home.html'%}
+{% extends 'pages/dashboard.html'%}
 {% load static %}
 {% load embed_video_tags %}
 
-{% block title %}<title>Lesson Detail </title>{% endblock title%}
+{% block title %}<title>Ticket Detail </title>{% endblock title%}
 
 {% block content_body %}
 
@@ -11,8 +11,8 @@
 		
 		<div class="row page-titles">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ lessons.subject }}</a></li>
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ lessons.name }}</b><span> - Class : {{ lessons.standard }}</span></a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ tickets.subject }}</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ tickets.name }}</b><span> - Class : {{ tickets.group }}</span></a></li>
 			</ol>
 		</div>
 		
@@ -23,12 +23,12 @@
 					<div class="card-body">
 						<div class="email-left-box generic-width px-0 mb-5">
 							<div class="p-0">
-								{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+								{% if user.is_authenticated and user.is_superuser %}
 								
 								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
 								<p>Use the buttons below to update or delete lessons</p>
-								<p><a href="{% url 'curriculum:lesson_update' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-info">Update Lesson</a><br></p>
-								<p><a href="{% url 'curriculum:lesson_delete' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-secondary">Delete Lesson</a></p>
+								<p><a href="{% url 'ticket:ticket_update' group=tickets.group.slug subject=tickets.subject.slug slug=tickets.slug %}" class="btn btn-info">Update Lesson</a><br></p>
+								<p><a href="{% url 'ticket:ticket_delete' group=tickets.group.slug subject=tickets.subject.slug slug=tickets.slug %}" class="btn btn-secondary">Delete Lesson</a></p>
 								{% else %}
 								<p><a href="#">Teacher's Contact</a><br></p>
 
@@ -44,8 +44,8 @@
 											<div class="media pt-3 d-sm-flex d-block justify-content-between">
 												<div class="clearfix mb-3 d-flex">
 													<div class="media-body me-2">
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ lessons.created_by}}</h5>
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ lessons.created_at}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ tickets.created_by}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ tickets.created_at}}</h5>
 														
 													</div>
 												</div>
@@ -59,7 +59,7 @@
 											<div class="media mb-2 mt-3">
 												
 												<div class="media-body">
-													<h2 class="mb-4">Lesson Details:</h2>																								
+													<h2 class="mb-4">Ticket Details:</h2>																								
 													
 													<p class="read-content-email">
 														Watch Lesson video here..</p>
@@ -69,7 +69,7 @@
 																					
 												<!-- make sure the video link looks like this https://www.youtube.com/embed/dGF1x14QNGA -->
 												<iframe width="620" height="345" 									
-												src="{{ lessons.video }}" frameborder="0" allowfullscreen>  
+												src="" frameborder="0" allowfullscreen>  
 												                     
 												
 												</iframe>                     
@@ -78,7 +78,7 @@
 											
 											<div class="read-content-body">
 												<p class="mb-2"><strong>Teacher's Highlights:</strong><br> </p>
-												{{ lessons.comment | safe }}
+												{{ tickets.comment | safe }}
 												<p class="mb-2"></p>
 																								
 												<hr>
@@ -88,10 +88,10 @@
 													<div class="row attachment">
 													<div class="col-auto">
 														{% if lessons.ppt %}
-														<a href="{{ lessons.ppt.url }}"  download="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
+														<a href=""  download="" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
 													</div>
 													<div class="col-auto" >
-														<a href="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;">Read Lesson</span></a>
+														<a href="" class="text-muted"><span style="color:red;">Read Lesson</span></a>
 													</div>
 													{% endif %}
 												</div>

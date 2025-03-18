@@ -4,47 +4,46 @@ from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
-from .models import Lesson, Standard, Subject, save_lesson_files
-from .forms import CommentForm, LessonForm, ReplyForm
+from .models import Ticket, save_lesson_files, Group, Subject
+from .forms import CommentForm, TicketForm, ReplyForm, 
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # from students.models import StudentDetail
 
 
-class StandardSelfListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
-    # template_name = 'curriculum/class_list.html'
-    template_name = 'curriculum/my_class.html'
+class GroupSelfListView(LoginRequiredMixin, ListView):
+    context_object_name = 'groups'
+    model = Group
+    template_name = 'ticket/my_class.html'
  
     # Student can only view their class elearning
     def get_queryset(self):
-        return Standard.objects.filter(name = self.request.user.studentdetail.current_class)
+        return Group.objects.filter(name = self.request.user.profile)
 
 # Standard list view for the admin and teachers
-class StandardListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
+class GroupListView(LoginRequiredMixin, ListView):
+    context_object_name = 'groups'
+    model = Group
     # template_name = 'curriculum/class_list.html'
-    template_name = 'curriculum/elearning_class.html'
+    template_name = 'ticket/elearning_class.html'
 
     
 class SubjectListView(DetailView):
-    context_object_name = 'standards'
-    model = Standard
-    template_name = 'curriculum/class_subjects.html'
+    context_object_name = 'groups'
+    model = Group
+    template_name = 'ticket/class_subjects.html'
 
 
-class LessonListView(DetailView):
+class TicketListView(DetailView):
     context_object_name = 'subjects'
     model = Subject
-    template_name = 'curriculum/course_list.html'
+    template_name = 'ticket/course_list.html'
 
 
-class LessonDetailView(DetailView, FormView):
-    context_object_name = 'lessons'
-    model = Lesson
-    template_name = 'curriculum/lesson-detail.html'
+class TicketDetailView(DetailView, FormView):
+    context_object_name = 'tickets'
+    model = Ticket
+    template_name = 'ticket/lesson-detail.html'
     # for replies to lessons
     form_class = CommentForm
     second_form_class = ReplyForm
@@ -54,12 +53,11 @@ class LessonDetailView(DetailView, FormView):
         take action on the form which is posted
     '''
     def get_context_data(self, **kwargs):
-        context = super(LessonDetailView, self).get_context_data(**kwargs)
+        context = super(TicketDetailView, self).get_context_data(**kwargs)
         if 'form' not in context:
             context['form'] = self.form_class()
         if 'form2' not in context:
             context['form2'] = self.second_form_class()
-        # context['comments] = Comment.objects.filter(id=self.object.id)
         return context
 
 
@@ -83,9 +81,9 @@ class LessonDetailView(DetailView, FormView):
 
     def get_success_url(self):
         self.object = self.get_object()
-        standard = self.object.standard
+        group = self.object.group
         subject = self.object.subject
-        return reverse_lazy('curriculum:lesson_detail', kwargs={'standard':standard.slug,
+        return reverse_lazy('ticket:ticket_detail', kwargs={'group':group.slug,
                                                             'subject':subject.slug,
                                                             'slug':self.object.slug})
 
@@ -93,8 +91,8 @@ class LessonDetailView(DetailView, FormView):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.author = self.request.user
-        fm.lesson_name = self.object.comments.name
-        fm.lesson_name_id = self.object.id
+        fm.ticket_name = self.object.comments.name
+        fm.ticket_name_id = self.object.id
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -102,38 +100,36 @@ class LessonDetailView(DetailView, FormView):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.author = self.request.user
-        fm. comment_name_id = self.request.POST.get('comment.id')
+        fm.comment_name_id = self.request.POST.get('comment.id')
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
             
 
-
-
-class LessonCreateView(CreateView):
-    form_class = LessonForm
+class TicketCreateView(CreateView):
+    form_class = TicketForm
     context_object_name = 'subject'
     model = Subject
-    template_name = 'curriculum/lesson_create.html'
+    template_name = 'ticket/lesson_create.html'
 
     def get_success_url(self):
         self.object = self.get_object()
         standard = self.object.standard
-        return reverse_lazy('curriculum:lesson_list',kwargs={'standard':standard.slug, 'slug':self.object.slug})
+        return reverse_lazy('ticket:lesson_list',kwargs={'group':standard.slug, 'slug':self.object.slug})
 
     def form_valid(self, form, *args, **kwargs):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.created_by = self.request.user
-        fm.standard = self.object.standard
+        fm.group = self.object.group
         fm.subject = self.object
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 
-class LessonUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    fields = ('name', 'position', 'video', 'comment')
-    model = Lesson
-    template_name = 'curriculum/lesson_update_view.html'
-    context_object_name = 'lessons'
+class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    fields = ('name', 'comment')
+    model = Ticket
+    template_name = 'ticket/lesson_update_view.html'
+    context_object_name = 'tickets'
     
     #function to check if user is the login user
     def form_valid(self, form):
@@ -148,15 +144,15 @@ class LessonUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class LessonDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Lesson
-    context_object_name = 'lessons'
-    template_name = 'curriculum/lesson_delete.html'
+class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Ticket
+    context_object_name = 'tickets'
+    template_name = 'ticket/lesson_delete.html'
 
     def get_success_url(self):
-        standard = self.object.standard
+        group = self.object.group
         subject = self.object.subject
-        return reverse_lazy('curriculum:lesson_list', kwargs={'standard':standard.slug, 'slug':subject.slug})
+        return reverse_lazy('ticket:ticket_list', kwargs={'group':group.slug, 'slug':subject.slug})
 
 #preventing other users from update other people's post
     def test_func(self):
@@ -164,7 +160,3 @@ class LessonDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.created_by:
             return True
         return False
-
-
-
-   
