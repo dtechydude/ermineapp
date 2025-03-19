@@ -720,7 +720,7 @@
 							<span class="nav-text">Profile Mgt.</span>
 						</a>
 						<ul aria-expanded="false">							
-							<li><a href="./page-register.html">Reset Password</a></li>
+							<li><a href="{% url 'users:password_reset' %}">Reset Password</a></li>
 							<li><a href="{% url 'users:profile' %}">Edit Profile</a></li>
 							<li><a href="{% url 'users:logout' %}">Logout</a></li>
 							<!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>

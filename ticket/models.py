@@ -28,8 +28,7 @@ class Group(models.Model):
 class Subject(models.Model):
     subject_id = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
-    standard = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='subjects')
-    # image = models.ImageField(upload_to=save_subject_image, blank=True, verbose_name='Subject Image')
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='groups')
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
 
