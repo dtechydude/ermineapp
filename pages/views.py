@@ -16,6 +16,8 @@ def ermine_home(request):
 @login_required
 def dashboard(request):
     users_num = User.objects.count()
+    merchant = Merchant.objects.all()
+    merchant = SubscriberList.objects.all()
     merchant_num = Merchant.objects.count()
     subscriber_num = SubscriberList.objects.count()
     agent_num = AgentList.objects.count()
@@ -35,6 +37,7 @@ def dashboard(request):
         'my_trans': my_trans,
         'sub_trans': sub_trans,
         'agent_num': agent_num,
+        'merchant': merchant,
     }
     return render(request, 'pages/dashboard.html', context)
 

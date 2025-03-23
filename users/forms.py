@@ -15,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    email = forms.EmailField(required=False)
     first_name = forms.CharField()
     last_name = forms.CharField()
 
@@ -27,7 +27,7 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = [ 'middle_name', 'gender', 'phone', 'address', 'state', 'nin', 'date_of_birth', 'bio', 'image', ]
+        fields = [ 'middle_name', 'gender', 'date_of_birth', ]
         widgets = {
             'date_of_birth': forms.DateInput(
                 format=('%d/%m/%Y'),
@@ -36,3 +36,55 @@ class ProfileUpdateForm(forms.ModelForm):
                        'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
                       }),
         }
+
+
+
+
+
+class UserTwoUpdateForm(forms.ModelForm):
+    # email = forms.EmailField(required=False)
+    # first_name = forms.CharField()
+    # last_name = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = [ 'last_name', ]
+
+
+class BusinessUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'business_name', 'business_type', 'business_reg_no', ]
+
+class BankUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'bank_name', 'acc_no', 'acc_name', ]
+
+class KYCUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'date_of_birth', 'phone', 'nin', 'image', ]
+        widgets = {
+            'date_of_birth': forms.DateInput(
+                format=('%d/%m/%Y'),
+                attrs={'class': 'form-control', 
+                        'placeholder': 'Select a date',
+                        'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
+                        }),
+        }
+
+class RoleUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'user_role', ]
+        widgets = {
+            'date_of_birth': forms.DateInput(
+                format=('%d/%m/%Y'),
+                attrs={'class': 'form-control', 
+                        'placeholder': 'Select a date',
+                        'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
+                        }),
+        }
+   
+   

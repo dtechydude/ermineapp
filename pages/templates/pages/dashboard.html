@@ -68,7 +68,7 @@
 				</g>
 				
 				</svg> -->
-				<img src="{% static 'pages/images/logo-full.png' %}" alt="Ermine Logo">
+				<img src="{% static 'pages/images/logo-full1.png' %}" alt="Ermine Logo">
 				<!-- <svg class="brand-title" xmlns="http://www.w3.org/2000/svg" width="143" height="46.359" viewBox="0 0 143 46.359">
 				  <g id="Group_26" data-name="Group 26" transform="translate(-134 -40.641)">
 					<text id="Hotel_Admin_Dashboard" data-name="Ermine Admin Dashboard" transform="translate(134 83)" fill="#5d5449" font-size="16" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Ermine Dashboard</tspan></text>
@@ -444,12 +444,15 @@
 							<div class="dashboard_bar"> 
 								{% if user.is_superuser or user.is_staff %}
 								<span style="color: green;">Admin Dashboard</span>
-								{% elif user.profile.merchant %}
+								{% elif user.profile.user_role == 'merchant' %}
 								<span style="color:red">Merchant Dashboard</span>
-								{% elif user.profile.subscriber %}
+								{% elif user.profile.user_role == 'subscriber' %}
 								<span  style="color: brown;">Subscriber Dashboard</span>
+								{% elif user.profile.user_role == 'agent' %}
+								<span  style="color: brown;">Agent Dashboard</span>
 								{% else %}
-								<span>Agent Dashboard</span>
+								<button type="button" class="btn btn-secondary">You Need To Update Your Dashboard Role <span
+									class="btn-icon-end"><i class="fa fa-plus"></i></span>
 								{% endif %}
 								{% block sub-title%}								
 								{% endblock sub-title%}
@@ -677,7 +680,8 @@
 							<li><a href="./uc-nestable.html">Cancelled KYC List</a></li>
 							<li><a href="./uc-noui-slider.html">Pending KYC List</a></li>
 							<li><a href="./uc-sweetalert.html">KYC Completed List</a></li>
-							<li><a href="./uc-toastr.html">Reset KYC</a></li>
+							<li><a href="./uc-toastr.html">Reset Merchant KYC</a></li>
+							<li><a href="./uc-toastr.html">Reset Subscriber KYC</a></li>
 							<li><a href="./map-jqvmap.html">Upload KYC List</a></li>
 							
 						</ul>
@@ -785,8 +789,19 @@
 														</svg>
 													</span>
 													<div class="ms-4">
-														<h4 class="mb-0 font-w600">{{user.username}}</h4>
-														<p class="mb-0 text-nowrap">My Username</p>
+														<a href="">
+														{% if user.profile.user_role == 'select' %}
+														<h4 class="mb-0 font-w600">Update Role!</h4>
+														<p class="mb-0 text-nowrap">
+															Choose Your Role </p> </a>
+															{% else %}
+															<a href="">															
+															<h4 class="mb-0 font-w600">{{ user.username}}</h4>
+															<p class="mb-0 text-nowrap">															
+															My Username</p>
+														</a>
+															{% endif%}
+														
 													</div>
 												</div>
 											</div>
@@ -868,8 +883,15 @@
 									</div>
 								</div>
 							</div>
+							<div>
+								{% if messages %}
+								{% for message in messages %}
+								<div class ="alert alert-{{ message.tags }}">{{ message }}</div>
+								{% endfor%}
+								{% endif%}
+							</div>
 							<!-- start of section -->
-							{% if user.is_superuser or user.is_staff%}
+							{% if user.is_superuser or user.is_staff %}
 							<div class="col-xl-12">
 								<div class="row">
 									<div class="col-xl-6">
@@ -1099,21 +1121,22 @@
 																	<div class="d-flex align-items-center mb-3">
 																		<!-- <img src="{% static 'pages/images/room/room1.jpg' %}" alt=""> -->
 																		<div class="ms-4 bed-text">
-																			<h6>MY DOB - {{ user.profile.date_of_birth }}.</h6>
+																			<h6>UPDATE KYC - .</h6>
+																			<P>DATE OF BIRTH: {{ user.profile.date_of_birth }}</P>
 																			<div class="users d-flex align-items-center">
 																				<img src="{{ user.profile.image.url }}" alt="">
+																				
 																				<div>
 																					{% if user.profile.nin %}
-																					<span class="fs-16 font-w500 me-3">{{user.profile.nin}}</span>
-																					<span>MY NIN</span>
+																					<span>MY NIN</span><span class="fs-16 font-w500 me-3">{{user.profile.nin}}</span>
 																					{% else %}
-																					<span class="fs-16 font-w500 me-3 text-red">You have not updated your NIN</span>
-																					<span>:MY NIN</span>
+																					<span>MY NIN: </span><span class="fs-16 font-w500 me-3 text-red">You have not updated your NIN</span>
+																					<!-- <span>:MY NIN</span> -->
 																					{% endif %}
 																				</div>
 																				
 																			</div>
-																			<div><a href="{% url 'users:profile' %}"><button type="button" class="btn btn-secondary">Update Profile</button></a></div>
+																			<div><a href="{% url 'users:kyc-profile' %}"><button type="button" class="btn btn-secondary">Update KYC</button></a></div>
 																		</div>
 																	</div>
 																</div>
@@ -1142,29 +1165,32 @@
 														<div class="row">
 															<div class="col-xl-12">
 																<div class="card">
-																	<div class="card-header border-0 flex-wrap">
-												 
-											<h5 class="fs-20">Profile Information</h5>
-											<div class="card-action coin-tabs">
-												<ul class="nav nav-tabs" role="tablist">
-													<li class="nav-item">
-														<a class="nav-link " data-bs-toggle="tab" href="#Daily1" role="tab"> {{ user.first_name }} {{ user.profile.middle_name }} {{ user.last_name }}</a>
-													</li>
-												
-												</ul>
-											</div>
-										</div>
+																	<!-- <div class="card-header border-0 flex-wrap">
+											
+										</div> -->
+										<!-- <div class="card-body pb-0">
+											Full Name:
+										<h3>{{ user.first_name }} {{ user.profile.middle_name }} {{ user.last_name }}</h3>
+									</div> -->
+																	
 										<div class="card-body pb-0">
-											<div class="d-flex flex-wrap">
+											<!-- <div class="d-flex flex-wrap">
 												
-											</div>	
+											</div>	 -->
 											<div class="tab-content">
+												<h3><span style="color: grey; font-size:18px;">Welcome! </span>{{ user.first_name }} {{ user.profile.middle_name }} {{ user.last_name }}</h3>
+
 												<h5><span>Referral Link: </span><span style="color: grey;"> <small>https://ermine.ng/users/{{ user.profile.code }} </small></span></h5>
 
 												
 												<div class="tab-pane fade show active" id="Daily1">
-													<!-- <div id="chartBar" class="chartBar"></div> -->
-													 <p>Use Your Link To Invite Others...</p>
+													<p><span> You're On <strong>{{ user.profile.user_role }} Account : </strong>  </span> 
+														<a href="{% url 'users:role-update' %}">
+														<span> <button type="button" class="btn btn-rounded btn-info">
+															<span class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
+													</span>Switch Role</button></a></span>
+												</p>
+													</button>
 													
 												</div>
 												<div class="tab-pane fade " id="weekly1">
@@ -1226,9 +1252,20 @@
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-left">
 																	<ul>
-																		<li class="fs-16 text-red">Email: <span class="fs-16 text-black">{{ user.email }}</span></li>
-																		<li class="fs-16 text-red">Phone: <span class="fs-16 text-black">{{ user.profile.phone }}</span></li>
-																		<li class="fs-16 text-red">Alt.Phone: <span class="fs-16 text-black"> {{ user.profile.alternate_phone }}</span></li>
+																		<h5>Email & Phone Info.</h5>
+																		<li class="fs-11 text-red">Email: <span class="fs-11 text-black">{{ user.email }}</span></li>
+																		<li class="fs-11 text-red">Phone: <span class="fs-11 text-black">{{ user.profile.phone }}</span></li>
+																		<li class="fs-11 text-red">Alt.Phone: <span class="fs-11 text-black"> {{ user.profile.alternate_phone }}</span></li>
+																		<li></li>
+																		<div><a class='text-green' href="{% url 'users:profile' %}"><span style='font-size:medium'>Update</span></a></div>
+
+																		<hr>
+																		<h5>Business Info.</h5>
+																		<li class="fs-11 text-red">Biz Type: <span class="fs-11 text-black">{{ user.profile.business_type }}</span></li>
+																		<li class="fs-11 text-red">Biz Name: <span class="fs-11 text-black">{{ user.profile.business_name }}</span></li>
+																		<li class="fs-11 text-red">Biz Reg No: <span class="fs-11 text-black"> {{ user.profile.business_reg_no }}</span></li>
+
+																		<div><a class='text-green' href="{% url 'users:business-profile' %}"><span style='font-size:medium'>Update</span></a></div>
 
 																	</ul>																	
 																
@@ -1237,26 +1274,37 @@
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-left">
 																	<ul>
-																		<li class="fs-16 text-red">State:  <span class="fs-16 text-black">{{ user.profile.state }}</span></li>
-																		<li class="fs-16 text-red">Gender:  <span class="fs-16 text-black">{{ user.profile.gender }}</span></li>
-																		<li class="fs-16 text-red">Last Updated: <span class="fs-16 text-black">{{ user.profile.update |date:"d/m/Y" }}</span></li>
+																		<h5>Location Info.</h5>
+																		<li class="fs-11 text-red">State:  <span class="fs-11 text-black">{{ user.profile.state }}</span></li>
+																		<li class="fs-11 text-red">Address:  <span class="fs-8 text-black">{{ user.profile.address }}</span></li>
+																		<li class="fs-11 text-red">Last Updated: <span class="fs-11 text-black">{{ user.profile.update |date:"d/m/Y" }}</span></li>
+																		<div><a class='text-green' href="{% url 'users:profile' %}"><span style='font-size:medium'>Update</span></a></div>
+
+																		<hr>
+																		<h5>Bank Info.</h5>
+																		<li class="fs-11 text-red">Bank Name: <span class="fs-11 text-black">{{ user.profile.bank_name }}</span></li>
+																		<li class="fs-11 text-red">Acc No: <span class="fs-11 text-black">{{ user.profile.acc_no }}</span></li>
+																		<li class="fs-11 text-red">Acc Name: <span class="fs-11 text-black"> {{ user.profile.acc_name }}</span></li>
+
+																		<div><a class='text-green' href="{% url 'users:bank-profile' %}"><span style='font-size:medium'>Update</span></a></div>
+
 																	</ul>
 																	</div>
 															</div>
-															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+															<!-- <div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 															
-															</div>
-															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
+															</div> -->
+															<!-- <div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																
-															</div>
+															</div> -->
 															<hr>
 															<div class="mb-5 mt-4 d-flex align-items-center">
 																<div>
 																	<h4><a href="javascript:void(0);" class="text-secondary">"My Bio Info</a></h4>
 																	{% if user.profile.bio %}
-																	<span class="fs-18">Your bio info goes here </span>
+																	<span class="fs-16">Your bio info goes here </span>
 																	{% else %}
-																	<span class="fs-18">You've not updated your bio information </span>
+																	<span class="fs-16">You've not updated your bio information </span>
 																	{% endif %}
 																																		
 																	<div><a href="{% url 'users:profile' %}"><button type="button" class="btn btn-secondary">Update Profile</button></a></div>
@@ -1289,12 +1337,14 @@
 										<div class="front-view-slider owl-carousel owl-carousel owl-loaded owl-drag owl-dot">
 											<div class="items">
 												<div class="customers border">
-													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+													<p class="fs-16">
+														The platform has helped in removing the stress of having to go home with cash, I now deposit my money into my bank account.
+													</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
 														<img src="{% static 'pages/images/users/user5.jpg' %}" alt="">
 														<div class="ms-3">
-															<h5 class="mb-0"><a href="javascript:void(0);">Kusnaidi Anderson</a></h5>
+															<h5 class="mb-0"><a href="javascript:void(0);">Anu Agbe</a></h5>
 															<span>4m ago</span>
 														</div>
 														</div>
@@ -1307,12 +1357,14 @@
 											</div>
 											<div class="items">
 												<div class="customers border">
-													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+													<p class="fs-16">
+														The withdrawal charges on Ermine platform is amazingly low and the swift connection to available agents/merchants is superb. Kudos!
+													</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
-														<img src="{% static 'pages/images/users/user6.jpg' %}" alt="">
+														<img src="{% static 'pages/images/users/user7.jpg' %}" alt="">
 														<div class="ms-3">
-															<h5 class="mb-0"><a href="javascript:void(0);">Adepegba Badmos</a></h5>
+															<h5 class="mb-0"><a href="javascript:void(0);">Gbenga Babs</a></h5>
 															<span>4m ago</span>
 														</div>
 														</div>
@@ -1325,12 +1377,14 @@
 											</div>
 											<div class="items">
 												<div class="customers border">
-													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+													<p class="fs-16">
+														The charges on Ermine is extremely low, making withdrawals more convenient is top notch and the support system is waoh!
+													</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
-														<img src="images/users/user7.jpg" alt="">
+														<img src="{% static 'pages/images/users/user3.jpg' %}" alt="">
 														<div class="ms-3">
-															<h5 class="mb-0"><a href="javascript:void(0);">Kusnaidi Anderson</a></h5>
+															<h5 class="mb-0"><a href="javascript:void(0);">Adekoya Mary</a></h5>
 															<span>4m ago</span>
 														</div>
 														</div>
@@ -1343,12 +1397,14 @@
 											</div>
 											<div class="items">
 												<div class="customers border">
-													<p class="fs-16">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+													<p class="fs-16">
+														My review is on the "Remote Transaction"; getting cash at a location where there are no POS service has really helped me a lot
+													</p>
 													<div class="d-flex justify-content-between align-items-center mt-4">
 														<div class="customer-profile d-flex ">
-														<img src="images/users/user5.jpg" alt="">
+														<img src="{% static 'pages/images/users/user1.jpg' %}" alt="">
 														<div class="ms-3">
-															<h5 class="mb-0"><a href="javascript:void(0);">Kusnaidi Anderson</a></h5>
+															<h5 class="mb-0"><a href="javascript:void(0);">Emeka Anyanwu</a></h5>
 															<span>4m ago</span>
 														</div>
 														</div>
@@ -1488,7 +1544,7 @@
 		$(document).ready(function(){
 			$(".booking-calender .fa.fa-clock-o").removeClass(this);
 			$(".booking-calender .fa.fa-clock-o").addClass('fa-clock');
-		});
+		});		
 	</script>
 	{% endblock script %}
 

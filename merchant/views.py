@@ -1,13 +1,16 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from users.models import Profile
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from transaction.models import MerchantSetTransact
 from .models import Merchant
-from .forms import MerchantUpdateForm
-from django.views.generic import DetailView, UpdateView, DeleteView, ListView, FormView
+from .forms import MerchantUpdateForm, MerchantRegisterForm, MerchantForm
+from django.views.generic import DetailView, UpdateView, DeleteView, ListView, FormView, CreateView
 
 
 #Displays available merchants to subscribers
@@ -31,7 +34,48 @@ def merchant_list(request):
     return render(request, 'merchant/merchant_list.html', context)
 
 
-class MerchantDetailView(DetailView):
+#merchant create function
+@login_required
+def merchantform(request):
+    if request.method == 'POST':
+        merchant_form = MerchantForm(request.POST, instance=request.user)
+        if merchant_form.is_valid():
+            merchant_form.save()
+            messages.success(request, f'Your profile has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        merchant_form = MerchantForm(instance=request.user)
+
+    context = {
+        'merchant_form': merchant_form,
+        
+    }
+
+    return render(request, 'merchant/merchant_create.html', context)
+
+
+#merchant create Class Base View
+class MerchantCreateView(CreateView):
+    form_class = MerchantForm
+    context_object_name = 'merchant'
+    model = Merchant
+    template_name = 'merchant/merchant_create.html'
+
+    def get_success_url(self):
+        self.object = self.get_object()
+        # profile = self.object.profile
+        return reverse_lazy('merchant:merchant_list',kwargs={'slug':self.object.slug})
+
+    def form_valid(self, form, *args, **kwargs):
+        self.object = self.get_object()
+        fm = form.save(commit=False)
+        fm.profile = self.request.user
+        fm.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+
+class MerchantDetailView(LoginRequiredMixin, DetailView):
     template_name = 'merchant/merchant_detail.html'
     queryset = Merchant.objects.all()
 
@@ -40,8 +84,9 @@ class MerchantDetailView(DetailView):
         return get_object_or_404(Merchant, id=id_)
 
 
-class MerchantUpdateView(LoginRequiredMixin, UpdateView):
+class MerchantUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = MerchantUpdateForm
+    # template_object_name = 'merchant'
     template_name = 'merchant/merchant_update_form.html'
     # queryset = StudentDetail.objects.all()
 
@@ -53,6 +98,13 @@ class MerchantUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+    
+    #preventing other users from update other people's post
+    def test_func(self):
+        merchant = self.get_object()
+        if self.request.user == merchant.profile.user:
+            return True
+        return False
 
 class MerchantDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'merchant/merchant_delete.html'

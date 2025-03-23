@@ -11,7 +11,7 @@ class Profile(models.Model):
     recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,  related_name='ref_by' )
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     middle_name = models.CharField(max_length=20, blank=True)
-    date_of_birth = models.DateField(null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     nin = models.CharField(max_length=13, blank=True)
     phone = models.CharField(max_length=11, blank=True)
     altenate_phone = models.CharField(max_length=11, blank=True)
@@ -112,18 +112,41 @@ class Profile(models.Model):
     bio = models.TextField(max_length=150, blank=True)
 
     
-    select = 'Select'
-    agent = 'Agent'
-    merchant = 'Merchant'
-    subscriber = 'Subscriber' 
+    select = 'select'
+    agent = 'agent'
+    merchant = 'merchant'
+    subscriber = 'subscriber' 
 
     user_role = [
-        ('Select', select),
-        ('Agent', agent),
-        ('Merchant', merchant),  
-        ('Subscriber', subscriber),      
+        ('select', select),
+        ('agent', agent),
+        ('merchant', merchant),  
+        ('subscriber', subscriber),      
     ]
-    user_role = models.CharField(max_length=15, choices=user_role, default=select)
+    user_role = models.CharField(max_length=15, choices=user_role, default=select, help_text='Click To Select Your Role')
+
+    
+    nin_verified = models.BooleanField(default=False, blank=True)
+    current_state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True)
+
+    select = 'Select'
+    sales = 'Sales'
+    services = 'Services'
+    product_services = 'Product_Service'  
+
+    business_type = [
+        ('Select', select),
+        ('Sales', sales),
+        ('Services', services),
+        ('Product_Service', product_services),       
+    ]
+    business_type = models.CharField(max_length=25, choices=business_type, default=select)
+    business_name = models.CharField(max_length=20, blank=True)
+    business_reg_no = models.CharField(max_length=20, blank=True)
+    business_address = models.CharField(max_length=20, blank=True)
+    bank_name = models.CharField(max_length=20, blank=True)
+    acc_name = models.CharField(max_length=20, blank=True)
+    acc_no = models.CharField(max_length=20, blank=True)
 
     inactive = 'Inactive'
     active = 'Active'
@@ -136,8 +159,7 @@ class Profile(models.Model):
     ]
     user_status = models.CharField(max_length=15, choices=user_status, default=inactive)
 
-    nin_verified = models.BooleanField(default=False, blank=True)
-    current_state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True)
+
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

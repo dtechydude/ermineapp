@@ -6,28 +6,29 @@ from .models import Merchant
 from transaction.models import MerchantSetTransact
 
 
-class SubscriberRegisterForm(forms.ModelForm):
+class MerchantRegisterForm(forms.ModelForm):
 
     class Meta:
         model = Merchant
-        fields = ('profile',)
+        # fields = ('profile',)
+        exclude = ('profile',)
         
-        widgets = {
-            'date_employed': forms.DateInput(
-                format=('%d/%m/%Y'),
-                attrs={'class': 'form-control', 
-                       'placeholder': 'Select a date',
-                       'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
-                      }),
+        # widgets = {
+        #     'date_employed': forms.DateInput(
+        #         format=('%d/%m/%Y'),
+        #         attrs={'class': 'form-control', 
+        #                'placeholder': 'Select a date',
+        #                'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
+        #               }),
 
-            'year': forms.DateInput(
-                format=('%d/%m/%Y'),
-                attrs={'class': 'form-control', 
-                       'placeholder': 'Select a date',
-                       'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
-                      }),
+        #     'year': forms.DateInput(
+        #         format=('%d/%m/%Y'),
+        #         attrs={'class': 'form-control', 
+        #                'placeholder': 'Select a date',
+        #                'type': 'date'  # <--- IF I REMOVE THIS LINE, THE INITIAL VALUE IS DISPLAYED
+        #               }),
 
-         }
+        #  }
 
        # Widget = {'date_employed': forms.DateInput()}
 
@@ -80,3 +81,9 @@ class MerchantUpdateForm(forms.ModelForm):
 #     class Meta:
 #         model = TransactionComplete
 #         fields = ('remark', 'trans_success',)
+
+class MerchantForm(forms.ModelForm):
+    class Meta:
+        model = Merchant
+        fields = ['business_type', 'business_type', 'business_reg_no', 'bank_name', 'acc_name', 'acc_no', ]
+       

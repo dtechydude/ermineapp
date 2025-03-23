@@ -11,7 +11,8 @@ from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import ProfileUpdateForm, UserUpdateForm
+from .forms import(ProfileUpdateForm, UserUpdateForm, KYCUpdateForm,
+                   BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,  RoleUpdateForm)
 
 
 @login_required
@@ -102,20 +103,7 @@ class UserDetailView(DetailView):
     def get_object(self):
         id_ = self.kwargs.get("id")
         return get_object_or_404(Profile, id=id_)
-    
-# class UserUpdateView(LoginRequiredMixin, UpdateView):
-#     form_class = ProfileUpdateForm
-#     template_name = 'users/users_update_form.html'
-#     # queryset = Profile.objects.all()
-
-
-    # def get_object(self):
-    #     id_ = self.kwargs.get("id")
-    #     return get_object_or_404(StudentDetail, id=id_)
-
-    # def form_valid(self, form):
-    #     print(form.cleaned_data)
-    #     return super().form_valid(form)
+  
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'users/users_delete.html'
@@ -126,7 +114,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         return get_object_or_404(Profile, id=id_)
     # queryset = StudentDetail.objects.all()
 
-
+# Profile Information
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -147,3 +135,92 @@ def profile(request):
     }
 
     return render(request, 'users/profile_update_form.html', context)
+
+
+# Business Information
+@login_required
+def business_profile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = BusinessUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your business information has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = BusinessUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/business_update_form.html', context)
+
+# Bank Profile Information
+@login_required
+def bankprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = BankUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your Bank Profile has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = BankUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/bank_update_form.html', context)
+
+# KYC information
+@login_required
+def kycprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = KYCUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your KYC information has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = KYCUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/kyc_update_form.html', context)
+
+# KYC information
+@login_required
+def roleprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = RoleUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your ROLE switch has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = RoleUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/user_role_update.html', context)

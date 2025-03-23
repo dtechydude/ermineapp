@@ -18,7 +18,7 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Bank Update Form</title>
+	<title>KYC Update Form</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{% static 'pages/images/favicon.png'%} " />
@@ -36,10 +36,10 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
 									<div class="text-center mb-3">
-                                        <h4>Update Your Personal Info</h4>
+                                        <h4>Update Your KYC Info</h4>
 									</div>
                                     <!-- <h4 class="text-center mb-4">Welcome To Ermine App!</h4> -->
-                                    <form  action ="" method="POST" enctype="multipart/form-data" class="needs-validation">
+                                    <form  action ="" method="POST">
                                         {% csrf_token %}
                                         <div class="mb-3">
                                             {{ u_form|crispy }}
@@ -49,7 +49,7 @@
                                         </div>
                                                                               
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Update Personal Info</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Update KYC Info</button>
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
