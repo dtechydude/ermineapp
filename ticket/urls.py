@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .models import views as curriculum_view
+from ticket import views as ticket_view
 
 
 app_name = 'ticket'

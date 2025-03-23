@@ -17,6 +17,9 @@ class State(models.Model):
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -72,7 +75,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('order:order_list', kwargs={'slug':self.subject.slug, 'standard':self.standard.slug})
+        return reverse('order:order_list', kwargs={'slug':self.lga.slug, 'state':self.state.slug})
 
     @property
     def html_stripped(self):

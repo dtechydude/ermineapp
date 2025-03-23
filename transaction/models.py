@@ -145,7 +145,7 @@ class TransactionComplete(models.Model):
     trans_success = models.BooleanField()
 
     def __str__(self):
-        return f'{self.author} - {self.trans_success}'
+        return f'{self.responder} - {self.trans_success}'
     
 
 

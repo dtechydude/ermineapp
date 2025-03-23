@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{states.name}}</span></a>  E-learning</li>
+                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{standards.name}}</span></a>  E-learning</li>
                 
                 
             </ol>
@@ -22,15 +22,13 @@
                     <div class="card-body">
                         <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height370">
                             <ul class="timeline">
-                                {% for lga in states.lgas.all %}
-                                
+                                {% for subject in standards.subjects.all %}
                                 <li>
-                                    
                                     <div class="timeline-badge primary"></div>
-                                    <a class="timeline-panel text-muted" href="{% url 'order:lesson_list' slug=lga.slug state=states.slug %}">
+                                    <a class="timeline-panel text-muted" href="{% url 'business:lesson_list' slug=subject.slug standard=standards.slug %}">
                                         
-                                        <h6 class="mb-0">{{ lga.name }} <strong class="text-primary">#</strong>.</h6>
-                                        <p><b>Description: </b>{{lga.description|truncatechars:20 }}<br /></p>
+                                        <h6 class="mb-0">{{ subject.name }} <strong class="text-primary">#</strong>.</h6>
+                                        <p><b>Description: </b>{{subject.description|truncatechars:20 }}<br /></p>
                                     </a>
                                 </li>
                                 
@@ -103,7 +101,7 @@
                         <div class="hom-list-share">
                                 
                                 <ul>
-                                    <li><a href="{% url 'curriculum:lesson_list' slug=subject.slug standard=standards.slug %}">{{subject.name}}</a></li>
+                                    <li><a href="{% url 'business:lesson_list' slug=subject.slug standard=standards.slug %}">{{subject.name}}</a></li>
                                     <li><a href="course-details.html"><i class="fa fa-eye" aria-hidden="true"></i>10 Aavailable</a> </li>
                                     <li><a href="course-details.html"><i class="fa fa-share-alt" aria-hidden="true"></i> 570</a> </li>
                                 </ul>

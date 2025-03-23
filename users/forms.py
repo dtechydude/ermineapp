@@ -87,4 +87,8 @@ class RoleUpdateForm(forms.ModelForm):
                         }),
         }
    
-   
+class BioUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'bio', ]
+       

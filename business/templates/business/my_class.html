@@ -6,13 +6,12 @@
             Content body start
         ***********************************-->
 		{% block contentbody %}
-        {% if user.is_authenticated and user.is_superuser or user.staffprofile %}
         <div class="content-body">
             <div class="container-fluid">
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Registered Standard List</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">My Current Class</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -21,9 +20,11 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h6 class="card-title">Click on the standard/class name to explore the subjects</h6>
+                                <p class="">Click on the standard / your class name to explore the subjects for the e-learning</p>
+                              
                             </div>
-							{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+                            
+							{% if user.is_authenticated and user.studentdetail %}
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-responsive-md">
@@ -42,22 +43,20 @@
                                             <tr>
 												
                                                 <td><strong>{{ standard.id}}</strong></td>
-                                                <td><a href="{% url 'curriculum:subject_list' slug=standard.slug %}"><span>{{standard.name }}</span></a></td>
-                                                <td><a href="{% url 'curriculum:subject_list' slug=standard.slug %}">{% if standard.description%}{{ standard.description }}{% else%}<span>E-learning class</span>{% endif%}</a></td>
+                                                <td><a href="{% url 'business:subject_list' slug=standard.slug %}"><h4>{{standard.name }}</h4></a></td>
+                                                <td>{{ standard.description }}</td>
                                                 <td>ACTIVE!</td>
-                                                <!-- <td><span class="badge light badge-success"><a href="{% url 'curriculum:subject_list' slug=standard.slug %}"><h4>EXPLORE</h4></a> </span></td> -->
                                                                                                 											
                                             </tr>
 											{% endfor %} 
                                         </tbody>
                                     </table>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 					{% endif %}
                         <!-- /# card -->
-         
                    
                                 </div>
                             </div>
@@ -66,8 +65,7 @@
                 </div>
             </div>
         </div>
-        
-		{% endif %}
+		
 
 		{% endblock contentbody %}
         <!--**********************************
@@ -76,3 +74,5 @@
 
 
        
+
+

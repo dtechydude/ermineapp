@@ -4,8 +4,8 @@ from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
-from .models import Ticket, save_lesson_files, Group, Subject
-from .forms import CommentForm, TicketForm, ReplyForm, 
+from .models import Ticket, Group, Subject
+from .forms import CommentForm, TicketForm, ReplyForm 
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # from students.models import StudentDetail

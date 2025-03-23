@@ -20,6 +20,7 @@ urlpatterns = [
      path('bank_profile/', users_views.bankprofile, name="bank-profile"),
      path('kyc_profile/', users_views.kycprofile, name="kyc-profile"),
      path('role_update/', users_views.roleprofile, name="role-update"),
+     path('bio_update/', users_views.bioprofile, name="bio-update"),
      path('<str:id>/', UserDetailView.as_view(), name="profile-detail"),
      # path('<int:id>/update/', UserUpdateView.as_view(), name="profile-update"),
      # path('<int:id>/delete/', UserDeleteView.as_view(), name="profile-delete"),

@@ -12,7 +12,8 @@ from django.views.generic import(TemplateView, DetailView,
                                 UpdateView, DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import(ProfileUpdateForm, UserUpdateForm, KYCUpdateForm,
-                   BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,  RoleUpdateForm)
+                   BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,
+                   RoleUpdateForm, BioUpdateForm)
 
 
 @login_required
@@ -224,3 +225,24 @@ def roleprofile(request):
     }
 
     return render(request, 'users/user_role_update.html', context)
+
+@login_required
+def bioprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = BioUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your ROLE switch has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = BioUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/bio_update.html', context)

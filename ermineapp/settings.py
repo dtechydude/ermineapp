@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'order.apps.OrderConfig',
     'ticket.apps.TicketConfig',
+    'business.apps.BusinessConfig',
 
     #installed_applications
     'crispy_forms',

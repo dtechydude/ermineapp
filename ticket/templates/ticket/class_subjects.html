@@ -1,8 +1,8 @@
-{% extends 'portal/portal-home.html'%}
+{% extends 'pages/dashboard.html'%}
 {% load static %}
 {% block title %}<title>Schoolly - Class Subjects List </title>{% endblock title %}
 
-{% block content_body %}
+{% block contentbody %}
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles">
@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height370">
                             <ul class="timeline">
-                                {% for subject in standards.subjects.all %}
+                                {% for subject in groups.subjects.all %}
                                 <li>
                                     <div class="timeline-badge primary"></div>
                                     <a class="timeline-panel text-muted" href="{% url 'curriculum:lesson_list' slug=subject.slug standard=standards.slug %}">
@@ -63,7 +63,7 @@
         </div>
     </div>
 </div>
-{% endblock content_body %}
+{% endblock contentbody %}
 {% block section%}
 <section class="pop-cour">
     <div class="container com-sp pad-bot-70">

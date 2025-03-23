@@ -4,11 +4,10 @@
 <html lang="en">
 
 <head>
-
 	
 	<!-- PAGE TITLE HERE -->
-    {% block title %}
-	<title>Select Transaction </title>
+     {% block title %}
+	<title>Company Income</title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
@@ -19,6 +18,7 @@
     <!-- Custom Stylesheet -->
 	<link href="{% static 'pages/vendor/jquery-nice-select/css/nice-select.css' %}" rel="stylesheet">
     <link href="{% static 'pages/css/style.css' %}" rel="stylesheet">
+    
     {% endblock favicon %}
 </head>
 
@@ -37,7 +37,6 @@
         Preloader end
     ********************-->
 
-
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -46,7 +45,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-	
+		
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -54,7 +53,7 @@
 		<!--**********************************
             Chat box start
         ***********************************-->
-	
+		
 		<!--**********************************
             Chat box End
         ***********************************-->
@@ -63,8 +62,8 @@
         <!--**********************************
             Header start
         ***********************************-->
-
-                     
+       
+                    
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -86,75 +85,59 @@
 <!-- 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">History</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Datatable</a></li>
 					</ol>
                 </div> -->
                 <!-- row -->
 
 
-                <div class="row">
-                    <div class="col-12">
+					<div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Select Merchant For Transaction</h4>
+                                <h4 class="card-title">{{ states.name }} - Available State List Table</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example" class="display" style="min-width: 845px">
+                                    <table id="example4" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Trans-ID</th>
-                                                <th>Merchant</th>
-                                                <th>Location</th>
-                                                <th>Available</th>
-                                                <th>Min. Trans</th>
-                                                <th>Status</th>
-                                                <th>Remote</th>                                                
+                                                <th>S/No.</th>
+                                                <th>State Name</th>
+                                                <th>Action</th>
+                                                
+                                                <th>Description </th>												                                              
+                                                <th>Ermine Earn</th>
+                                                <th>Date</th>
+												<th>Status </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for merch in selectmerchant %}
-                                            <tr>                                               
-                                                <td><a href="{% url 'transaction:transaction-flow' merch.id %}">{{ merch.trans_id}}</a></td>
-                                                <td>{{ merch.merchant }}  <br />{{ merch.merchant.profile.phone }}</td>
-                                                <td>{{ merch.current_location }} <br />{{ merch.merchant.profile.address }}</td>
-                                                <td>{{ merch.max_amount}}</td>
-                                                <td>{{ merch.min_amount }}</td>
-                                                {% if merch.trans_status == True %}
-                                                <td style="color: green;">Active</td>
-                                                {% else %}
-                                                <td style="color: red;">Inactive</td>
-                                                {% endif%}
-                                                {% if merch.remote_option == True %}
-                                                <td>YES</td>
-                                                {% else %}
-                                                <td>NO</td>
-                                                {% endif %}                                               
-                                                                                                 
-                                            </tr>
-                                            {% endfor %}
-                                     
-                                        </tbody>
-                                        <tfoot>
+                                            {% for l in states.lgas.all %}
                                             <tr>
-                                                <th>Trans-ID</th>
-                                                <th>Merchant</th>
-                                                <th>Location</th>
-                                                <th>Available</th>
-                                                <th>Min. Trans</th>
-                                                <th>Status</th>
-                                                <th>Remote</th>
+                                                <td>{{ l.id }}</td>
+                                                <td><a href="{% url 'order:lga_list' slug=st.slug %}">{{ lga.name }}</a></td>
+                                                <td><a href="{% url 'order:lga_list' slug=st.slug %}"><span>View LGA List</span></a></td>
+                                                <td><a href="{% url 'order:lga_list' slug=st.slug %}">
+                                                {% if st.description %}{{ st.description }}
+                                                {% else %}
+                                                <span>Descriptions here</span>
+                                                {% endif %}</a></td>
+                                                <td>{{ income.merchant_commission }}</td>                                                                                          
+                                                <td><strong>{{income.company_charges}}</strong></td>
+                                                <td><span class="badge light badge-success">Active</span></td>
                                                 
                                             </tr>
-                                        </tfoot>
+                                            {% endfor %}
+                                           
+                                        
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div>                  
-											
-                                </div>
+                    </div>
                             </div>
                         </div>
                     </div>
@@ -170,7 +153,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
- 
+   
         <!--**********************************
             Footer end
         ***********************************-->

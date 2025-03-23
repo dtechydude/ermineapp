@@ -13,7 +13,7 @@
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Platform - </a></li>
-            <li>All <span>Lessons </span> in {{ lga.state }} - <span>{{lga.name }}</span></li>
+            <li>All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span></li>
 
 					</ol>
                 </div>
@@ -26,8 +26,8 @@
                                 <!-- <h4 class="card-title">Click on the standard/class name to explore</h4> -->
                                 <h4 class="card-title">All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span> </h4>
                               </div>
-                            {% if user.is_authenticated and user.profile.user_role =='merchant' or user.is_superuser %}
-                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'order:order_create' standard=lgas.state.slug slug=lgas.slug %}"><span style="color:white;"><b>Create Order</b></span></a></button><br />
+                            {% if user.is_authenticated and user.profile.user_role == 'merchant' %}
+                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'business:lesson_create' standard=subjects.standard.slug slug=subjects.slug %}"><span style="color:white;"><b>Create Lesson</b></span></a></button><br />
                            
                           </div>
                           {%endif%}
@@ -50,7 +50,7 @@
                                             <tr>
                                                 <td>{{ lesson.position}}</td>
                                                 <td>{{lesson.name }}</td>
-                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'curriculum:lesson_detail' slug=lesson.slug subject=subjects.slug standard=lesson.standard.slug %}">Enter Class</button> </a></td>
+                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'business:lesson_detail' slug=lesson.slug subject=subjects.slug standard=lesson.standard.slug %}">Enter Class</button> </a></td>
 
                                           
                                         </td>

@@ -20,7 +20,7 @@ urlpatterns = [
 
      # Results Detail Views
     path('transaction_list/', MerchantTransactListView.as_view(), name='transaction-list'), 
-    path('<int:pk>/', MerchantTransactionDetailView.as_view(), name='transaction-detail'), 
+    # path('<int:pk>/', MerchantTransactionDetailView.as_view(), name='transaction-detail'), 
     path('new_transaction/', MerchantTransactionCreateView.as_view(), name="transaction-create"),
     path('<int:pk>/update/', MerchantTransactUpdateView.as_view(), name='transaction-update'),
 

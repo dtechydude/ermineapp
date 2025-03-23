@@ -23,6 +23,8 @@ urlpatterns = [
     path('subscriber/', include('subscriber.urls')),
     path('transaction/', include('transaction.urls')),
     path('order/', include('order.urls')),
+    path('ticket/', include('ticket.urls')),
+    path('business/', include('business.urls')),
 
     # path('ckeditor', include('ckeditor_uploader.urls')),    #for ckeditor image upload
     path("ckeditor5/", include('django_ckeditor_5.urls')),
