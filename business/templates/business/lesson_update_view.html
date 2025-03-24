@@ -4,7 +4,7 @@
 {% block title %}<title>Schoolly - Lesson Update </title>{% endblock title %}
 
 {% block contentbody %}
-{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+{% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles">
@@ -37,7 +37,7 @@
                             
                             <button type="submit" name="submit" class="btn btn-success btn-block mt-3 mb-3" >Update Lesson</button>
                         </form>
-                            <a href="{% url 'business:standard_list' %}" class="btn btn-danger btn-block">Cancel Update</a>
+                            <a href="{% url 'business:state_list' %}" class="btn btn-danger btn-block">Cancel Update</a>
 
                             {% endif %}
                        

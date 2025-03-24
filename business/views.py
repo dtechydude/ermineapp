@@ -128,7 +128,7 @@ class TransactCreateView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    fields = ('name', 'position', 'video', 'comment')
+    fields = ('name', 'comment')
     model = Transact
     template_name = 'business/lesson_update_view.html'
     context_object_name = 'transacts'

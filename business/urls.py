@@ -6,7 +6,7 @@ from business import views as curriculum_view
 app_name = 'business'
 
 urlpatterns = [
-    path('', views.StateListView.as_view(), name='standard_list'),
+    path('', views.StateListView.as_view(), name='state_list'),
     path('my-state/', views.StateSelfListView.as_view(), name='my-state'),
     path('<slug:slug>/', views.SubjectListView.as_view(), name='subject_list'),
     path('<str:state>/<slug:slug>/', views.TransactListView.as_view(), name='transact_list'),

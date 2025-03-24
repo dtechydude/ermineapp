@@ -24,14 +24,14 @@
                               
                             </div>
                             
-							{% if user.is_authenticated and user.studentdetail %}
+							{% if user.is_authenticated and user.profile.user_role == 'subscriber' %}
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-responsive-md">
                                         <thead>
                                             <tr>
                                                 <th style="width:80px;"><strong>ID</strong></th>
-                                                <th><strong>Standard Name</strong></th>
+                                                <th><strong>State Name</strong></th>
                                                 <th><strong>Description</strong></th>
                                                 <th><strong>STATUS</strong></th>
                                               
@@ -39,12 +39,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-											{% for standard in standards %} 
+											{% for state in states %} 
                                             <tr>
 												
-                                                <td><strong>{{ standard.id}}</strong></td>
-                                                <td><a href="{% url 'business:subject_list' slug=standard.slug %}"><h4>{{standard.name }}</h4></a></td>
-                                                <td>{{ standard.description }}</td>
+                                                <td><strong>{{ state.id}}</strong></td>
+                                                <td><a href="{% url 'business:subject_list' slug=state.slug %}"><h4>{{state.name }}</h4></a></td>
+                                                <td>{{ state.description }}</td>
                                                 <td>ACTIVE!</td>
                                                                                                 											
                                             </tr>

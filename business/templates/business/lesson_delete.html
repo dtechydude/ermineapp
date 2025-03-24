@@ -3,7 +3,7 @@
 {% block title %}<title> Delete Lesson</title>{% endblock title%}
 
 {% block contentbody %}
-{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+{% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
     </div>
 
     <body class="vh-100">    

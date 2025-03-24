@@ -1,6 +1,6 @@
 {% extends 'pages/dashboard.html'%}
 {% load static %}
-{% load embed_video_tags %}
+
 
 {% block title %}<title>Lesson Detail </title>{% endblock title%}
 
@@ -59,20 +59,11 @@
 											<div class="media mb-2 mt-3">
 												
 												<div class="media-body">
-													<h2 class="mb-4">Lesson Details:</h2>																								
-													
-													<p class="read-content-email">
-														Watch Lesson video here..</p>
-												</div>
-											</div>
+													<h4 class="mb-4">Transaction Details:</h4>																								
+
 											<div>
 																					
-												<!-- make sure the video link looks like this https://www.youtube.com/embed/dGF1x14QNGA -->
-												<iframe width="620" height="345" 									
-												src="{{ transacts.video }}" frameborder="0" allowfullscreen>  
-												                     
 												
-												</iframe>                     
 												
 											</div>
 											
@@ -80,20 +71,13 @@
 												<p class="mb-2"><strong>Teacher's Highlights:</strong><br> </p>
 												{{ transacts.comment | safe }}
 												<p class="mb-2"></p>
-																								
-												<hr>
+												
 											</div>
 											<div class="read-content-attachment">
-												<h6><i class="fa fa-download mb-2"></i> Download or view Lesson Attachments</h6>
+												<!-- <h6><i class="fa fa-download mb-2"></i> Download or view Lesson Attachments</h6> -->
 													<div class="row attachment">
 													<div class="col-auto">
-														{% if transacts.ppt %}
-														<a href="{{ transacts.ppt.url }}"  download="{{ transacts.ppt.url }}" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
-													</div>
-													<div class="col-auto" >
-														<a href="{{ transacts.ppt.url }}" class="text-muted"><span style="color:red;">Read Lesson</span></a>
-													</div>
-													{% endif %}
+														
 												</div>
 											</div>
 											<hr>

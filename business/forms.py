@@ -9,7 +9,7 @@ class TransactForm(forms.ModelForm):
     class Meta:
         
         model = Transact
-        fields = ('transact_id', 'name', 'position', 'video', 'comment')
+        fields = ('transact_id', 'name', 'comment')
         widgets = {
             'comment': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
         }

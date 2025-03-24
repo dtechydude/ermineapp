@@ -1,19 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-
-# from ckeditor.fields import RichTextField
-# from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils import timezone
 import os
 from embed_video.fields import EmbedVideoField
 from django.urls import reverse
 #from ckeditor.fields import RichTextField
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.html import strip_tags
+from .utils import generate_trans_id
+from pages.models import CompanyBankDetail
 
 # Create your models here.
-
-
 
 
 class Session(models.Model):
@@ -127,13 +125,34 @@ def save_transact_files(instance, filename):
 
 
 class Transact(models.Model):
-    transact_id = models.CharField(max_length=100, unique=True)
+    transact_id = models.CharField(max_length=8, blank=True)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts')
     name = models.CharField(max_length=250)
-    position = models.PositiveSmallIntegerField(verbose_name="Chapter no.")
-    video = EmbedVideoField(blank=True, null=True)
-    Notes = models.FileField(upload_to='save_transact_files', verbose_name="Notes", blank=True)
+    trans_date = models.DateTimeField(default=timezone.now)
+    max_amount = models.IntegerField(help_text='Enter Max Amount', default= 0)
+    min_amount = models.IntegerField(help_text='Enter Min Amount', default= 0)
+    charges_pay_date = models.DateTimeField(default=timezone.now)
+    charges_amount_paid = models.IntegerField(help_text='Enter Max Amount', blank=True, null=True)
+    comp_bank_ref = models.ForeignKey(CompanyBankDetail, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    payment_confirmed = models.BooleanField(default=False, blank=True)
+
+    card = 'Card Payment'
+    bank_transfer = 'Bank Transfer'
+    transfer_or_card = 'transfer_or_card'
+
+    payment_option = [
+        (card, 'Card Payment'),
+        (bank_transfer, 'Bank Transfer'),
+        (transfer_or_card, 'transfer_or_card'),
+
+    ]
+    prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
+    trans_status = models.BooleanField(blank=True, null=True)
+    remote_option = models.BooleanField()
+
+    # position = models.PositiveSmallIntegerField(verbose_name="Chapter no.")
+    # Notes = models.FileField(upload_to='save_transact_files', verbose_name="Notes", blank=True)
     #comment = RichTextField(blank=True, null=True)
     comment = CKEditor5Field('Text', config_name='extends')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -143,7 +162,7 @@ class Transact(models.Model):
     class Meta:
       verbose_name = 'Transactions'
       verbose_name_plural = 'Transactions'
-      ordering = ['position']
+      ordering = ['trans_date']
 
     # class Meta:
     #     ordering = ['position']
@@ -153,6 +172,9 @@ class Transact(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        if self.transact_id == "":
+            transact_id = generate_trans_id()
+            self.transact_id = transact_id
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -162,6 +184,14 @@ class Transact(models.Model):
     def html_stripped(self):
        
        return strip_tags(self.comment)
+    
+    @property
+    def merchant_commission(self):
+       return self.max_amount * 0.01
+    
+    @property
+    def company_charges(self):
+       return self.merchant_commission * 0.3
             
 
 # comment module
