@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{standards.name}}</span></a>  E-learning</li>
+                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{states.name}}</span></a>  E-learning</li>
                 
                 
             </ol>
@@ -22,10 +22,10 @@
                     <div class="card-body">
                         <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height370">
                             <ul class="timeline">
-                                {% for subject in standards.subjects.all %}
+                                {% for subject in states.subjects.all %}
                                 <li>
                                     <div class="timeline-badge primary"></div>
-                                    <a class="timeline-panel text-muted" href="{% url 'business:lesson_list' slug=subject.slug standard=standards.slug %}">
+                                    <a class="timeline-panel text-muted" href="{% url 'business:transact_list' slug=subject.slug state=states.slug %}">
                                         
                                         <h6 class="mb-0">{{ subject.name }} <strong class="text-primary">#</strong>.</h6>
                                         <p><b>Description: </b>{{subject.description|truncatechars:20 }}<br /></p>
@@ -69,13 +69,13 @@
     <div class="container com-sp pad-bot-70">
         <div class="row">
             <div class="con-title">
-                <h2>List of subjects in -  <span>{{standards.name}}</span> </h2>
+                <h2>List of subjects in -  <span>{{states.name}}</span> </h2>
                 <p>Use the links below to explore courses in each class.</p>
             </div>
         </div>
    
 
-		{% for subject in standards.subjects.all %}
+		{% for subject in states.subjects.all %}
         <div class="row">
 			
             <div class="col-md-6">
@@ -101,7 +101,7 @@
                         <div class="hom-list-share">
                                 
                                 <ul>
-                                    <li><a href="{% url 'business:lesson_list' slug=subject.slug standard=standards.slug %}">{{subject.name}}</a></li>
+                                    <li><a href="{% url 'business:transact_list' slug=subject.slug state=states.slug %}">{{subject.name}}</a></li>
                                     <li><a href="course-details.html"><i class="fa fa-eye" aria-hidden="true"></i>10 Aavailable</a> </li>
                                     <li><a href="course-details.html"><i class="fa fa-share-alt" aria-hidden="true"></i> 570</a> </li>
                                 </ul>

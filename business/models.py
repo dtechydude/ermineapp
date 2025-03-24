@@ -50,7 +50,7 @@ class Session(models.Model):
 
 
 
-class Standard(models.Model):
+class State(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
@@ -92,7 +92,7 @@ def save_subject_image(instance, filename):
 class Subject(models.Model):
     subject_id = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
-    standard = models.ForeignKey(Standard, on_delete=models.CASCADE, related_name='subjects')
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='subjects')
     # image = models.ImageField(upload_to=save_subject_image, blank=True, verbose_name='Subject Image')
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
@@ -113,31 +113,27 @@ class Subject(models.Model):
     #   verbose_name_plural = 'Subjects'
 
 
-def save_lesson_files(instance, filename):
+def save_transact_files(instance, filename):
     upload_to = 'Images/'
     ext = filename.split('.')[-1]
     # get file name
-    if instance.lesson_id:
-        filename = 'lesson_files/{}.{}'.format(instance.lesson_id,instance.lesson_id, ext)
+    if instance.transact_id:
+        filename = 'transact_files/{}.{}'.format(instance.transact_id,instance.transact_id, ext)
         if os.path.exists(filename):
-            new_name = str(instance.lesson_id) + str('1')
-            filename = 'lesson_images/{}/{}.{}'.format(instance.lesson_id,new_name, ext)
+            new_name = str(instance.transact_id) + str('1')
+            filename = 'transact_images/{}/{}.{}'.format(instance.transact_id,new_name, ext)
     
     return os.path.join(upload_to, filename)
 
 
-class Lesson(models.Model):
-    lesson_id = models.CharField(max_length=100, unique=True)
-    standard = models.ForeignKey(Standard, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='lessons')
+class Transact(models.Model):
+    transact_id = models.CharField(max_length=100, unique=True)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts')
     name = models.CharField(max_length=250)
     position = models.PositiveSmallIntegerField(verbose_name="Chapter no.")
-    # video = models.FileField(upload_to=save_lesson_files, verbose_name="video", blank=True, null=True)
     video = EmbedVideoField(blank=True, null=True)
-    # video = models.CharField(max_length=500, blank=True)
-    # video_url = EmbedVideoField(null=True,blank=True)
-    # ppt = models.FileField(upload_to='save_lesson_files', verbose_name="Presentation", blank=True)
-    Notes = models.FileField(upload_to='save_lesson_files', verbose_name="Notes", blank=True)
+    Notes = models.FileField(upload_to='save_transact_files', verbose_name="Notes", blank=True)
     #comment = RichTextField(blank=True, null=True)
     comment = CKEditor5Field('Text', config_name='extends')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -160,7 +156,7 @@ class Lesson(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('curriculum:lesson_list', kwargs={'slug':self.subject.slug, 'standard':self.standard.slug})
+        return reverse('business:transact_list', kwargs={'slug':self.subject.slug, 'state':self.state.slug})
 
     @property
     def html_stripped(self):
@@ -170,7 +166,7 @@ class Lesson(models.Model):
 
 # comment module
 class Comment(models.Model):
-    lesson_name = models.ForeignKey(Lesson, null=True, on_delete=models.CASCADE, related_name='comments')
+    transact_name = models.ForeignKey(Transact, null=True, on_delete=models.CASCADE, related_name='comments')
     comm_name = models. CharField(max_length=100, blank=True)
     # reply = models.ForeignKey("comment", null=True, blank=True, on_delete=CASCADE, related_name='replies')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribers_comment')

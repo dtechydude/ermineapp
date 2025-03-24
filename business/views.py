@@ -4,44 +4,44 @@ from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
-from .models import Lesson, Standard, Subject, save_lesson_files
-from .forms import CommentForm, LessonForm, ReplyForm
+from .models import Transact, State, Subject, save_transact_files
+from .forms import CommentForm, TransactForm, ReplyForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from users.models import Profile
 
 
-class StandardSelfListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
+class StateSelfListView(LoginRequiredMixin, ListView):
+    context_object_name = 'states'
+    model = State
     template_name = 'business/my_class.html'
  
     # Student can only view their class elearning
     def get_queryset(self):
-        return Standard.objects.filter(name = self.request.user.profile.current_state)
+        return State.objects.filter(name = self.request.user.profile.current_state)
 
 # Standard list view for the admin and teachers
-class StandardListView(LoginRequiredMixin, ListView):
-    context_object_name = 'standards'
-    model = Standard
+class StateListView(LoginRequiredMixin, ListView):
+    context_object_name = 'states'
+    model = State
     template_name = 'business/state_list.html'
 
     
 class SubjectListView(DetailView):
-    context_object_name = 'standards'
-    model = Standard
+    context_object_name = 'states'
+    model = State
     template_name = 'business/class_subjects.html'
 
 
-class LessonListView(DetailView):
+class TransactListView(DetailView):
     context_object_name = 'subjects'
     model = Subject
     template_name = 'business/course_list.html'
 
 
-class LessonDetailView(DetailView, FormView):
-    context_object_name = 'lessons'
-    model = Lesson
+class TransactDetailView(DetailView, FormView):
+    context_object_name = 'transacts'
+    model = Transact
     template_name = 'business/lesson-detail.html'
     # for replies to lessons
     form_class = CommentForm
@@ -52,7 +52,7 @@ class LessonDetailView(DetailView, FormView):
         take action on the form which is posted
     '''
     def get_context_data(self, **kwargs):
-        context = super(LessonDetailView, self).get_context_data(**kwargs)
+        context = super(TransactDetailView, self).get_context_data(**kwargs)
         if 'form' not in context:
             context['form'] = self.form_class()
         if 'form2' not in context:
@@ -81,9 +81,9 @@ class LessonDetailView(DetailView, FormView):
 
     def get_success_url(self):
         self.object = self.get_object()
-        standard = self.object.standard
+        state = self.object.state
         subject = self.object.subject
-        return reverse_lazy('business:lesson_detail', kwargs={'standard':standard.slug,
+        return reverse_lazy('business:transact_detail', kwargs={'state':state.slug,
                                                             'subject':subject.slug,
                                                             'slug':self.object.slug})
 
@@ -91,8 +91,8 @@ class LessonDetailView(DetailView, FormView):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.author = self.request.user
-        fm.lesson_name = self.object.comments.name
-        fm.lesson_name_id = self.object.id
+        fm.transact_name = self.object.comments.name
+        fm.transact_name_id = self.object.id
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -107,31 +107,31 @@ class LessonDetailView(DetailView, FormView):
 
 
 
-class LessonCreateView(CreateView):
-    form_class = LessonForm
+class TransactCreateView(CreateView):
+    form_class = TransactForm
     context_object_name = 'subject'
     model = Subject
     template_name = 'business/lesson_create.html'
 
     def get_success_url(self):
         self.object = self.get_object()
-        standard = self.object.standard
-        return reverse_lazy('business:lesson_list',kwargs={'standard':standard.slug, 'slug':self.object.slug})
+        state = self.object.state
+        return reverse_lazy('business:transact_list',kwargs={'state':state.slug, 'slug':self.object.slug})
 
     def form_valid(self, form, *args, **kwargs):
         self.object = self.get_object()
         fm = form.save(commit=False)
         fm.created_by = self.request.user
-        fm.standard = self.object.standard
+        fm.state = self.object.state
         fm.subject = self.object
         fm.save()
         return HttpResponseRedirect(self.get_success_url())
 
-class LessonUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ('name', 'position', 'video', 'comment')
-    model = Lesson
+    model = Transact
     template_name = 'business/lesson_update_view.html'
-    context_object_name = 'lessons'
+    context_object_name = 'transacts'
     
     #function to check if user is the login user
     def form_valid(self, form):
@@ -146,15 +146,15 @@ class LessonUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class LessonDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Lesson
-    context_object_name = 'lessons'
+class TransactDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Transact
+    context_object_name = 'transacts'
     template_name = 'business/lesson_delete.html'
 
     def get_success_url(self):
-        standard = self.object.standard
+        state = self.object.state
         subject = self.object.subject
-        return reverse_lazy('business:lesson_list', kwargs={'standard':standard.slug, 'slug':subject.slug})
+        return reverse_lazy('business:transact_list', kwargs={'state':state.slug, 'slug':subject.slug})
 
 #preventing other users from update other people's post
     def test_func(self):

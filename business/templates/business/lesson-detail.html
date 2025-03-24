@@ -11,8 +11,8 @@
 		
 		<div class="row page-titles">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ lessons.subject }}</a></li>
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ lessons.name }}</b><span> - Class : {{ lessons.standard }}</span></a></li>
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ transacts.subject }}</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ transacts.name }}</b><span> - Class : {{ transacts.state }}</span></a></li>
 			</ol>
 		</div>
 		
@@ -23,12 +23,12 @@
 					<div class="card-body">
 						<div class="email-left-box generic-width px-0 mb-5">
 							<div class="p-0">
-								{% if user.is_authenticated and user.is_superuser or user.staffprofile %}
+								{% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
 								
 								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
 								<p>Use the buttons below to update or delete lessons</p>
-								<p><a href="{% url 'business:lesson_update' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-info">Update Lesson</a><br></p>
-								<p><a href="{% url 'business:lesson_delete' standard=lessons.standard.slug subject=lessons.subject.slug slug=lessons.slug %}" class="btn btn-secondary">Delete Lesson</a></p>
+								<p><a href="{% url 'business:transact_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-info">Update Transaction</a><br></p>
+								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Delete Transaction</a></p>
 								{% else %}
 								<p><a href="#">Teacher's Contact</a><br></p>
 
@@ -44,8 +44,8 @@
 											<div class="media pt-3 d-sm-flex d-block justify-content-between">
 												<div class="clearfix mb-3 d-flex">
 													<div class="media-body me-2">
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ lessons.created_by}}</h5>
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ lessons.created_at}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ transacts.created_by}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ transacts.created_at}}</h5>
 														
 													</div>
 												</div>
@@ -69,7 +69,7 @@
 																					
 												<!-- make sure the video link looks like this https://www.youtube.com/embed/dGF1x14QNGA -->
 												<iframe width="620" height="345" 									
-												src="{{ lessons.video }}" frameborder="0" allowfullscreen>  
+												src="{{ transacts.video }}" frameborder="0" allowfullscreen>  
 												                     
 												
 												</iframe>                     
@@ -78,7 +78,7 @@
 											
 											<div class="read-content-body">
 												<p class="mb-2"><strong>Teacher's Highlights:</strong><br> </p>
-												{{ lessons.comment | safe }}
+												{{ transacts.comment | safe }}
 												<p class="mb-2"></p>
 																								
 												<hr>
@@ -87,11 +87,11 @@
 												<h6><i class="fa fa-download mb-2"></i> Download or view Lesson Attachments</h6>
 													<div class="row attachment">
 													<div class="col-auto">
-														{% if lessons.ppt %}
-														<a href="{{ lessons.ppt.url }}"  download="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
+														{% if transacts.ppt %}
+														<a href="{{ transacts.ppt.url }}"  download="{{ transacts.ppt.url }}" class="text-muted"><span style="color:red;"></span>Download Lesson</span></a>
 													</div>
 													<div class="col-auto" >
-														<a href="{{ lessons.ppt.url }}" class="text-muted"><span style="color:red;">Read Lesson</span></a>
+														<a href="{{ transacts.ppt.url }}" class="text-muted"><span style="color:red;">Read Lesson</span></a>
 													</div>
 													{% endif %}
 												</div>
@@ -111,7 +111,7 @@
 												</div>
 												</form>
 												
-												{% for comment in lessons.comments.all %}
+												{% for comment in transacts.comments.all %}
 												<h4>{{comment.author}}<small><i>Posted on {{comment.date_added}}</i></small></h4>
 												<p>{{comment.body}}</p>
 												{% for reply in comment.replies.all %}

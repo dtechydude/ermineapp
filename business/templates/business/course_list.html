@@ -13,7 +13,7 @@
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Platform - </a></li>
-            <li>All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span></li>
+            <li>All <span>Lessons </span> in {{ subjects.state }} - <span>{{subjects.name }}</span></li>
 
 					</ol>
                 </div>
@@ -24,10 +24,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <!-- <h4 class="card-title">Click on the standard/class name to explore</h4> -->
-                                <h4 class="card-title">All <span>Lessons </span> in {{ subjects.standard }} - <span>{{subjects.name }}</span> </h4>
+                                <h4 class="card-title">All <span>Transactions </span> in {{ subjects.state }} - <span>{{subjects.name }}</span> </h4>
                               </div>
                             {% if user.is_authenticated and user.profile.user_role == 'merchant' %}
-                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'business:lesson_create' standard=subjects.standard.slug slug=subjects.slug %}"><span style="color:white;"><b>Create Lesson</b></span></a></button><br />
+                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'business:transact_create' state=subjects.state.slug slug=subjects.slug %}"><span style="color:white;"><b>Create Transaction</b></span></a></button><br />
                            
                           </div>
                           {%endif%}
@@ -40,17 +40,17 @@
                                             <tr>
                                                 <!-- <th style="width:80px;"><strong>ID</strong></th>                                                -->
                                                 <th>Chapter No.</th>
-                                                <th>Lesson Name</th>
+                                                <th>Transaction Name</th>
                                                 <th>Action</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          {% for lesson in subjects.lessons.all %} 
+                                          {% for trans in subjects.transacts.all %} 
                                             <tr>
-                                                <td>{{ lesson.position}}</td>
-                                                <td>{{lesson.name }}</td>
-                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'business:lesson_detail' slug=lesson.slug subject=subjects.slug standard=lesson.standard.slug %}">Enter Class</button> </a></td>
+                                                <td>{{ trans.position}}</td>
+                                                <td>{{trans.name }}</td>
+                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'business:transact_detail' slug=trans.slug subject=subjects.slug state=trans.state.slug %}">Enter Class</button> </a></td>
 
                                           
                                         </td>
