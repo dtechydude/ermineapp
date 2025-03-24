@@ -12,7 +12,7 @@
 		<div class="row page-titles">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ transacts.subject }}</a></li>
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Topic :  {{ transacts.name }}</b><span> - Class : {{ transacts.state }}</span></a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Name :  {{ transacts.name }}</b><span> - Category : {{ transacts.state }}</span></a></li>
 			</ol>
 		</div>
 		
@@ -30,7 +30,7 @@
 								<p><a href="{% url 'business:transact_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-info">Update Transaction</a><br></p>
 								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Delete Transaction</a></p>
 								{% else %}
-								<p><a href="#">Teacher's Contact</a><br></p>
+								<p><a href="#">Merchant's Contact</a><br></p>
 
 								{% endif %}
 							
@@ -44,7 +44,7 @@
 											<div class="media pt-3 d-sm-flex d-block justify-content-between">
 												<div class="clearfix mb-3 d-flex">
 													<div class="media-body me-2">
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created by: </span> {{ transacts.created_by}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created By Merchant :  </span> <a href="">{{ transacts.created_by}} </a></h5>
 														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ transacts.created_at}}</h5>
 														
 													</div>
@@ -61,48 +61,42 @@
 												<div class="media-body">
 													<h4 class="mb-4">Transaction Details:</h4>																								
 
-											<div>
-																					
-												
-												
+											<div>																													
 											</div>
 											
 											<div class="read-content-body">
-												<p class="mb-2"><strong>Teacher's Highlights:</strong><br> </p>
-												{{ transacts.comment | safe }}
-												<p class="mb-2"></p>
-												
-											</div>
-											<div class="read-content-attachment">
-												<!-- <h6><i class="fa fa-download mb-2"></i> Download or view Lesson Attachments</h6> -->
-													<div class="row attachment">
-													<div class="col-auto">
-														
-												</div>
+												<p class="mb-2"><strong>Teacher's Highlights:</strong><br>
+												<p class="mb-2">Maximum Amount Available: {{ transacts.max_amount}}<br>
+												Minimum Withdrawable Amount: {{ transacts.min_amount}} <br>
+												Prefered Payment Method: {{ transacts.payment_method}} 
+												</p>
+												<p>{{ transacts.comment | safe }}	</p>									
+																																				
 											</div>
 											<hr>
-											<div class="mb-3 pt-3">
-												
-													<h6>Comment Area</h6>
-													<div class="">
-														
-														<h6>Post your comment or question below:</h6>
+											<div class="mb-3 pt-3">												
+													<h6>Subscriber Comment Area</h6>
+													<div class="">														
+														<h6>Post your comment to connect with the merchant below:</h6>
 												<form method="post">
 												<div class="">
 												{% csrf_token %}
 												{{form.as_p}}
 												<input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
 												</div>
-												</form>
+												</form> <h1></h1>
 												
 												{% for comment in transacts.comments.all %}
-												<h4>{{comment.author}}<small><i>Posted on {{comment.date_added}}</i></small></h4>
+												<h5> - {{comment.author}}<small><i> - Posted a comment on {{comment.date_added}}</i></small></h5>
 												<p>{{comment.body}}</p>
-												{% for reply in comment.replies.all %}
-												<h5>{{reply.author}}<small><i>Posted on {{reply.date_added}}</i></small></h5>
-												<p>{{reply.reply_body}}</p>
+												{% for reply in comment.replies.all %}																					
+												<h5> - {{reply.author}}<small><i>- Posted a reply on: {{reply.date_added}}</i></small></h5>
 												
+                                                    <div class="subject">{{reply.reply_body}} </div>
+                                                    </a>
+																																		
 												{% endfor %}
+												
 												<!-- form to post reply -->
 												
 												
@@ -115,11 +109,12 @@
 												<input type="submit" name="form2" value="Add Reply" class="btn btn-warning btn-sm">
 												
 												</form>
-												</div>
-												</div>
-												
-												
 												{% endfor %}
+												</div>
+												</div>
+												
+												
+												
 
 								</div>
 								</div>
@@ -128,5 +123,13 @@
 						</div>
 					</div>  
 				</div>
+
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				
 
 {% endblock contentbody %}

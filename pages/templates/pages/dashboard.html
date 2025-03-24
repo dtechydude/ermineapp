@@ -653,7 +653,6 @@
 							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>
 							<li><a href="./chart-morris.html">Failed Transactions</a></li>
 							<li><a href="./chart-chartjs.html">Successful Transactions</a></li>
-							<li><a href="{% url 'transaction:transaction-create' %}">Set Transaction</a></li>
 							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li>
 							<li><a href="{% url 'merchant:available-merchant' %}">Available Merchant</a></li>
 							<li><a href="{% url 'transaction:transaction-list' %}">My Transaction List</a></li>
@@ -1278,7 +1277,7 @@
 																		<h5>Location Info.</h5>
 																		<li class="fs-11 text-red">State:  <span class="fs-11 text-black">{{ user.profile.state }}</span></li>
 																		<li class="fs-11 text-red">Address:  <span class="fs-8 text-black">{{ user.profile.address }}</span></li>
-																		<li class="fs-11 text-red">Last Updated: <span class="fs-11 text-black">{{ user.profile.update |date:"d/m/Y" }}</span></li>
+																		<li class="fs-11 text-red">Updated: <span class="fs-11 text-black">{{ user.profile.updated|date:"d/m/Y" }}</span></li>
 																		<div><a class='text-green' href="{% url 'users:profile' %}"><span style='font-size:medium'>Update</span></a></div>
 
 																		<hr>

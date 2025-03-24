@@ -112,6 +112,7 @@ class TransactCreateView(CreateView):
     context_object_name = 'subject'
     model = Subject
     template_name = 'business/transact_create.html'
+    success_message = "Your Transaction was updated successfully"
 
     def get_success_url(self):
         self.object = self.get_object()

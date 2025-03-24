@@ -103,7 +103,7 @@
                                         <thead>
                                             <tr>
                                                 <th>S/No.</th>
-                                                <th>Transaction No</th>
+                                                <th>Trans. ID</th>
                                                 <th>M. Detail</th>
                                                 
                                                 <th>Total Amount </th>
@@ -117,10 +117,9 @@
                                         <tbody>
                                             {% for income in allincome %}
                                             <tr>
-                                                <td>{{ income.id }}</td>
-                                                <td>{{ income.trans_id }}</td>
-                                                <td>{{ income.merchant.username }} <br/>{{ income.merchant.first_name }} {{ income.merchant.last_name }}</td>
-                                              
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{ income.transact_id }}</td>
+                                                <td>{{ income.created_by.username }} <br/>{{ income.created_by.first_name }} {{ income.created_by.last_name }}</td>                                              
                                                 <td>{{ income.max_amount }}</td>
                                                 <td>{{ income.merchant_commission }}</td>                                                                                          
                                                 <td><strong>{{income.company_charges}}</strong></td>

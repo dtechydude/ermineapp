@@ -14,40 +14,6 @@ from pages.models import CompanyBankDetail
 # Create your models here.
 
 
-class Session(models.Model):
-    name = models.CharField(max_length=100)
-
-    first_term = 'First Term'
-    second_term = 'Second Term'
-    third_term = 'Third Term'
-    others = 'Others'
-
-    term_status = [
-        (first_term, 'First Term'),
-        (second_term, 'Second Term'),
-        (third_term, 'Third Term'),
-        (others, 'Others'),
-
-    ]
-
-    term = models.CharField(max_length=15, choices=term_status, blank=True, null=True, default='First Term')
-    start_date = models.DateField(blank=True, null=True, verbose_name='Start Date')
-    end_date = models.DateField(blank=True, null=True, verbose_name='End Date')
-    description = models.TextField(max_length=500, blank=True)
-    slug = models.SlugField(null=True, blank=True)
-
-    class Meta:
-        unique_together = ['name', 'term']
-
-    def __str__(self):
-        return f"{self.name} - {self.term}"
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-
-
 class State(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=500, blank=True)
@@ -65,19 +31,6 @@ class State(models.Model):
         super().save(*args, **kwargs)
 
 
-class ClassGroup(models.Model):
-    name = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=120, blank=True)
-    slug = models.SlugField(null=True, blank=True)
-    
-    def __str__ (self):
-        return f'{self.name}'
-        
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-
 
 def save_subject_image(instance, filename):
     upload_to = 'Images/'
@@ -86,6 +39,7 @@ def save_subject_image(instance, filename):
     if instance.user.username:
         filename = 'Subject_Pictures/{}.{}'.format(instance.subject_id, ext)
     return os.path.join(upload_to, filename)
+
 
 class Subject(models.Model):
     subject_id = models.CharField(max_length=100, unique=True)
@@ -148,7 +102,7 @@ class Transact(models.Model):
 
     ]
     prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
-    trans_status = models.BooleanField(blank=True, null=True)
+    trans_status = models.BooleanField(default=False)
     remote_option = models.BooleanField(default=False)
 
     comment = CKEditor5Field('Text', config_name='extends')

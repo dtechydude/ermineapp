@@ -191,7 +191,7 @@ def transaction_status(request):
 
 # @login_required
 def company_income(request):
-    allincome = MerchantSetTransact.objects.all().order_by('-id')
+    allincome = Transact.objects.all().order_by('-id')
     context = {
         'allincome': allincome
     }
