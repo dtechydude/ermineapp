@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .utils import generate_ref_code
-from order.models import State
+from business.models import State
 
 
 class Profile(models.Model):

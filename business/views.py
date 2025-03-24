@@ -14,7 +14,7 @@ from users.models import Profile
 class StateSelfListView(LoginRequiredMixin, ListView):
     context_object_name = 'states'
     model = State
-    template_name = 'business/my_class.html'
+    template_name = 'business/my_state.html'
  
     # Student can only view their class elearning
     def get_queryset(self):
@@ -36,13 +36,13 @@ class SubjectListView(DetailView):
 class TransactListView(DetailView):
     context_object_name = 'subjects'
     model = Subject
-    template_name = 'business/course_list.html'
+    template_name = 'business/transact_list.html'
 
 
 class TransactDetailView(DetailView, FormView):
     context_object_name = 'transacts'
     model = Transact
-    template_name = 'business/lesson-detail.html'
+    template_name = 'business/transact-detail.html'
     # for replies to lessons
     form_class = CommentForm
     second_form_class = ReplyForm
@@ -111,7 +111,7 @@ class TransactCreateView(CreateView):
     form_class = TransactForm
     context_object_name = 'subject'
     model = Subject
-    template_name = 'business/lesson_create.html'
+    template_name = 'business/transact_create.html'
 
     def get_success_url(self):
         self.object = self.get_object()
@@ -130,7 +130,7 @@ class TransactCreateView(CreateView):
 class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ('name', 'comment')
     model = Transact
-    template_name = 'business/lesson_update_view.html'
+    template_name = 'business/transact_update_view.html'
     context_object_name = 'transacts'
     
     #function to check if user is the login user
@@ -149,7 +149,7 @@ class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class TransactDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Transact
     context_object_name = 'transacts'
-    template_name = 'business/lesson_delete.html'
+    template_name = 'business/transact_delete.html'
 
     def get_success_url(self):
         state = self.object.state

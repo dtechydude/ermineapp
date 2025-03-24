@@ -106,7 +106,7 @@
                                             <tr>
                                                 <th>Trans-ID</th>
                                                 <th>Merchant</th>
-                                                <th>Location</th>
+                                                <th>State</th>
                                                 <th>Available</th>
                                                 <th>Min. Trans</th>
                                                 <th>Status</th>
@@ -116,9 +116,9 @@
                                         <tbody>
                                             {% for merch in selectmerchant %}
                                             <tr>                                               
-                                                <td><a href="{% url 'transaction:transaction-flow' merch.id %}">{{ merch.trans_id}}</a></td>
-                                                <td>{{ merch.merchant }}  <br />{{ merch.merchant.profile.phone }}</td>
-                                                <td>{{ merch.current_location }} <br />{{ merch.merchant.profile.address }}</td>
+                                                <td><a href="{% url 'business:my-state' %}">{{ merch.transact_id}}</a></td>
+                                                <td>{{ merch.created_by.username }}</td>
+                                                <td><a href="{% url 'business:my-state' %}">{{ merch.created_by.profile.current_state }}</a></td>
                                                 <td>{{ merch.max_amount}}</td>
                                                 <td>{{ merch.min_amount }}</td>
                                                 {% if merch.trans_status == True %}

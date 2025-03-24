@@ -107,8 +107,8 @@
                                                 <th>S/No.</th>
                                                 <th>Trans-ID</th>
                                                 <th>Merchant</th>
-                                                <th>Subscriber</th>
-                                                <th>Amount</th>
+                                                <th>Max Amount</th>
+                                                <th>Min Amount</th>                                                                                             
                                                 <th>Date</th>
                                                 <th>Status</th>
                                             </tr>
@@ -116,11 +116,11 @@
                                         <tbody>
                                             {% for trans in transhistory %}
                                             <tr>
-                                                <td>{{ trans.id}}</td>
-                                                <td>{{ trans.trans_ref.trans_id}}</td>
-                                                <td>{{ trans.trans_ref.merchant }}</td>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{ trans.transact_id}}</td>
+                                                <td>{{ trans.created_by.username }}</td>
                                                 <td>{{ trans.subscriber}}</td>
-                                                <td>{{ trans.trans_amount }}</td>
+                                                <td>{{ trans.max_amount }}</td>
                                                 <td>{{ trans.trans_date | date:"d/m/Y" }}</td>
                                                 {% if trans.trans_status == True %}
                                                 <td style="color: green;">Successful</td>

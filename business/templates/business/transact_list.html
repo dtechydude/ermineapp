@@ -1,3 +1,4 @@
+
 {% extends 'pages/dashboard.html' %}
 {% load static %}
 {% block title %}<title>Schoolly E-Learning Class List</title>{% endblock title %}
@@ -6,13 +7,14 @@
             Content body start
         ***********************************-->
 		{% block contentbody %}
-        {% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
         <div class="content-body">
             <div class="container-fluid">
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">E-LEARNING</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Registered Standard List</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Platform - </a></li>
+            <li>All <span>Lessons </span> in {{ subjects.state }} - <span>{{subjects.name }}</span></li>
+
 					</ol>
                 </div>
                 <!-- row -->
@@ -21,42 +23,49 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h6 class="card-title">Click on the standard/class name to explore the subjects</h6>
-                            </div>
-							{% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
+                                <!-- <h4 class="card-title">Click on the standard/class name to explore</h4> -->
+                                <h4 class="card-title">All <span>Transactions </span> in {{ subjects.state }} - <span>{{subjects.name }}</span> </h4>
+                              </div>
+                            {% if user.is_authenticated and user.profile.user_role == 'merchant' %}
+                            <div class="button"><button type="button" class="btn btn-danger"><a href="{% url 'business:transact_create' state=subjects.state.slug slug=subjects.slug %}"><span style="color:white;"><b>Create Transaction</b></span></a></button><br />
+                           
+                          </div>
+                          {%endif%}
+                           
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-responsive-md">
                                         <thead>
                                             <tr>
-                                                <th style="width:80px;"><strong>ID</strong></th>
-                                                <th><strong>State Name</strong></th>
-                                                <th><strong>Description</strong></th>
-                                                <th><strong>STATUS</strong></th>
-                                              
+                                                <!-- <th style="width:80px;"><strong>ID</strong></th>                                                -->
+                                                <th>Chapter No.</th>
+                                                <th>Transaction Name</th>
+                                                <th>Action</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-											{% for state in states %} 
+                                          {% for trans in subjects.transacts.all %} 
                                             <tr>
+                                                <td>{{ trans.transact_id}}</td>
+                                                <td>{{trans.name }}</td>
+                                                <td ><button type="button" class="btn btn-success"><a href="{% url 'business:transact_detail' slug=trans.slug subject=subjects.slug state=trans.state.slug %}">Enter Class</button> </a></td>
+
+                                          
+                                        </td>
 												
-                                                <td><strong>{{ state.id}}</strong></td>
-                                                <td><a href="{% url 'business:subject_list' slug=state.slug %}"><span>{{state.name }}</span></a></td>
-                                                <td><a href="{% url 'business:subject_list' slug=state.slug %}">{% if state.description%}{{ state.description }}{% else%}<span>State Description</span>{% endif%}</a></td>
-                                                <td>ACTIVE!</td>
-                                                                                                											
                                             </tr>
 											{% endfor %} 
+                      
                                         </tbody>
                                     </table>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-					{% endif %}
+				
                         <!-- /# card -->
-         
                    
                                 </div>
                             </div>
@@ -66,12 +75,8 @@
             </div>
         </div>
         
-		{% endif %}
 
 		{% endblock contentbody %}
         <!--**********************************
             Content body end
         ***********************************-->
-
-
-       

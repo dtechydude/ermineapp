@@ -149,11 +149,8 @@ class Transact(models.Model):
     ]
     prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
     trans_status = models.BooleanField(blank=True, null=True)
-    remote_option = models.BooleanField()
+    remote_option = models.BooleanField(default=False)
 
-    # position = models.PositiveSmallIntegerField(verbose_name="Chapter no.")
-    # Notes = models.FileField(upload_to='save_transact_files', verbose_name="Notes", blank=True)
-    #comment = RichTextField(blank=True, null=True)
     comment = CKEditor5Field('Text', config_name='extends')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

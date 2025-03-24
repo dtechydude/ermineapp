@@ -4,20 +4,20 @@ from import_export.admin import ImportExportModelAdmin
 from .models import Transact, State, Subject, Session, ClassGroup
 
 # Register your models here.
-class SessionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+# class SessionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    
-    list_display=('name', 'term', 'start_date', 'end_date')
-    exclude = ['slug']
+#     list_display=('name', 'term', 'start_date', 'end_date')
+#     exclude = ['slug']
 
 class StateAdmin(ImportExportModelAdmin, admin.ModelAdmin):
    
     list_display=('name', 'description')
     exclude = ['slug']
 
-class ClassGroupAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+# class ClassGroupAdmin(ImportExportModelAdmin, admin.ModelAdmin):
        
-    list_display=('name', 'description',)
-    exclude = ['slug']
+#     list_display=('name', 'description',)
+#     exclude = ['slug']
 
 class SubjectAdmin(ImportExportModelAdmin, admin.ModelAdmin):
        
@@ -34,9 +34,9 @@ class TransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 
-admin.site.register(Session, SessionAdmin)
+# admin.site.register(Session, SessionAdmin)
 admin.site.register(State, StateAdmin)
-admin.site.register(ClassGroup, ClassGroupAdmin)
+# admin.site.register(ClassGroup, ClassGroupAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(Transact, TransactAdmin)
 
