@@ -12,7 +12,7 @@ from django.utils.html import strip_tags
 # Create your models here.
 
 
-class Group(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
@@ -25,23 +25,23 @@ class Group(models.Model):
         super().save(*args, **kwargs)
 
 
-class Subject(models.Model):
-    subject_id = models.CharField(max_length=100, unique=True)
-    name = models.CharField(max_length=100)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='groups')
-    description = models.TextField(max_length=500, blank=True)
-    slug = models.SlugField(null=True, blank=True)
+# class Subject(models.Model):
+#     subject_id = models.CharField(max_length=100, unique=True)
+#     name = models.CharField(max_length=100)
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='groups')
+#     description = models.TextField(max_length=500, blank=True)
+#     slug = models.SlugField(null=True, blank=True)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.subject_id)
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         self.slug = slugify(self.subject_id)
+#         super().save(*args, **kwargs)
 
-    class Meta:
-      verbose_name = 'Subjects'
-      verbose_name_plural = 'Subjects'
+#     class Meta:
+#       verbose_name = 'Subjects'
+#       verbose_name_plural = 'Subjects'
 
 
 def save_ticket_files(instance, filename):
@@ -59,8 +59,8 @@ def save_ticket_files(instance, filename):
 
 class Ticket(models.Model):
     ticket_id = models.CharField(max_length=6, blank=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='tickets')
+    group = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='tickets')
     name = models.CharField(max_length=250)
     Notes = models.FileField(upload_to='save_lesson_files', verbose_name="Notes", blank=True)
     comment = CKEditor5Field('Text', config_name='extends')

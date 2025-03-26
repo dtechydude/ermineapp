@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from business.models import Transact
+from business.models import Transact, Comment
 from .models import MerchantSetTransact, SubscriberTransact, MerchantCommssion
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import  DetailView, CreateView,  UpdateView, ListView, FormView
 from .forms import MerchantSetTransactForm, MerchantTransactionUpdateForm, CommentForm, ReplyForm
+from .filters import TransactFilter, MyTransactFilter, Commentilter
 
 # Create your views here.
 
@@ -216,3 +218,34 @@ def select_merchant(request):
         'selectmerchant': selectmerchant
     }
     return render(request, 'transaction/select_merchant.html', context)
+
+
+
+# Merchant
+@login_required
+def view_self_transaction(request):
+    mytransact = Transact.objects.filter(created_by=User.objects.get(username=request.user))
+    mytransact_filter = MyTransactFilter(request.GET, queryset=mytransact)
+    mytransact = mytransact_filter.qs
+
+    context = {
+        # 'mypayment' : PaymentDetail.objects.filter(student=StudentDetail.objects.get(user=request.user)).order_by("-payment_date"),
+        'mytransact' : Transact.objects.filter(created_by=User.objects.get(username=request.user)).order_by("created_at"),
+        'mytransact':mytransact,
+        'mytransact_filter' : mytransact_filter,
+    }
+
+    return render(request, 'transaction/view_self_transaction.html', context)
+
+
+# Subscriber
+@login_required
+def subscriber_self_transaction(request):
+    mytransact = Comment.objects.filter(author=User.objects.get(username=request.user))
+    
+    context = {
+        'mytransact' : Comment.objects.filter(author=User.objects.get(username=request.user)).order_by("date_added"),
+        'mytransact':mytransact,
+    }
+
+    return render(request, 'transaction/subscriber_self_transaction.html', context)

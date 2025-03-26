@@ -35,7 +35,15 @@
 								<p><a href="{% url 'business:transact_complete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Complete Transaction</a></p>
 
 								{% else %}
-								<p><a href="#">Merchant's Contact</a><br></p>
+								<p><strong>Steps & Tips:</strong></p>
+								<p> - Respond to the transaction, <br>
+									- Indicating the amount you need,<br>
+									- Contact the merchant<br>
+									- Connect with th merchant<br>
+									- Locate the merchant<br>
+									- Use payment method
+
+								</p>
 
 								{% endif %}
 							

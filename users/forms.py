@@ -90,5 +90,18 @@ class RoleUpdateForm(forms.ModelForm):
 class BioUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = [ 'bio', ]
+        fields = [ 'gender', 'bio', ]
+
+# address update       
+class AddressUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'state', 'address', ]
+
+# Phone update       
+class PhoneUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'phone', 'altenate_phone' ]
+       
        

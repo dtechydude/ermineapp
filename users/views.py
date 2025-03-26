@@ -13,7 +13,7 @@ from django.views.generic import(TemplateView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import(ProfileUpdateForm, UserUpdateForm, KYCUpdateForm,
                    BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,
-                   RoleUpdateForm, BioUpdateForm)
+                   RoleUpdateForm, BioUpdateForm, AddressUpdateForm, PhoneUpdateForm)
 
 
 @login_required
@@ -246,3 +246,47 @@ def bioprofile(request):
     }
 
     return render(request, 'users/bio_update.html', context)
+
+# Address Update
+@login_required
+def phoneprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = PhoneUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your ROLE switch has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = PhoneUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/phone_update.html', context)
+
+# Address Update
+@login_required
+def addressprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = AddressUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your ROLE switch has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = AddressUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/address_update.html', context)

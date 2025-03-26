@@ -650,14 +650,22 @@
 							<span class="nav-text">Transaction Mgt.</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>
+							{% if user.is_superuser or user.is_staff%}
+							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>							
 							<li><a href="./chart-morris.html">Failed Transactions</a></li>
-							<li><a href="./chart-chartjs.html">Successful Transactions</a></li>
-							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li>
+							<li><a href="./chart-chartjs.html">Successful Transactions</a></li>	
+							{% endif %}						
 							<li><a href="{% url 'merchant:available-merchant' %}">Available Merchant</a></li>
-							<li><a href="{% url 'transaction:transaction-list' %}">My Transaction List</a></li>
+							{% if user.profile.user_role == 'merchant'%}
+							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li>
+							<li><a href="{% url 'transaction:my-transaction' %}">My Set Transactions</a></li>
+							{% endif %}
+							{% if user.profile.user_role == 'subscriber' %}
+							<li><a href="{% url 'transaction:subscriber-self-transact' %}">My Transactions</a></li>
+							{% endif %}
 						</ul>
 					</li>
+					{% if user.is_superuser or user.is_staff or user.profile.user_role == 'subscriber' %}
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-086-star"></i>
 							<span class="nav-text">Subscriber Trans.</span>
@@ -671,31 +679,9 @@
 							
 						</ul>
 					</li>
-					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-045-heart"></i>
-							<span class="nav-text">KYC Mgt.</span>
-						</a>
-						<ul aria-expanded="false">
-							<li><a href="{% url 'users:members-kyc-list' %}">All ID List</a></li>
-							<li><a href="./uc-nestable.html">Cancelled KYC List</a></li>
-							<li><a href="./uc-noui-slider.html">Pending KYC List</a></li>
-							<li><a href="./uc-sweetalert.html">KYC Completed List</a></li>
-							<li><a href="./uc-toastr.html">Reset Merchant KYC</a></li>
-							<li><a href="./uc-toastr.html">Reset Subscriber KYC</a></li>
-							<li><a href="./map-jqvmap.html">Upload KYC List</a></li>
-							
-						</ul>
-					</li>
-					<li><a href="{% url 'pages:cooperative' %}" class="" aria-expanded="false">
-							<i class="flaticon-013-checkmark"></i>
-							<span class="nav-text">Cooperative</span>
-						</a>
-					</li>
-					<li><a href="widget-basic.html" class="" aria-expanded="false">
-						<i class="flaticon-013-checkmark"></i>
-						<span class="nav-text">Referral Link</span>
-					</a>
-				</li>
+					{% endif %}
+
+					{% if user.is_superuser or user.is_staff or user.profile.user_role == 'merchant' %}
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-072-printer"></i>
 							<span class="nav-text">Merchant Trans.</span>
@@ -708,6 +694,36 @@
 							<li><a href="form-validation.html">Pending Transaction</a></li>
 						</ul>
 					</li>
+					{% endif %}
+					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-045-heart"></i>
+						<span class="nav-text">KYC Mgt.</span>
+					</a>
+					<ul aria-expanded="false">
+						{% if user.is_superuser or user.is_staff %}
+						<li><a href="{% url 'users:members-kyc-list' %}">All ID List</a></li>
+						<li><a href="{% url 'pages:dashboard' %}">Cancelled KYC List</a></li>
+						<li><a href="{% url 'pages:dashboard' %}">Pending KYC List</a></li>
+						<li><a href="{% url 'pages:dashboard' %}">KYC Completed List</a></li>
+						<li><a href="{% url 'pages:dashboard' %}">Reset Merchant KYC</a></li>
+						<li><a href="{% url 'pages:dashboard' %}">Reset Subscriber KYC</a></li>
+						{% endif %}
+						{% if user.profile.user_role == 'merchant' or user.profile.user_role == 'subscriber'  %}
+						<li><a href="{% url 'users:profile' %}">Upload KYC</a></li>
+						{% endif %}
+					</ul>
+				</li>
+				<li><a href="{% url 'pages:cooperative' %}" class="" aria-expanded="false">
+						<i class="flaticon-013-checkmark"></i>
+						<span class="nav-text">Cooperative</span>
+					</a>
+				</li>
+				<li><a href="widget-basic.html" class="" aria-expanded="false">
+					<i class="flaticon-013-checkmark"></i>
+					<span class="nav-text">Referral Link</span>
+				</a>
+			</li>
+
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-043-menu"></i>
 							<span class="nav-text">Support Mgt.</span>
@@ -1128,7 +1144,7 @@
 																				
 																				<div>
 																					{% if user.profile.nin %}
-																					<span>MY NIN</span><span class="fs-16 font-w500 me-3">{{user.profile.nin}}</span>
+																					<span>MY NIN: </span><span class="fs-16 font-w500 me-3">{{user.profile.nin}}</span>
 																					{% else %}
 																					<span>MY NIN: </span><span class="fs-16 font-w500 me-3 text-red">You have not updated your NIN</span>
 																					<!-- <span>:MY NIN</span> -->
@@ -1255,9 +1271,9 @@
 																		<h5>Email & Phone Info.</h5>
 																		<li class="fs-11 text-red">Email: <span class="fs-11 text-black">{{ user.email }}</span></li>
 																		<li class="fs-11 text-red">Phone: <span class="fs-11 text-black">{{ user.profile.phone }}</span></li>
-																		<li class="fs-11 text-red">Alt.Phone: <span class="fs-11 text-black"> {{ user.profile.alternate_phone }}</span></li>
+																		<li class="fs-11 text-red">Alt.Phone: <span class="fs-11 text-black"> {{ user.profile.altenate_phone }}</span></li>
 																		<li></li>
-																		<div><a class='text-green' href="{% url 'users:profile' %}"><span style='font-size:medium'>Update</span></a></div>
+																		<div><a class='text-green' href="{% url 'users:phone-update' %}"><span style='font-size:medium'>Update</span></a></div>
 
 																		<hr>
 																		<h5>Business Info.</h5>
@@ -1278,7 +1294,7 @@
 																		<li class="fs-11 text-red">State:  <span class="fs-11 text-black">{{ user.profile.state }}</span></li>
 																		<li class="fs-11 text-red">Address:  <span class="fs-8 text-black">{{ user.profile.address }}</span></li>
 																		<li class="fs-11 text-red">Updated: <span class="fs-11 text-black">{{ user.profile.updated|date:"d/m/Y" }}</span></li>
-																		<div><a class='text-green' href="{% url 'users:profile' %}"><span style='font-size:medium'>Update</span></a></div>
+																		<div><a class='text-green' href="{% url 'users:address-update' %}"><span style='font-size:medium'>Update</span></a></div>
 
 																		<hr>
 																		<h5>Bank Info.</h5>

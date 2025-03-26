@@ -4,40 +4,40 @@ from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
-from .models import Ticket, Group, Subject
+from .models import Ticket, Category
 from .forms import CommentForm, TicketForm, ReplyForm 
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # from students.models import StudentDetail
 
 
-class GroupSelfListView(LoginRequiredMixin, ListView):
+class CategorySelfListView(LoginRequiredMixin, ListView):
     context_object_name = 'groups'
-    model = Group
+    model = Category
     template_name = 'ticket/my_class.html'
  
     # Student can only view their class elearning
     def get_queryset(self):
-        return Group.objects.filter(name = self.request.user.profile)
+        return Category.objects.filter(name = self.request.user.profile)
 
 # Standard list view for the admin and teachers
-class GroupListView(LoginRequiredMixin, ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     context_object_name = 'groups'
-    model = Group
+    model = Category
     # template_name = 'curriculum/class_list.html'
     template_name = 'ticket/elearning_class.html'
 
     
 class SubjectListView(DetailView):
     context_object_name = 'groups'
-    model = Group
+    model = Category
     template_name = 'ticket/class_subjects.html'
 
 
-class TicketListView(DetailView):
-    context_object_name = 'subjects'
-    model = Subject
-    template_name = 'ticket/course_list.html'
+# class TicketListView(DetailView):
+#     context_object_name = 'subjects'
+#     model = Subject
+#     template_name = 'ticket/course_list.html'
 
 
 class TicketDetailView(DetailView, FormView):
@@ -105,25 +105,25 @@ class TicketDetailView(DetailView, FormView):
         return HttpResponseRedirect(self.get_success_url())
             
 
-class TicketCreateView(CreateView):
-    form_class = TicketForm
-    context_object_name = 'subject'
-    model = Subject
-    template_name = 'ticket/lesson_create.html'
+# class TicketCreateView(CreateView):
+#     form_class = TicketForm
+#     context_object_name = 'subject'
+#     model = Subject
+#     template_name = 'ticket/lesson_create.html'
 
-    def get_success_url(self):
-        self.object = self.get_object()
-        standard = self.object.standard
-        return reverse_lazy('ticket:lesson_list',kwargs={'group':standard.slug, 'slug':self.object.slug})
+#     def get_success_url(self):
+#         self.object = self.get_object()
+#         standard = self.object.standard
+#         return reverse_lazy('ticket:lesson_list',kwargs={'group':standard.slug, 'slug':self.object.slug})
 
-    def form_valid(self, form, *args, **kwargs):
-        self.object = self.get_object()
-        fm = form.save(commit=False)
-        fm.created_by = self.request.user
-        fm.group = self.object.group
-        fm.subject = self.object
-        fm.save()
-        return HttpResponseRedirect(self.get_success_url())
+#     def form_valid(self, form, *args, **kwargs):
+#         self.object = self.get_object()
+#         fm = form.save(commit=False)
+#         fm.created_by = self.request.user
+#         fm.group = self.object.group
+#         fm.subject = self.object
+#         fm.save()
+#         return HttpResponseRedirect(self.get_success_url())
 
 class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ('name', 'comment')

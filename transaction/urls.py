@@ -8,15 +8,14 @@ app_name ='transaction'
 
 urlpatterns = [
 
-     path('history/', transaction_views.transaction_history, name='transaction-history'),
-     path('status/', transaction_views.transaction_status, name='transaction-status'),
-     path('company_income/', transaction_views.company_income, name='company-income'),
-     path('merchant_earning/', transaction_views.merchant_earning, name='merchant-earning'),
-     path('agent_earning/', transaction_views.agent_earning, name='agent-earning'),
-     path('select_merchant/', transaction_views.select_merchant, name='select-merchant'),
-     # Test
-    #  path('set_transaction/', transaction_views.set_transaction, name='set-transaction'),
-    #  path('merchant_set_transaction/', transaction_views.merchant_set_transaction, name='merchant-set-transaction'),
+    path('history/', transaction_views.transaction_history, name='transaction-history'),
+    path('status/', transaction_views.transaction_status, name='transaction-status'),
+    path('company_income/', transaction_views.company_income, name='company-income'),
+    path('merchant_earning/', transaction_views.merchant_earning, name='merchant-earning'),
+    path('agent_earning/', transaction_views.agent_earning, name='agent-earning'),
+    path('select_merchant/', transaction_views.select_merchant, name='select-merchant'),
+    path('my_transaction/', transaction_views.view_self_transaction, name='my-transaction'),
+    path('sub_self_transact/', transaction_views.subscriber_self_transaction, name='subscriber-self-transact'),
 
      # Results Detail Views
     path('transaction_list/', MerchantTransactListView.as_view(), name='transaction-list'), 
