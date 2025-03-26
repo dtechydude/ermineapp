@@ -9,7 +9,6 @@ from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.html import strip_tags
 
-# Create your models here.
 
 
 class State(models.Model):
