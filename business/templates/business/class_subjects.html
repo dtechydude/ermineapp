@@ -1,15 +1,19 @@
 {% extends 'pages/dashboard.html'%}
 {% load static %}
-{% block title %}<title>Schoolly - Class Subjects List </title>{% endblock title %}
+
+
+{% block title %}
+<title>ERMINE TRANSACTION TYPES </title>
+{% endblock title %}
+
 
 {% block contentbody %}
 <div class="content-body">
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href=""><span style="font-size: 35px;">{{states.name}}</span></a>  E-learning</li>
-                
-                
+                <li class="breadcrumb-item active"><a href=""><span style="font-size: 25px;">{{states.name}} State</span></a>  Transaction Types</li>
+                                
             </ol>
         </div>
         <!-- row -->
@@ -17,7 +21,7 @@
             <div class="col-xl-4 col-xxl-6 col-lg-6">
                 <div class="card">
                     <div class="card-header border-0 pb-0">
-                        <h4 class="card-title">Subjects List</h4>
+                        <h6 class="card-title">Transaction Types List</h6>
                     </div>
                     <div class="card-body">
                         <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height370">
@@ -42,10 +46,13 @@
             <div class="col-xl-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Class Instruction</h5>
+                        <h5 class="card-title">Important Info!</h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Please follow instructions as directed by the instructor</p>
+                        <p class="card-text fs-18">Please select the type of transaction you'll like to initiate.
+                            Direct Dispense, Bulk Flow or Remote Flow. You can edit transaction later in the next window. </pp>
+                           <p class="card-text fs-18"> You are expected to pay the company's fee after setting the transaction
+                        </p>
                     </div>
                     <div class="card-footer d-sm-flex justify-content-between align-items-center">
                         <div class="card-footer-link mb-4 mb-sm-0">
@@ -69,8 +76,8 @@
     <div class="container com-sp pad-bot-70">
         <div class="row">
             <div class="con-title">
-                <h2>List of subjects in -  <span>{{states.name}}</span> </h2>
-                <p>Use the links below to explore courses in each class.</p>
+                <h2>List of Transaction Type in -  <span>{{states.name}}</span> </h2>
+                <p>Use the links below to explore transaction types.</p>
             </div>
         </div>
    

@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
@@ -37,6 +37,11 @@ class TransactListView(DetailView):
     context_object_name = 'subjects'
     model = Subject
     template_name = 'business/transact_list.html'
+    # queryset = Subject.objects.all()
+
+    # def get_object(self):
+    #     slug_ = self.kwargs.get("slug")
+    #     return get_object_or_404(Subject, slug=slug_)
 
 
 class TransactDetailView(DetailView, FormView):
@@ -111,7 +116,7 @@ class TransactCreateView(CreateView):
     form_class = TransactForm
     context_object_name = 'subject'
     model = Subject
-    template_name = 'business/transact_create.html'
+    template_name = 'business/create.html'
     success_message = "Your Transaction was updated successfully"
 
     def get_success_url(self):
@@ -129,9 +134,28 @@ class TransactCreateView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    fields = ('name', 'comment')
+    fields = ('max_amount', 'min_amount', 'prefered_method', 'state', 'remark')
     model = Transact
     template_name = 'business/transact_update_view.html'
+    context_object_name = 'transacts'
+    
+    #function to check if user is the login user
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    #preventing other users from update other people's post
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.created_by:
+            return True
+        return False
+
+#Complete Transaction
+class TransactCompleteView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    fields = ('end_trans',)
+    model = Transact
+    template_name = 'business/transact_complete_view.html'
     context_object_name = 'transacts'
     
     #function to check if user is the login user

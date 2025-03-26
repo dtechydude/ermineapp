@@ -1,8 +1,11 @@
 {% extends 'pages/dashboard.html'%}
 {% load static %}
+{% load crispy_forms_tags %}
 
 
-{% block title %}<title>Lesson Detail </title>{% endblock title%}
+{% block title %}
+<title>Transaction Detail </title>
+{% endblock title%}
 
 {% block contentbody %}
 
@@ -12,7 +15,7 @@
 		<div class="row page-titles">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ transacts.subject }}</a></li>
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Name :  {{ transacts.name }}</b><span> - Category : {{ transacts.state }}</span></a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Trans ID : <strong> {{ transacts.transact_id }} </strong><span> - State : <strong>{{ transacts.state }}</strong></span></a></li>
 			</ol>
 		</div>
 		
@@ -26,9 +29,11 @@
 								{% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
 								
 								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
-								<p>Use the buttons below to update or delete lessons</p>
+								<p>Use the buttons below to Update or Delete or End transaction</p>
 								<p><a href="{% url 'business:transact_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-info">Update Transaction</a><br></p>
-								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Delete Transaction</a></p>
+								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-danger">Delete Transaction</a></p>
+								<p><a href="{% url 'business:transact_complete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Complete Transaction</a></p>
+
 								{% else %}
 								<p><a href="#">Merchant's Contact</a><br></p>
 
@@ -65,30 +70,38 @@
 											</div>
 											
 											<div class="read-content-body">
-												<p class="mb-2"><strong>Teacher's Highlights:</strong><br>
-												<p class="mb-2">Maximum Amount Available: {{ transacts.max_amount}}<br>
-												Minimum Withdrawable Amount: {{ transacts.min_amount}} <br>
-												Prefered Payment Method: {{ transacts.payment_method}} 
-												</p>
-												<p>{{ transacts.comment | safe }}	</p>									
+												
+												<p class="mb-2"><strong>Transaction's Highlights:</strong></p>
+												<p class="mb-2">Maximum Amount Available: <strong> N{{ transacts.max_amount}}</strong></p>
+												<p class="mb-2">Minimum Withdrawable Amount:<strong> N{{ transacts.min_amount}}</strong> </p>
+												<p class="mb-2">Prefered Payment Method: <strong>{{ transacts.prefered_method}}</strong> </p>
+												<p class="mb-2">Minimum Withdrawable Amount: <strong>{{ transacts.min_amount}}</strong> </p>
+												
+												<pclass="mb-2">Merchant Remark : <strong>{{ transacts.remark | safe }}</strong>	</p>									
 																																				
 											</div>
 											<hr>
+											{% if transacts.trans_status %}
 											<div class="mb-3 pt-3">												
-													<h6>Subscriber Comment Area</h6>
+													<h6>For Subscriber Amount/Comment Area</h6>
 													<div class="">														
-														<h6>Post your comment to connect with the merchant below:</h6>
+														<h6>Enter the Amount You need a comment to connect with the merchant:</h6>
 												<form method="post">
 												<div class="">
 												{% csrf_token %}
-												{{form.as_p}}
+												{{form|crispy}}
 												<input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
 												</div>
 												</form> <h1></h1>
 												
 												{% for comment in transacts.comments.all %}
-												<h5> - {{comment.author}}<small><i> - Posted a comment on {{comment.date_added}}</i></small></h5>
-												<p>{{comment.body}}</p>
+												<h5> - {{comment.author}} :<small> a {{comment.author.profile.user_role}} needs cash - <i>posted on: {{comment.date_added}}</i></small></h5>
+												<p>
+													<span> - Cash Sum Needed: <strong>N{{comment.required_amount}}</strong></span><br>
+													<span> - Charges Due: <strong>N{{comment.charges_on_transaction}} - </strong>
+															Subscriber will pay total sum Of: <strong>N{{comment.total_payable}}</strong> to the merchant</span><br>
+													<span> - Subscriber's Remark: <strong>{{comment.body}}</strong></span>
+												</p>
 												{% for reply in comment.replies.all %}																					
 												<h5> - {{reply.author}}<small><i>- Posted a reply on: {{reply.date_added}}</i></small></h5>
 												
@@ -96,6 +109,7 @@
                                                     </a>
 																																		
 												{% endfor %}
+												
 												
 												<!-- form to post reply -->
 												
@@ -110,6 +124,9 @@
 												
 												</form>
 												{% endfor %}
+												{% else %}
+												<h4 style="color: red;">Transaction Locked !</h4>
+												{% endif %}
 												</div>
 												</div>
 												

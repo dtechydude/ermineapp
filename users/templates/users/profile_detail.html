@@ -106,7 +106,7 @@
 													<div class="d-flex">
 														<img src="{{ user.profile.image.url }}" alt="">
 														<div>
-															<h3 class="font-w600">{{ user.first_name }} {{ user.last_name }}</h3>
+															<h3 class="font-w600">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
 															<span class="text-secondary">PROFILE ID:  {{ user.profile.code }}</span>
 															<div class="call d-flex align-items-center"> 
 															<a href=""><i class="fas fa-phone-alt text-secondary"></i></a>
@@ -140,19 +140,19 @@
 													<div class="d-flex">
 														<div class="mt-4 check-status">
 															<span class="d-block mb-2">Contact Phone & Mail:</span>	
-															<span class="font-w500 fs-16">{{ merchant.profile.phone }}</span><br /> 
-																<span>{{ merchant.profile.user.email }}</span>
+															<span class="font-w500 fs-16">{{ user.profile.phone }}</span><br /> 
+																<span>{{ user.profile.user.email }}</span>
 														</div>
 														<div class="mt-4">
 															<span class="d-block mb-2">Business Address:</span>	
-															<span class="font-w500 fs-14">{{ merchant.profile.state }} - {{ merchant.profile.address }}</span>
+															<span class="font-w500 fs-14">{{ user.profile.state }} - {{ user.profile.address }}</span>
 														</div>
 													</div>
 												</div>
 												<div class="d-flex flex-wrap">
 													<div class="mt-4 check-status">
 														<span class="d-block mb-2">Member Since</span>	
-														<h5 class="font-w500 fs-24">{{ merchant.profile.created | date:"d/m/Y" }}</h5>
+														<h5 class="font-w500 fs-24">{{ user.profile.created | date:"d/m/Y" }}</h5>
 													</div>
 													<div class="mt-4 ms-3">
 														<span class="d-block mb-2 text-black">Min Trans Amount Allow</span>	

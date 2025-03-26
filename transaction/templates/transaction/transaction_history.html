@@ -118,9 +118,9 @@
                                             <tr>
                                                 <td>{{forloop.counter}}</td>
                                                 <td>{{ trans.transact_id}}</td>
-                                                <td>{{ trans.created_by.username }}</td>
-                                                <td>{{ trans.subscriber}}</td>
+                                                <td>{{ trans.created_by.username }}</td>                                               
                                                 <td>{{ trans.max_amount }}</td>
+                                                <td>{{ trans.min_amount }}</td>
                                                 <td>{{ trans.trans_date | date:"d/m/Y" }}</td>
                                                 {% if trans.trans_status == True %}
                                                 <td style="color: green;">Successful</td>

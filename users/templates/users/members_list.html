@@ -132,8 +132,7 @@
 												</thead>
 												<tbody>
 													{% for p in allusers %}
-
-													
+																									
 													<tr>
 														<td>
 															<div class="form-check style-1">
@@ -144,9 +143,9 @@
 															<div class="concierge-list-bx d-flex align-items-center">
 																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="#">{{p.user}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block">{{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</strong></span>
-																	<span class=" fs-14  text-nowrap">{{ p.user.profile.created }}</span>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">{{p.user}}</a></h5>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">{{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</a></strong></span>
+																	<span class=" fs-14  text-nowrap">{{ p.user.profile.created | date:"d/m/Y" }}</span>
 																</div>
 															</div>
 														</td>
@@ -195,7 +194,7 @@
 															</div>
 														</td>
 													</tr>
-												
+											
 													{% endfor %}
 													
 												</tbody>

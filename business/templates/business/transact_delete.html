@@ -1,6 +1,9 @@
 {% extends 'pages/dashboard.html' %}
 {% load static %}
-{% block title %}<title> Delete Lesson</title>{% endblock title%}
+
+{% block title %}
+<title> Delete Transaction</title>
+{% endblock title%}
 
 {% block contentbody %}
 {% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
@@ -13,13 +16,12 @@
                     <div class="col-md-5">
                         <div class="form-input-content text-center error-page">
                             <h2 class="error-text fw-bold">Oops!</h2>
-                            <h3>Are you sure you want to delete this LESSON?<br>
-                                LESSON:<span style="color:red">"{{ object.name }}"</span></h3>
+                            <h3>Are you sure you want to delete this TRANSACTION?   </h3>
+                            
                             <form method="post">
-                                {% csrf_token %}
-                           
+                                {% csrf_token %}                           
                          
-                                <button class="btn btn-danger" type="submit">Delete Lesson</button>
+                                <button class="btn btn-danger" type="submit">Delete Transaction</button>
                                 </form>
                         
                             <p>Note: You cannot reverse the delete!</p> 

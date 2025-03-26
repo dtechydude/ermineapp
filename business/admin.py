@@ -13,14 +13,16 @@ class StateAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 class SubjectAdmin(ImportExportModelAdmin, admin.ModelAdmin):
        
-    list_display=('subject_id', 'name', 'state')
+    list_display=( 'state', 'name', 'subject_id', )
     exclude = ['slug']
+    list_filter  = ['state', 'subject_id']
+    search_fields = ('state', 'subject_id')
 
 class TransactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
        
-    list_display=( 'created_by', 'state', 'subject', 'transact_id', 'name', 'max_amount', 'min_amount', 'trans_date' )
+    list_display=( 'created_by', 'state', 'subject', 'transact_id', 'max_amount', 'min_amount', 'trans_date' )
     list_filter = ['state',]
-    search_fields = ('state__name', 'subject__name')
+    search_fields = ('state__name', 'subject__name','transact_id' )
     raw_id_fields = ['created_by',]
     exclude = ['slug']
 

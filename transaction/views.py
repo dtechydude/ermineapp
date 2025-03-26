@@ -177,7 +177,7 @@ class TransactionFlowView(DetailView, FormView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-# @login_required
+@login_required
 def transaction_history(request):
     transhistory = Transact.objects.all().order_by('-trans_date')
     context = {
@@ -185,11 +185,11 @@ def transaction_history(request):
     }
     return render(request, 'transaction/transaction_history.html', context)
 
-# @login_required
+@login_required
 def transaction_status(request):
     return render(request, 'transaction/transaction_status.html')
 
-# @login_required
+@login_required
 def company_income(request):
     allincome = Transact.objects.all().order_by('-id')
     context = {
@@ -197,9 +197,9 @@ def company_income(request):
     }
     return render(request, 'transaction/company_income.html', context)
 
-# @login_required
+@login_required
 def merchant_earning(request):
-    merchantearn = SubscriberTransact.objects.all().order_by('-id')
+    merchantearn = Transact.objects.all().order_by('-id')
     context = {
         'merchantearn': merchantearn
     }
@@ -216,4 +216,3 @@ def select_merchant(request):
         'selectmerchant': selectmerchant
     }
     return render(request, 'transaction/select_merchant.html', context)
-

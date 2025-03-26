@@ -9,15 +9,15 @@ class TransactForm(forms.ModelForm):
     class Meta:
         
         model = Transact
-        fields = ('transact_id', 'name', 'comment')
+        fields = ('prefered_method', 'max_amount', 'min_amount', 'remark')
         widgets = {
-            'comment': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
+            'remark': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
         }
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('body',)
+        fields = ( 'required_amount','body',)
 
         labels = {"body":"Comment:"}
 

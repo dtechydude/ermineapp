@@ -15,7 +15,7 @@ from pages.models import CompanyBankDetail
 
 
 class State(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
 
@@ -42,7 +42,7 @@ def save_subject_image(instance, filename):
 
 
 class Subject(models.Model):
-    subject_id = models.CharField(max_length=100, unique=True)
+    subject_id = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='subjects')
     # image = models.ImageField(upload_to=save_subject_image, blank=True, verbose_name='Subject Image')
@@ -50,14 +50,15 @@ class Subject(models.Model):
     slug = models.SlugField(null=True, blank=True)
 
     class Meta:
-      verbose_name = 'Lgas'
-      verbose_name_plural = 'Lgas'
+      verbose_name = 'Trans Type'
+      verbose_name_plural = 'Trans Type'
+      ordering = ['state']
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.subject_id)
+        self.slug = slugify(self.id)
         super().save(*args, **kwargs)
 
     # class Meta:
@@ -79,10 +80,10 @@ def save_transact_files(instance, filename):
 
 
 class Transact(models.Model):
-    transact_id = models.CharField(max_length=8, blank=True)
+    transact_id = models.CharField(max_length=8, blank=True, help_text='This is automatically generated')
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts')
-    name = models.CharField(max_length=250)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts', help_text='Select same as state')
+    name = models.CharField(max_length=200, default='do nothing with this input')
     trans_date = models.DateTimeField(default=timezone.now)
     max_amount = models.IntegerField(help_text='Enter Max Amount', default= 0)
     min_amount = models.IntegerField(help_text='Enter Min Amount', default= 0)
@@ -102,10 +103,23 @@ class Transact(models.Model):
 
     ]
     prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
-    trans_status = models.BooleanField(default=False)
+   
+    complete = 'complete'
+    pending = 'pending'
+    active = 'active'
+        
+    end_trans = [
+        (complete, 'complete'),
+        (pending, 'pending'),
+        (active, 'active'),
+         
+    ]
+    end_trans = models.CharField(max_length=50, choices=end_trans, default=active)
     remote_option = models.BooleanField(default=False)
+    trans_status = models.BooleanField(default=False)
 
-    comment = CKEditor5Field('Text', config_name='extends')
+    # comment = CKEditor5Field('Text', config_name='extends')
+    remark = models.TextField(default='merchant remark', blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, blank=True)
@@ -119,10 +133,10 @@ class Transact(models.Model):
     #     ordering = ['position']
 
     def __str__(self):
-        return self.name
-
+        return f'transaction_id:- {self.transact_id}'
+  
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(self.trans_date)
         if self.transact_id == "":
             transact_id = generate_trans_id()
             self.transact_id = transact_id
@@ -149,6 +163,7 @@ class Transact(models.Model):
 class Comment(models.Model):
     transact_name = models.ForeignKey(Transact, null=True, on_delete=models.CASCADE, related_name='comments')
     comm_name = models. CharField(max_length=100, blank=True)
+    required_amount = models.IntegerField(help_text='Enter Amount Needed', default= 0)
     # reply = models.ForeignKey("comment", null=True, blank=True, on_delete=CASCADE, related_name='replies')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribers_comment')
     body = models.TextField(max_length=500)
@@ -163,6 +178,14 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-date_added']
+
+    @property
+    def charges_on_transaction(self):
+       return self.required_amount * 0.01
+    
+    @property
+    def total_payable(self):
+       return self.required_amount + self.charges_on_transaction
 
 
 class Reply(models.Model):

@@ -2,7 +2,7 @@ from tkinter import Widget
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Merchant
+from .models import Merchant, Cooperative
 from transaction.models import MerchantSetTransact
 
 
@@ -86,4 +86,13 @@ class MerchantForm(forms.ModelForm):
     class Meta:
         model = Merchant
         fields = ['business_type', 'business_type', 'business_reg_no', 'bank_name', 'acc_name', 'acc_no', ]
+
+
+
+
+class CooperativeForm(forms.ModelForm):
+   
+    class Meta:        
+        model = Cooperative
+        fields = ('profile',)
        

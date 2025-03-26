@@ -93,19 +93,24 @@
                             <div class="card-body">
                                 <div class="new-arrival-product">
                                     <div class="new-arrivals-img-contnent">                                        
-                                        <img class="img-fluid" src="{{merc.merchant.profile.image.url}}" alt="">
+                                        <img class="img-fluid" src="{{merc.created_by.profile.image.url}}" alt="">
                                     </div>
                                     <div class="new-arrival-content text-center mt-3">
-                                        <h4><a href="ecom-product-detail.html">{{ merc.merchant.first_name }}</a></h4>
+                                        <h4><a href="#">{{ merc.created_by }}</a></h4>
                                         <ul class="star-rating">
-                                            <li><b>Phone:</b> {{ merc.merchant.profile.phone}}
-                                            <br />Location: {{ merc.merchant.profile.state}}</li>
+                                            <li><b>Trans. ID:</b> {{ merc.transact_id}}
+                                            <br /><b>Location: </b>{{ merc.created_by.profile.current_state}}
+                                            <br /><b>Created: </b><span style="font-size:10px;">{{ merc.trans_date }}</span>
+                                            
+                                        </li>
                                             <!-- <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-half-empty"></i></li>
                                             <li><i class="fa fa-star-half-empty"></i></li> -->
                                         </ul>
-                                        <span>Available Cash:</span><span class="price" style="font-size: 15px;">  {{ merc.max_amount }}</span>
+                                        <span><b>Available Cash:</b></span><span class="price" style="font-size: 15px;">  {{ merc.max_amount }}</span><br>
+                                        <span><b>Min. To Withdraw:</b></span><span class="price" style="font-size: 12px;">  {{ merc.min_amount }}</span>
+
                                     </div>
                                 </div>
                             </div>

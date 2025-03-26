@@ -7,6 +7,10 @@ from subscriber.models import SubscriberList
 from users.models import Profile
 from transaction.models import MerchantSetTransact, SubscriberTransact
 from agent.models import AgentList
+from django.urls import reverse_lazy
+from django.views.generic import(TemplateView, DetailView,
+                                ListView, FormView, CreateView, 
+                                UpdateView, DeleteView)
 
 
 def ermine_home(request):
@@ -83,4 +87,5 @@ def error_page (request):
 
 def cooperative_page(request):
     return render(request, 'pages/cooperative.html')
+
 

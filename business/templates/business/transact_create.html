@@ -1,8 +1,11 @@
 {% extends 'pages/dashboard.html' %}
 {% load embed_video_tags %}
-
 {% load static %}
-{% block title %}<title>Schoolly Lesson Creation </title>{% endblock title %}
+
+
+{% block title %}
+<title>Ermine Transaction Creation </title>
+{% endblock title %}
 
 {% block contentbody%}
 {% if user.is_authenticated and user.is_superuser or user.profile.user_role == 'merchant' %}
@@ -11,8 +14,8 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">E-Learning</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Transact Creation Form</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction Creation</a></li>
+                <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">Transact Creation Form</a></li> -->
             </ol>
         </div>
         <!-- row -->
