@@ -6,7 +6,8 @@ from django.urls import reverse_lazy
 from .forms import UserRegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Profile
+from users.models import Profile
+from django.contrib.auth.models import User
 from django.views.generic import(TemplateView, DetailView,
                                 ListView, FormView, CreateView, 
                                 UpdateView, DeleteView)
@@ -14,6 +15,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import(ProfileUpdateForm, UserUpdateForm, KYCUpdateForm,
                    BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,
                    RoleUpdateForm, BioUpdateForm, AddressUpdateForm, PhoneUpdateForm)
+
+
 
 
 @login_required
@@ -102,7 +105,7 @@ class UserDetailView(DetailView):
     # context_object_name = 'profile'
 
     def get_object(self):
-        id_ = self.kwargs.get("id")
+        id_ = self.kwargs.get('id')
         return get_object_or_404(Profile, id=id_)
   
 
@@ -117,7 +120,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 # Profile Information
 @login_required
-def profile(request):
+def profileupdate(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
