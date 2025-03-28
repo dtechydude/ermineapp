@@ -132,7 +132,7 @@
                                                 <td>{{trans.min_amount }}</td>
 
                                                 {% if user.profile.user_role == 'merchant' %}
-                                                {% if trans.trans_status %}
+                                                {% if trans.payment_confirmed %}
                                                 <td style="color: red;">N{{trans.company_charges }} - <span style="color: green;">PAID</span></td> 
                                                 {% else %} 
                                                 <td style="color: red;">N{{trans.company_charges }} - pending</td> 

@@ -38,7 +38,7 @@ def profile(request):
         'p_form': p_form,
     }
 
-    return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile_update_form.html', context)
 
 
 def my_recommendations_view(request):

@@ -42,10 +42,9 @@ def save_subject_image(instance, filename):
 
 
 class Subject(models.Model):
-    subject_id = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
+    subject_id = models.CharField(max_length=100, help_text='example: -lagosbulkflow')
+    name = models.CharField(max_length=100, help_text='example: -Bulk Flow')
     state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='subjects')
-    # image = models.ImageField(upload_to=save_subject_image, blank=True, verbose_name='Subject Image')
     description = models.TextField(max_length=500, blank=True)
     slug = models.SlugField(null=True, blank=True)
 
@@ -61,9 +60,6 @@ class Subject(models.Model):
         self.slug = slugify(self.id)
         super().save(*args, **kwargs)
 
-    # class Meta:
-    #   verbose_name = 'Subjects'
-    #   verbose_name_plural = 'Subjects'
 
 
 def save_transact_files(instance, filename):
@@ -81,17 +77,14 @@ def save_transact_files(instance, filename):
 
 class Transact(models.Model):
     transact_id = models.CharField(max_length=8, blank=True, help_text='This is automatically generated')
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, on_delete=models.CASCADE, help_text='Select the State where you want to initiate transaction')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts', help_text='Select same as state')
     name = models.CharField(max_length=200, default='do nothing with this input')
     trans_date = models.DateTimeField(default=timezone.now)
     max_amount = models.IntegerField(help_text='Enter Max Amount', default= 0)
     min_amount = models.IntegerField(help_text='Enter Min Amount', default= 0)
-    charges_pay_date = models.DateTimeField(default=timezone.now)
-    charges_amount_paid = models.IntegerField(help_text='Enter Max Amount', blank=True, null=True)
-    comp_bank_ref = models.ForeignKey(CompanyBankDetail, on_delete=models.CASCADE, default=None, null=True, blank=True)
-    payment_confirmed = models.BooleanField(default=False, blank=True)
-
+    
     card = 'Card Payment'
     bank_transfer = 'Bank Transfer'
     transfer_or_card = 'transfer_or_card'
@@ -103,7 +96,13 @@ class Transact(models.Model):
 
     ]
     prefered_method = models.CharField(max_length=50, choices=payment_option, default=card)
-   
+    remote_option = models.BooleanField(default=False)
+    remark = models.TextField(default='merchant remark', blank=True)
+
+    charges_pay_date = models.DateTimeField(default=timezone.now)
+    charges_amount_paid = models.IntegerField(help_text='Enter Amount Paid', blank=True, null=True)
+    comp_bank_ref = models.ForeignKey(CompanyBankDetail, on_delete=models.CASCADE, default=None, null=True, blank=True, help_text='Select The Bank You Paid To')
+       
     complete = 'complete'
     pending = 'pending'
     active = 'active'
@@ -114,13 +113,10 @@ class Transact(models.Model):
         (active, 'active'),
          
     ]
+       
     end_trans = models.CharField(max_length=50, choices=end_trans, default=active)
-    remote_option = models.BooleanField(default=False)
-    trans_status = models.BooleanField(default=False)
-
-    # comment = CKEditor5Field('Text', config_name='extends')
-    remark = models.TextField(default='merchant remark', blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    payment_confirmed = models.BooleanField(default=False, blank=True)
+    trans_status = models.BooleanField(default=False, help_text='ADMIN approves transaction after payment confirmed')
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, blank=True)
 

@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from users import views as users_views
 from .views import UserDetailView, UserDeleteView
+from django.urls import reverse_lazy
 
 
 

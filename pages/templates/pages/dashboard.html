@@ -479,7 +479,7 @@
 									<path id="Path_1962" data-name="Path 1962" d="M26.373,26.526A6.667,6.667,0,0,0,20,21.833H6.667A6.667,6.667,0,0,0,.293,26.526,6.931,6.931,0,0,0,0,28.5V39.166a6.669,6.669,0,0,0,6.667,6.667H20a6.669,6.669,0,0,0,6.667-6.667V28.5A6.928,6.928,0,0,0,26.373,26.526ZM6.667,24.5H20a4.011,4.011,0,0,1,3.947,3.36L13.333,33.646,2.72,27.86A4.011,4.011,0,0,1,6.667,24.5ZM24,39.166a4.012,4.012,0,0,1-4,4H6.667a4.012,4.012,0,0,1-4-4V30.873L12.693,36.34a1.357,1.357,0,0,0,1.28,0L24,30.873Z" transform="translate(0 0)" fill="#135846"/>
 								  </g>
 								</svg>
-									<span class="badge light text-white bg-primary rounded-circle">76</span>
+									<span class="badge light text-white bg-primary rounded-circle">6</span>
 								</a>
 							</li>	
 							<li class="nav-item dropdown notification_dropdown">
@@ -529,7 +529,7 @@
 										<path id="Path_1956" data-name="Path 1956" d="M274.4,67.347a4.8,4.8,0,0,0-4.8-4.8H255.2a4.8,4.8,0,0,0-4.8,4.8v15.6a1.2,1.2,0,0,0,2.048.848l3.746-3.745a2.4,2.4,0,0,1,1.7-.7H269.6a4.8,4.8,0,0,0,4.8-4.8Zm-2.4,0a2.4,2.4,0,0,0-2.4-2.4H255.2a2.4,2.4,0,0,0-2.4,2.4v12.7l1.7-1.7a4.8,4.8,0,0,1,3.395-1.406H269.6a2.4,2.4,0,0,0,2.4-2.4Zm-15.6,7.2H266a1.2,1.2,0,1,0,0-2.4h-9.6a1.2,1.2,0,0,0,0,2.4Zm0-4.8h12a1.2,1.2,0,1,0,0-2.4h-12a1.2,1.2,0,0,0,0,2.4Z" fill="#135846" fill-rule="evenodd"/>
 									  </g>
 									</svg>
-									<span class="badge light text-white bg-primary rounded-circle">15</span>
+									<span class="badge light text-white bg-primary rounded-circle">3</span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<div id="DZ_W_TimeLine02" class="widget-timeline dlab-scroll style-1 ps ps--active-y p-3 height370">
@@ -557,7 +557,7 @@
 										<svg id="icon-user2" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 										<span class="ms-2">Edit Profile </span>
 									</a>
-									<a href="./email-inbox.html" class="dropdown-item ai-icon">
+									<a href="#" class="dropdown-item ai-icon">
 										<svg id="icon-inbox1" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
 										<span class="ms-2">Inbox </span>
 									</a>
@@ -619,29 +619,8 @@
 							<li><a href="{% url 'merchant:merchant-list' %}">Verified Merchant</a></li>
 							<li><a href="./post-details.html">Verified Agent</a></li>
 							<li><a href="{% url 'subscriber:subscriber-list' %}">Verified Subscriber</a></li>
-							<li><a href="./post-details.html">Update Members Profile</a></li>
-							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-								<ul aria-expanded="false">
-									<li><a href="./email-compose.html">Compose</a></li>
-									<li><a href="./email-inbox.html">Inbox</a></li>
-									<li><a href="./email-read.html">Read</a></li>
-								</ul>
-								
-							</li>
+							<li><a href="/admin/users/profile/">Update Members Profile</a></li>											
 							
-							<li><a href="./app-calender.html">Calendar</a></li>
-							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-								<ul aria-expanded="false">
-									<li><a href="./ecom-product-grid.html">Product Grid</a></li>
-									<li><a href="./ecom-product-list.html">Product List</a></li>
-									<li><a href="./ecom-product-detail.html">Product Details</a></li>
-									<li><a href="./ecom-product-order.html">Order</a></li>
-									<li><a href="./ecom-checkout.html">Checkout</a></li>
-									<li><a href="./ecom-invoice.html">Invoice</a></li>
-									<li><a href="./ecom-customers.html">Customers</a></li>
-								</ul>
-								
-							</li>
 						</ul>
 						{% endif %}
 					</li>
@@ -672,10 +651,10 @@
 						</a>
 						<ul aria-expanded="false">
 							<li><a href="{% url 'transaction:select-merchant' %}">Start Transaction</a></li>
-							<li><a href="./ui-alert.html">Successful Transactions</a></li>
+							<!-- <li><a href="./ui-alert.html">Successful Transactions</a></li>
 							<li><a href="./ui-badge.html">Cancelled Transactions</a></li>
 							<li><a href="./ui-button.html">Rated Merchant</a></li>
-							<li><a href="./ui-modal.html">Transactions Report</a></li>
+							<li><a href="./ui-modal.html">Transactions Report</a></li> -->
 							
 						</ul>
 					</li>
@@ -687,11 +666,12 @@
 							<span class="nav-text">Merchant Trans.</span>
 						</a>
 						<ul aria-expanded="false">
+							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li><!-- 
 							<li><a href="./form-element.html">Set Transaction</a></li>
 							<li><a href="./form-wizard.html">View Transaction</a></li>
 							<li><a href="./form-ckeditor.html">Complete Transaction</a></li>
 							<li><a href="form-pickers.html">Cancelled Transaction</a></li>
-							<li><a href="form-validation.html">Pending Transaction</a></li>
+							<li><a href="form-validation.html">Pending Transaction</a></li> -->
 						</ul>
 					</li>
 					{% endif %}
@@ -702,11 +682,9 @@
 					<ul aria-expanded="false">
 						{% if user.is_superuser or user.is_staff %}
 						<li><a href="{% url 'users:members-kyc-list' %}">All ID List</a></li>
-						<li><a href="{% url 'pages:dashboard' %}">Cancelled KYC List</a></li>
+						<li><a href="/admin/">upload User KYC</a></li>
 						<li><a href="{% url 'pages:dashboard' %}">Pending KYC List</a></li>
-						<li><a href="{% url 'pages:dashboard' %}">KYC Completed List</a></li>
-						<li><a href="{% url 'pages:dashboard' %}">Reset Merchant KYC</a></li>
-						<li><a href="{% url 'pages:dashboard' %}">Reset Subscriber KYC</a></li>
+						
 						{% endif %}
 						{% if user.profile.user_role == 'merchant' or user.profile.user_role == 'subscriber'  %}
 						<li><a href="{% url 'users:profile' %}">Upload KYC</a></li>
@@ -729,9 +707,9 @@
 							<span class="nav-text">Support Mgt.</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="table-bootstrap-basic.html">Send Complaint</a></li>
+							<!-- <li><a href="table-bootstrap-basic.html">Send Complaint</a></li> -->
 							<li><a href="{% url 'pages:help-center' %}">Help Center</a></li>
-							<li><a href="table-datatable-basic.html">Submit FeedBack</a></li>
+							<!-- <li><a href="table-datatable-basic.html">Submit FeedBack</a></li> -->
 							<li><a href="{% url 'pages:privacy-policy' %}">Terms & Policies</a></li>
 						</ul>
 					</li>
@@ -743,17 +721,8 @@
 							<li><a href="{% url 'users:password_reset' %}">Reset Password</a></li>
 							<li><a href="{% url 'users:profile' %}">Edit Profile</a></li>
 							<li><a href="{% url 'users:logout' %}">Logout</a></li>
-							<!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-								<ul aria-expanded="false">
-									<li><a href="./page-error-400.html">Error 400</a></li>
-									<li><a href="./page-error-403.html">Error 403</a></li>
-									<li><a href="./page-error-404.html">Error 404</a></li>
-									<li><a href="./page-error-500.html">Error 500</a></li>
-									<li><a href="./page-error-503.html">Error 503</a></li>
-								</ul>
-							</li> -->
+							
 							<li><a href="https://ermine.ng">Ermine HomePage</a></li>
-							<!-- <li><a href="./empty-page.html">Empty Page</a></li> -->
 						</ul>
 					</li>
 				</ul>
@@ -768,7 +737,7 @@
 							</div>	
 						</div>
 						<div>
-							<a href="javascript:void(0);" class="btn btn-md text-secondary">Logout</a>
+							<a href="{% url 'users:logout' %}" class="btn btn-md text-secondary">Logout</a>
 						</div>
 					</div>
 				</div>
@@ -806,7 +775,12 @@
 													</span>
 													<div class="ms-4">
 														<a href="{% url 'users:role-update' %}">
-														{% if user.profile.user_role == 'select' %}
+														<!-- {% if user.is_superuser or user.is_staff %}
+														<h4 class="mb-0 font-w600">{{ user.username}}</h4>
+															<p class="mb-0 text-nowrap">															
+															My Username</p>
+															{% endif %} -->
+														{% if user.profile.user_role == 'select' and user.is_superuser == False and user.is_staff == False %}
 														<h4 class="mb-0 font-w600">Update Role!</h4>
 														<p class="mb-0 text-nowrap">
 															Choose Your Role </p> </a>
@@ -854,10 +828,10 @@
 														{% if user.is_superuser or user.is_staff %}
 														<h2 class="mb-0 font-w600">{{ users_num }}</h2>
 														<p class="mb-0">Total Members</p>
-														{% elif user.profile.merchant %}
+														{% elif user.profile.user_role == 'merchant' %}
 														<h2 class="mb-0 font-w600">{{ my_trans }}</h2>
 														<p class="mb-0">My Trans.M</p>
-														{% elif user.profile.subscriber %}
+														{% elif user.profile.user_role == 'subscriber' %}
 														<h2 class="mb-0 font-w600">{{ sub_trans }}</h2>
 														<p class="mb-0">My Trans.S</p>
 														{% else %}
@@ -1078,8 +1052,8 @@
 															</div>
 															<div class="col-xl-3 col-sm-3 col-6 mb-4 col-xxl-6">
 																<div class="text-center">
-																	{% if sub_num %}
-																	<h3 class="fs-28 font-w600">{{ sub_num }}</h3>
+																	{% if subscriber_num %}
+																	<h3 class="fs-28 font-w600">{{ subscriber_num }}</h3>
 																	{% else %}
 																	<h3 class="fs-28 font-w600">0</h3>
 																	{% endif %}
@@ -1291,9 +1265,9 @@
 																<div class="text-left">
 																	<ul>
 																		<h5>Location Info.</h5>
-																		<li class="fs-11 text-red">State:  <span class="fs-11 text-black">{{ user.profile.state }}</span></li>
+																		<li class="fs-11 text-red">State of Residence:  <span class="fs-11 text-black">{{ user.profile.state }}</span></li>
 																		<li class="fs-11 text-red">Address:  <span class="fs-8 text-black">{{ user.profile.address }}</span></li>
-																		<li class="fs-11 text-red">Updated: <span class="fs-11 text-black">{{ user.profile.updated|date:"d/m/Y" }}</span></li>
+																		<li class="fs-11 text-red">Current State: <span class="fs-11 text-black">{{ user.profile.current_state }}</span></li>
 																		<div><a class='text-green' href="{% url 'users:address-update' %}"><span style='font-size:medium'>Update</span></a></div>
 
 																		<hr>

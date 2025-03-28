@@ -117,32 +117,31 @@
                                         <thead>
                                             <tr>
                                                 <th>Transaction No</th>
-                                                <th>Merchant</th>
-                                                <th>Subscriber</th>
+                                                <th>Merchant</th>                                               
                                                 <th>Amount </th>
 												<th>Method </th>                                                
+                                                <th>Commission</th>
                                                 <th>Charges</th>
-                                                <th>Total</th>
                                                 <th>Date</th>
-												<th>Status </th>
+                                                <th>Status</th>
+											
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for earn in merchantearn %}
                                             <tr>
-                                                <td>{{ earn.trans_ref.trans_id }}</td>
-                                                <td>{{ earn.trans_ref.merchant }}</td>
-                                                <td>{{ earn.subscriber }}</td>
-                                                <td>{{ earn.trans_amount }}</td>
-                                                <td>{{ earn.payment_method }}</td>                                                                                          
-                                                <td><strong>{{ earn.mandatory_charges }}</strong></td>
-                                                <td><strong>{{ earn.total_due }}</strong></td>
+                                                <td>{{ earn.transact_id }}</td>
+                                                <td>{{ earn.created_by }}</td>                                                
+                                                <td>{{ earn.max_amount }}</td>
+                                                <td>{{ earn.prefered_method }}</td>                                                                                          
+                                                <td><strong>{{ earn.merchant_commission }}</strong></td>
+                                                <td><strong>{{ earn.company_charges }}</strong></td>
                                                 <td>{{earn.trans_date | date:"d/m/Y"}}</td>  
                                                 {% if earn.trans_status %}
                                                 <td>Paid</span></td>  
                                                 {% else %}
-                                                <td>failed   </td>                   
+                                                <td>unpaid</td>                   
                                                 {% endif %}
                                                 </tr>
                                             {% endfor %}

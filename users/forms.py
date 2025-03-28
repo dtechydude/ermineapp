@@ -96,7 +96,7 @@ class BioUpdateForm(forms.ModelForm):
 class AddressUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = [ 'state', 'address', ]
+        fields = [ 'state', 'address', 'current_state' ]
 
 # Phone update       
 class PhoneUpdateForm(forms.ModelForm):

@@ -150,6 +150,25 @@ class TransactUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.created_by:
             return True
         return False
+    
+class ChargesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    fields = ('charges_pay_date', 'charges_amount_paid', 'comp_bank_ref')
+    model = Transact
+    template_name = 'business/charges_update_form.html'
+    context_object_name = 'transacts'
+    
+    #function to check if user is the login user
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+    #preventing other users from update other people's post
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.created_by:
+            return True
+        return False
+
 
 #Complete Transaction
 class TransactCompleteView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

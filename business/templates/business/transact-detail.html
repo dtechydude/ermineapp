@@ -31,8 +31,9 @@
 								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
 								<p>Use the buttons below to Update or Delete or End transaction</p>
 								<p><a href="{% url 'business:transact_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-info">Update Transaction</a><br></p>
-								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-danger">Delete Transaction</a></p>
+								<p><a href="{% url 'business:charges_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-warning">Pay Trans. Charges</a></p>
 								<p><a href="{% url 'business:transact_complete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Complete Transaction</a></p>
+								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-danger">Delete Transaction</a></p>
 
 								{% else %}
 								<p><strong>Steps & Tips:</strong></p>

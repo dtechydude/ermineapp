@@ -14,6 +14,13 @@ class TransactForm(forms.ModelForm):
             'remark': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
         }
 
+class ChargesForm(forms.ModelForm):
+   
+    class Meta:        
+        model = Transact
+        fields = ('charges_pay_date', 'charges_amount_paid', 'comp_bank_ref')
+        
+       
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

@@ -140,12 +140,12 @@
 													<div class="d-flex">
 														<div class="mt-4 check-status">
 															<span class="d-block mb-2">Contact Phone & Mail:</span>	
-															<span class="font-w500 fs-16">{{ user.profile.phone }}</span><br /> 
-																<span>{{ user.profile.user.email }}</span>
+															<span class="font-w500 fs-16">{{ profile.phone }}</span><br /> 
+																<span>{{ profile.user.email }}</span>
 														</div>
 														<div class="mt-4">
 															<span class="d-block mb-2">Business Address:</span>	
-															<span class="font-w500 fs-14">{{ user.profile.state }} - {{ user.profile.address }}</span>
+															<span class="font-w500 fs-14">{{ profile.current_state }} - {{ profile.address }}</span>
 														</div>
 													</div>
 												</div>
@@ -155,12 +155,17 @@
 														<h5 class="font-w500 fs-24">{{ user.profile.created | date:"d/m/Y" }}</h5>
 													</div>
 													<div class="mt-4 ms-3">
-														<span class="d-block mb-2 text-black">Min Trans Amount Allow</span>	
-														<span class="font-w500 fs-24 text-black">N14,000:00</span>
+														<span class="d-block mb-2 text-black">Members Role</span>	
+														<span class="font-w500 fs-24 text-black">{{ profile.user_role }}</span>
 													</div>
 												</div>
-												<span class="d-block mb-3" style="color: red;">Merchant Bio </span>
-												<p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+												<span class="d-block mb-3" style="color: red; font-size: 16px;">Bio Info </span>
+												{% if profile.bio %}
+												<p class="mt-2">{{ profile.bio }}</p>
+												<hr>
+												{% else %}
+												<p class="mt-2">User has not updated Bio Information</p>
+												{% endif %}
 												<div class="facilities">
 													<div class="mb-3 ">
 														<a href="#" class="btn btn-secondary light btn-lg">
@@ -195,7 +200,7 @@
 														</div>
 														<div class="img-content">
 															<h4 class="fs-24 font-w600 text-white">Product / Services</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
+															<p class="text-white">Members will be allowed to advertise services and product. Contact Ermine Support Team (support@ermine.ng)</p>	
 														</div>
 													</div>
 												</div>
@@ -204,7 +209,7 @@
 														<img src="{% static 'pages/images/gallery/hotel2.jpg' %}" alt="">
 														<div class="img-content">
 															<h4 class="fs-24 font-w500 text-white">Hot Sales</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
+															<p class="text-white">Patronize Us</p>	
 														</div>
 													</div>
 												</div>
@@ -213,7 +218,7 @@
 														<img src="{% static 'pages/images/gallery/hotel3.jpg' %}" alt="">
 														<div class="img-content">
 															<h4 class="fs-24 font-w500 text-white">Hot Services</h4>
-															<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci</p>	
+															<p class="text-white">Patronize us</p>	
 														</div>
 													</div>
 												</div>
@@ -225,7 +230,7 @@
 							<div class="col-xl-12">
 								<div class="card">
 									<div class="card-header border-0">
-										<h4 class="fs-20">Transaction History</h4>
+										<h4 class="fs-20">Latest Highest Transaction Worth</h4>
 										<div class="newest ms-3">
 											<select class="default-select">
 												<option>Newest</option>
@@ -237,7 +242,7 @@
 										<div class="row align-items-center">
 											<div class="col-xl-4 col-sm-7">
 												<div class="purchase-history d-flex align-items-center">
-													<img src="images/gallery/hotel1.jpg" alt="">
+													<img src="{% static 'pages/images/gallery/hotel1.jpg' %}" alt="">
 													<div class="ms-3">
 														<!-- <h4 class="guest-text font-w500">Deluxe A-91234</h4> -->
 														<!-- <span class="fs-14 d-block mb-2 text-secondary">#000123456</span>
@@ -261,8 +266,8 @@
 											</div>
 											<div class="col-xl-2 col-sm-4 col-6">
 												<div class="mt-sm-0 mt-3">
-													<span class="d-block mb-2 text-black">Price</span>	
-													<span class="font-w500 fs-20 text-black">N20,000</span>
+													<span class="d-block mb-2 text-black">Trans Worth</span>	
+													<span class="font-w500 fs-20 text-black">N2,000,000:00</span>
 												</div>
 											</div>
 											<div class="col-xl-2 col-sm-4 col-6">
@@ -287,11 +292,9 @@
 										<div class="row align-items-center mt-5">
 											<div class="col-xl-4 col-sm-7">
 												<div class="purchase-history d-flex align-items-center">
-													<img src="images/gallery/hotel2.jpg" alt="">
+													<img src="{% static 'pages/images/gallery/hotel2.jpg' %}" alt="">
 													<div class="ms-3">
-														<!-- <h4 class="guest-text font-w500">Deluxe A-91234</h4>
-														<span class="fs-14 d-block mb-2 text-secondary">#000123456</span>
-														<span class="fs-16 text-nowrap">Oct 30th 2020 09:21 AM</span> -->
+														
 													</div>
 												</div>
 											</div>
@@ -305,14 +308,14 @@
 											<div class="col-xl-2 col-sm-4 col-6">
 												<div class="mt-sm-0 mt-2">
 													<span class="d-block">Trans. Date</span>
-													<span class="guest-text font-w500">Mar 2th, 2025</span>
+													<span class="guest-text font-w500">Mar 28th, 2025</span>
 													<span class="fs-14 d-block">9.46 PM</span>
 												</div>
 											</div>
 											<div class="col-xl-2 col-sm-4 col-6">
 												<div class="mt-sm-0 mt-3">
-													<span class="d-block mb-2 text-black">Amount</span>	
-													<span class="font-w500 fs-20 text-black">N14,500</span>
+													<span class="d-block mb-2 text-black">Trans. Worth</span>	
+													<span class="font-w500 fs-20 text-black">N4,000,000:00</span>
 												</div>
 											</div>
 											<div class="col-xl-2 col-sm-4 col-6">

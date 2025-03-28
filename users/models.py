@@ -107,7 +107,7 @@ class Profile(models.Model):
         
     ]
  
-    state = models.CharField(max_length=15, choices=state, default=select)
+    state = models.CharField(max_length=15, choices=state, default=select, help_text='Your Permanent State Of Residence')
     address = models.CharField(max_length=20, blank=True, null=True)
     bio = models.TextField(max_length=150, blank=True)
 
@@ -127,7 +127,7 @@ class Profile(models.Model):
 
     
     nin_verified = models.BooleanField(default=False, blank=True)
-    current_state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True)
+    current_state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True, help_text='State where you want to initiate transaction')
 
     select = 'Select'
     sales = 'Sales'

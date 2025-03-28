@@ -104,10 +104,8 @@
                                             <tr>
                                                 <th>S/No.</th>
                                                 <th>Trans. ID</th>
-                                                <th>M. Detail</th>
-                                                
-                                                <th>Total Amount </th>
-												<th>M. Commission </th>                                                
+                                                <th>M. Detail</th>                                                
+                                                <th>Total Amount </th>											                                             
                                                 <th>Ermine Earn</th>
                                                 <th>Date</th>
 												<th>Status </th>
@@ -120,11 +118,14 @@
                                                 <td>{{forloop.counter}}</td>
                                                 <td>{{ income.transact_id }}</td>
                                                 <td>{{ income.created_by.username }} <br/>{{ income.created_by.first_name }} {{ income.created_by.last_name }}</td>                                              
-                                                <td>{{ income.max_amount }}</td>
-                                                <td>{{ income.merchant_commission }}</td>                                                                                          
+                                                <td>{{ income.max_amount }}</td>                                                                                                                                       
                                                 <td><strong>{{income.company_charges}}</strong></td>
-                                                <td>{{income.trans_date | date:"d/m/Y"}}</td>  
+                                                <td>{{income.trans_date | date:"d/m/Y"}}</td>
+                                                {% if income.payment_confirmed%}  
                                                 <td><span class="badge light badge-success">Paid</span></td>
+                                                {% else %}
+                                                <td><span class="badge light badge-danger">UnPaid</span></td>
+                                                {% endif %}
                                                 
                                             </tr>
                                             {% endfor %}

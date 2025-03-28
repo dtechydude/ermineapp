@@ -6,6 +6,7 @@ from merchant.models import Merchant
 from subscriber.models import SubscriberList
 from users.models import Profile
 from transaction.models import MerchantSetTransact, SubscriberTransact
+from business.models import Transact, Comment
 from agent.models import AgentList
 from django.urls import reverse_lazy
 from django.views.generic import(TemplateView, DetailView,
@@ -22,14 +23,16 @@ def dashboard(request):
     users_num = User.objects.count()
     merchant = Merchant.objects.all()
     merchant = SubscriberList.objects.all()
-    merchant_num = Merchant.objects.count()
-    subscriber_num = SubscriberList.objects.count()
+    # merchant_num = Merchant.objects.count()
+    merchant_num = Profile.objects.filter(user_role='merchant').count()
+    subscriber_num = Profile.objects.filter(user_role='subscriber').count()
+    # subscriber_num = SubscriberList.objects.count()
     agent_num = AgentList.objects.count()
     inactive_user = User.objects.filter(is_active=False).count()
-    total_trans = MerchantSetTransact.objects.count()
+    total_trans = Transact.objects.count()
     suspended_user = Profile.objects.filter(user_status='suspended').count()
-    my_trans = MerchantSetTransact.objects.filter(merchant=User.objects.get(username=request.user)).count()
-    sub_trans = SubscriberTransact.objects.filter(subscriber=User.objects.get(username=request.user)).count()
+    my_trans = Transact.objects.filter(created_by=User.objects.get(username=request.user)).count()
+    sub_trans = Comment.objects.filter(author=User.objects.get(username=request.user)).count()
 
     context = {
         'merchant_num': merchant_num,
