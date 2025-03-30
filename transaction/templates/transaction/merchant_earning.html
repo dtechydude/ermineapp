@@ -116,14 +116,16 @@
                                     <table id="example4" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Transaction No</th>
+                                                <th>S/No</th>
+                                                <th>Trans No</th>
                                                 <th>Merchant</th>                                               
-                                                <th>Amount </th>
-												<th>Method </th>                                                
+                                                <th>Amount </th>												                                               
                                                 <th>Commission</th>
                                                 <th>Charges</th>
+                                                <th style="color:green;">Earning </th> 
                                                 <th>Date</th>
                                                 <th>Status</th>
+                                                
 											
                                                 
                                             </tr>
@@ -131,12 +133,13 @@
                                         <tbody>
                                             {% for earn in merchantearn %}
                                             <tr>
+                                                <td>{{ forloop.counter }}</td>
                                                 <td>{{ earn.transact_id }}</td>
                                                 <td>{{ earn.created_by }}</td>                                                
-                                                <td>{{ earn.max_amount }}</td>
-                                                <td>{{ earn.prefered_method }}</td>                                                                                          
-                                                <td><strong>{{ earn.merchant_commission }}</strong></td>
-                                                <td><strong>{{ earn.company_charges }}</strong></td>
+                                                <td>{{ earn.max_amount }}</td>                                                                                                                                      
+                                                <td>{{ earn.merchant_commission }}</td>
+                                                <td>{{ earn.company_charges }}</td>
+                                                <td style="color:green;"><strong>{{ earn.merchant_takehome }}</strong></td>   
                                                 <td>{{earn.trans_date | date:"d/m/Y"}}</td>  
                                                 {% if earn.trans_status %}
                                                 <td>Paid</span></td>  

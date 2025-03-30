@@ -142,11 +142,11 @@ class Profile(models.Model):
     ]
     business_type = models.CharField(max_length=25, choices=business_type, default=select)
     business_name = models.CharField(max_length=20, blank=True)
-    business_reg_no = models.CharField(max_length=20, blank=True)
-    business_address = models.CharField(max_length=20, blank=True)
+    business_reg_no = models.CharField(max_length=12, blank=True)
+    business_address = models.CharField(max_length=30, blank=True)
     bank_name = models.CharField(max_length=20, blank=True)
-    acc_name = models.CharField(max_length=20, blank=True)
-    acc_no = models.CharField(max_length=20, blank=True)
+    acc_name = models.CharField(max_length=25, blank=True)
+    acc_no = models.CharField(max_length=12, blank=True)
 
     inactive = 'Inactive'
     active = 'Active'

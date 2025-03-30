@@ -153,6 +153,10 @@ class Transact(models.Model):
     @property
     def company_charges(self):
        return self.merchant_commission * 0.3
+    
+    @property
+    def merchant_takehome(self):
+       return self.merchant_commission - self.company_charges
             
 
 # comment module

@@ -76,9 +76,12 @@ def user_logout(request):
 def members_list(request):
     allusers = Profile.objects.all().order_by('-id')
     subscriber = Profile.objects.filter(user_role='subscriber').order_by('-id')
+    merchant = Profile.objects.filter(user_role='merchant').order_by('-id')
+
     context = {
         'allusers':allusers,
         'subscriber':subscriber,
+        'merchant':merchant,
     }
     return render(request, 'users/members_list.html', context)
 

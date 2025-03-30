@@ -90,15 +90,15 @@
 								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Members</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Members</a>
+								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Merchants</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Members</a>
+								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Subscribers</a>
 							</li>
 						</ul>
 					</div>
 					<div class="d-flex align-items-center mb-3"> 
-						<a href="javascript:void(0);" class="btn btn-secondary">+ New Members</a>
+						<a href="{% url 'users:register' %}" class="btn btn-secondary">+ New Members</a>
 						<div class="newest ms-3">
 							<select class="default-select">
 								<option>Newest</option>
@@ -122,8 +122,8 @@
 															  <input class="form-check-input" type="checkbox" value="" id="checkAll">
 															</div>
 														</th>
-														<th>Name & ID</th>
-														<th>State & Address</th>
+														<th>Image, Name & ID</th>
+														<th>Reg. Date</th>
 														<th>User Role</th>
 														<th>Phone No.</th>
 														<th>Status</th>
@@ -143,14 +143,13 @@
 															<div class="concierge-list-bx d-flex align-items-center">
 																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">{{p.user}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">{{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</a></strong></span>
-																	<span class=" fs-14  text-nowrap">{{ p.user.profile.created | date:"d/m/Y" }}</span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">USERNAME: <strong>{{ p.user.username }}</a></strong></span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">FULL NAME: {{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</a></strong></span>
 																</div>
 															</div>
 														</td>
-														<td class="job-desk3">
-															<p class="mb-0"><b>State:</b> {{ p.state }} <br />{{ p.address }} <br />{{ p.user.email }}</p>
+														<td>
+															<p class="mb-0">{{ p.user.profile.created | date:"d/m/Y" }}</p>
 														</td>
 														<td>
 															<div>
@@ -220,10 +219,8 @@
 													</tr>
 												</thead>
 												<tbody>
-												
-													{% for sub in subscriber %}
+													{% for p in merchant %}
 																									
-													
 													<tr>
 														<td>
 															<div class="form-check style-1">
@@ -232,31 +229,41 @@
 														</td>
 														<td>
 															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="images/avatar/pic1.jpg" alt="">
+																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">{{ sub.user }}</a></h5>
-																	<span class=" text-secondary fs-14 d-block">#12341225</span>
-																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">USERNAME: <strong>{{ p.user.username }}</a></strong></span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">FULL NAME: {{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</a></strong></span>
 																</div>
 															</div>
 														</td>
-														<td class="job-desk3">
-															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
+														<td>
+															<p class="mb-0">{{ p.user.profile.created | date:"d/m/Y" }}</p>
 														</td>
 														<td>
 															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
+																<h5 class="text-nowrap">{{ p.user_role }}</h5>
+																{% if p.nin_verified %}
+																<span class="tex-secondary text-nowrap" style="color: green;">Verified</span>
+																{% else %}
+																<span class="tex-secondary text-nowrap" style="color: red;">Not Verified Yet</span>
+																{% endif %}
 															</div>
 														</td>
 														<td>
 															<div>
 																
-																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>{{ p.phone }}</span>
 															</div>
 														</td>
 														<td>
-															<span  class="font-w600 text-success">ACTIVE</span>
+															{% if p.user.is_staff and p.user.is_active %}
+															<span  class="font-w600 text-success">STAFF</span>															
+															{% elif p.user.is_active %}
+															<span  class="font-w600 text-warning">ACTIVE</span>
+															{% else %}
+															<span  class="font-w600 text-danger">INACTIVE</span>
+															
+															{% endif %}
 														</td>
 														<td>
 															<div class="dropdown dropend">
@@ -268,15 +275,14 @@
 																	</svg>
 																</a>
 																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																	<a class="dropdown-item" href="https://fizcos.com">Edit</a>
+																	<a class="dropdown-item" href="https://schoolly.com.ng">Delete</a>
 																</div>
 															</div>
 														</td>
 													</tr>
 											
-													{% endfor %}												
-													
+													{% endfor %}
 													
 												</tbody>
 											</table>
@@ -301,6 +307,8 @@
 													</tr>
 												</thead>
 												<tbody>
+													{% for p in subscriber %}
+																																						
 													<tr>
 														<td>
 															<div class="form-check style-1">
@@ -309,31 +317,41 @@
 														</td>
 														<td>
 															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="{% static 'pages/images/avatar/pic1.jpg'%}" alt="">
+																<img class="me-3 rounded" src="{{ p.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Hamzat Idris</a></h5>
-																	<span class=" text-secondary fs-14 d-block">#12341225</span>
-																	<span class=" fs-14  text-nowrap">Joined on Jan 2th 2025</span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">USERNAME: <strong>{{ p.user.username }}</a></strong></span>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' p.id %}">FULL NAME: {{ p.user.first_name }} - {{ p.user.profile.middle_name }} - <strong>{{ p.user.last_name }}</a></strong></span>
 																</div>
 															</div>
 														</td>
-														<td class="job-desk3">
-															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
+														<td>
+															<p class="mb-0">{{ p.user.profile.created | date:"d/m/Y" }} </p>
 														</td>
 														<td>
 															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
+																<h5 class="text-nowrap">{{ p.user_role }}</h5>
+																{% if p.nin_verified %}
+																<span class="tex-secondary text-nowrap" style="color: green;">Verified</span>
+																{% else %}
+																<span class="tex-secondary text-nowrap" style="color: red;">Not Verified Yet</span>
+																{% endif %}
 															</div>
 														</td>
 														<td>
 															<div>
 																
-																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>{{ p.phone }}</span>
 															</div>
 														</td>
 														<td>
-															<span  class="font-w600 text-success">ACTIVE</span>
+															{% if p.user.is_staff and p.user.is_active %}
+															<span  class="font-w600 text-success">STAFF</span>															
+															{% elif p.user.is_active %}
+															<span  class="font-w600 text-warning">ACTIVE</span>
+															{% else %}
+															<span  class="font-w600 text-danger">INACTIVE</span>
+															
+															{% endif %}
 														</td>
 														<td>
 															<div class="dropdown dropend">
@@ -345,13 +363,13 @@
 																	</svg>
 																</a>
 																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+																	<a class="dropdown-item" href="https://fizcos.com">Edit</a>
+																	<a class="dropdown-item" href="https://schoolly.com.ng">Delete</a>
 																</div>
 															</div>
 														</td>
-													</tr>
-													
+													</tr>												
+													{% endfor %}
 												</tbody>
 											</table>
 										</div>		
