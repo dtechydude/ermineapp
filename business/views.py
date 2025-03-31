@@ -206,7 +206,3 @@ class TransactDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.created_by:
             return True
         return False
-
-
-
-   

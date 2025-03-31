@@ -14,7 +14,7 @@ from django.views.generic import(TemplateView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import(ProfileUpdateForm, UserUpdateForm, KYCUpdateForm,
                    BusinessUpdateForm, UserTwoUpdateForm, BankUpdateForm,
-                   RoleUpdateForm, BioUpdateForm, AddressUpdateForm, PhoneUpdateForm)
+                   RoleUpdateForm, BioUpdateForm, AddressUpdateForm, PhoneUpdateForm, CurrentStateUpdateForm)
 
 
 
@@ -130,7 +130,7 @@ def profileupdate(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your profile has been updated successfully')
+            messages.success(request, f'Your PROFILE has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -153,7 +153,7 @@ def business_profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your business information has been updated successfully')
+            messages.success(request, f'Your BUSINESS INFORMATION has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserTwoUpdateForm(instance=request.user)
@@ -175,7 +175,7 @@ def bankprofile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your Bank Profile has been updated successfully')
+            messages.success(request, f'Your BANK DETAILS has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserTwoUpdateForm(instance=request.user)
@@ -240,7 +240,7 @@ def bioprofile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your ROLE switch has been updated successfully')
+            messages.success(request, f'Your BIO switch has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserTwoUpdateForm(instance=request.user)
@@ -262,7 +262,7 @@ def phoneprofile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your ROLE switch has been updated successfully')
+            messages.success(request, f'Your PHONE has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserTwoUpdateForm(instance=request.user)
@@ -284,7 +284,7 @@ def addressprofile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your ROLE switch has been updated successfully')
+            messages.success(request, f'Your ADDRESS has been updated successfully')
             return redirect('pages:dashboard')
     else:
         u_form = UserTwoUpdateForm(instance=request.user)
@@ -296,3 +296,26 @@ def addressprofile(request):
     }
 
     return render(request, 'users/address_update.html', context)
+
+
+# Update Current State For Transactions
+@login_required
+def currentstateprofile(request):
+    if request.method == 'POST':
+        u_form = UserTwoUpdateForm(request.POST, instance=request.user)
+        p_form = CurrentStateUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your CURRENT STATE has been updated successfully')
+            return redirect('pages:dashboard')
+    else:
+        u_form = UserTwoUpdateForm(instance=request.user)
+        p_form = CurrentStateUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+
+    return render(request, 'users/current_state_update.html', context)

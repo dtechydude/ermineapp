@@ -103,5 +103,12 @@ class PhoneUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [ 'phone', 'altenate_phone' ]
+
+# Current State update       
+class CurrentStateUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [ 'current_state',]
+       
        
        

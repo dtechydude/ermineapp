@@ -16,7 +16,8 @@ from django.views.generic import DetailView, UpdateView, DeleteView, ListView, F
 
 #Displays available merchants to subscribers
 def available_merchant(request):
-    available = Transact.objects.all()
+    available = Transact.objects.filter(payment_confirmed=True).order_by('-trans_date')
+
     context ={
         'available':available
     }

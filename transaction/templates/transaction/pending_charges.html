@@ -8,7 +8,7 @@
 	
 	<!-- PAGE TITLE HERE -->
     {% block title %}
-	<title>Select Transaction </title>
+	<title>Pending Charges Payment </title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
@@ -97,56 +97,47 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Select Transaction</h4>
-                                <span><strong>Note! </strong>Ensure you have set your <a href="{% url 'users:current-state-update'%}"><strong><u>current state</u></strong> </a>to where you intend to do the transaction</span>
+                                <h4 class="card-title" style="color: red;">Transactions Pending Charges Payment</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                                <th>S/No.</th>
                                                 <th>Trans-ID</th>
                                                 <th>Merchant</th>
                                                 <th>State</th>
-                                                <th>Available</th>
-                                                <th>Min. Trans</th>
-                                                <th>Status</th>
-                                                <th>Remote</th>                                                
+                                                <th>Max Amount</th> 
+                                                <th style="color: red;">Charges Due</th>                                                                                                                                        
+                                                <th>Date</th>
+                                             
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for merch in selectmerchant %}
-                                            <tr>                                               
-                                                <td><a href="{% url 'business:my-state' %}">{{ merch.transact_id}}</a></td>
-                                                <td>{{ merch.created_by.username }}</td>
-                                                <td><a href="{% url 'business:my-state' %}">{{ merch.state }}</a></td>
-                                                <td>{{ merch.max_amount}}</td>
-                                                <td>{{ merch.min_amount }}</td>
-                                                {% if merch.trans_status == True %}
-                                                <td style="color: green;">Active</td>
-                                                {% else %}
-                                                <td style="color: red;">Inactive</td>
-                                                {% endif%}
-                                                {% if merch.remote_option == True %}
-                                                <td>YES</td>
-                                                {% else %}
-                                                <td>NO</td>
-                                                {% endif %}                                               
-                                                                                                 
+                                            {% for p in pendingcharges %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{ p.transact_id}}</td>                                                
+                                                <td>{{ p.created_by.username }}</td>
+                                                <td>{{ p.state}}</td>                                               
+                                                <td>N{{ p.max_amount }}</td>  
+                                                <td style="color: red;">N{{ p.company_charges }}</td>                                               
+                                                <td>{{ p.trans_date | date:"d/m/Y" }}</td>                                               
+                                                
                                             </tr>
                                             {% endfor %}
                                      
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>S/No.</th>
                                                 <th>Trans-ID</th>
                                                 <th>Merchant</th>
-                                                <th>Location</th>
-                                                <th>Available</th>
-                                                <th>Min. Trans</th>
-                                                <th>Status</th>
-                                                <th>Remote</th>
-                                                
+                                                <th>State</th>
+                                                <th>Max Amount</th> 
+                                                <th style="color: red;">Charges Due</th>                                                                                                                                        
+                                                <th>Date</th>
                                             </tr>
                                         </tfoot>
                                     </table>

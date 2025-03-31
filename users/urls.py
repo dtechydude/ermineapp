@@ -22,6 +22,7 @@ urlpatterns = [
      path('bio_update/', users_views.bioprofile, name="bio-update"),
      path('address_update/', users_views.addressprofile, name="address-update"),
      path('phone_update/', users_views.phoneprofile, name="phone-update"),
+     path('current_state_update/', users_views.currentstateprofile, name="current-state-update"),
      path('<int:id>/', UserDetailView.as_view(), name="profile-detail"),
      # path('<int:id>/update/', UserUpdateView.as_view(), name="profile-update"),
      # path('<int:id>/delete/', UserDeleteView.as_view(), name="profile-delete"),

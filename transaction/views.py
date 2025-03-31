@@ -249,3 +249,23 @@ def subscriber_self_transaction(request):
     }
 
     return render(request, 'transaction/subscriber_self_transaction.html', context)
+
+
+
+@login_required
+def pending_charges(request):
+    # pendingcharges = Transact.objects.all().order_by('-trans_date')
+    pendingcharges = Transact.objects.filter(payment_confirmed=False).order_by('-trans_date')
+    context = {
+        'pendingcharges':pendingcharges
+    }
+    return render(request, 'transaction/pending_charges.html', context)
+
+
+@login_required
+def successful_transactions(request):
+    successful = Transact.objects.filter(trans_status=True).order_by('-trans_date')
+    context = {
+        'successful':successful
+    }
+    return render(request, 'transaction/successful_transaction.html', context)

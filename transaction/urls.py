@@ -16,6 +16,8 @@ urlpatterns = [
     path('select_merchant/', transaction_views.select_merchant, name='select-merchant'),
     path('my_transaction/', transaction_views.view_self_transaction, name='my-transaction'),
     path('sub_self_transact/', transaction_views.subscriber_self_transaction, name='subscriber-self-transact'),
+    path('pending-charges/', transaction_views.pending_charges, name='pending-charges'),
+    path('successful-transaction/', transaction_views.successful_transactions, name='successful-transaction'),
 
      # Results Detail Views
     path('transaction_list/', MerchantTransactListView.as_view(), name='transaction-list'), 

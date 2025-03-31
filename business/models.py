@@ -78,8 +78,8 @@ def save_transact_files(instance, filename):
 class Transact(models.Model):
     transact_id = models.CharField(max_length=8, blank=True, help_text='This is automatically generated')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, help_text='Select the State where you want to initiate transaction')
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts', help_text='Select same as state')
+    state = models.ForeignKey(State, on_delete=models.CASCADE, help_text='Select the STATE where you want to initiate transaction')
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='transacts', help_text='Selection must be prefixed by the STATE name selected above')
     name = models.CharField(max_length=200, default='do nothing with this input')
     trans_date = models.DateTimeField(default=timezone.now)
     max_amount = models.IntegerField(help_text='Enter Max Amount', default= 0)

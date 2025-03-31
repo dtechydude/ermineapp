@@ -631,8 +631,8 @@
 						<ul aria-expanded="false">
 							{% if user.is_superuser or user.is_staff%}
 							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>							
-							<li><a href="./chart-morris.html">Failed Transactions</a></li>
-							<li><a href="./chart-chartjs.html">Successful Transactions</a></li>	
+							<li><a href="{% url 'transaction:pending-charges' %}">Pending Charges</a></li>
+							<li><a href="{% url 'transaction:successful-transaction' %}">Successful Transactions</a></li>	
 							{% endif %}						
 							<li><a href="{% url 'merchant:available-merchant' %}">Available Merchant</a></li>
 							{% if user.profile.user_role == 'merchant'%}

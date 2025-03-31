@@ -31,7 +31,6 @@
 								<!-- <a href="email-compose.html" class="btn btn-primary btn-block">Compose</a> -->
 								<p>Use the buttons below to Update or Delete or End transaction</p>
 								<p><a href="{% url 'business:transact_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-info">Update Transaction</a><br></p>
-								<p><a href="{% url 'business:charges_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-warning">Pay Trans. Charges</a></p>
 								<p><a href="{% url 'business:transact_complete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Complete Transaction</a></p>
 								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-danger">Delete Transaction</a></p>
 
@@ -134,7 +133,16 @@
 												</form>
 												{% endfor %}
 												{% else %}
-												<h4 style="color: red;">Transaction Locked !</h4>
+												{% if user.profile.user_role == 'merchant' %}
+												<h4 style="color: red;">Transaction Locked ! <span style="font-size: 12px; color: black;">You Must Pay <span style="color:brown"> ( N{{ transacts.company_charges}} )</span> App-Charges To Unlock</span></h4>
+												<p><a href="{% url 'business:charges_update' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-secondary">Pay Trans. Charges</a></p>
+												
+												{% elif user.profile.user_role == 'subscriber' %}
+												<h4 style="color: red;">Transaction Locked ! <span style="font-size: 14px; color: green;">Contact Merchant</span></h4>
+												{% else %}
+												Contact us
+												{% endif %}
+
 												{% endif %}
 												</div>
 												</div>

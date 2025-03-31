@@ -112,10 +112,11 @@
                                                     <tr>
                                                         <th>S/No.</th>
                                                         <th>Trans. ID</th>
-                                                        <th>Type</th>                                                        
+                                                        <th>State</th>                                                        
                                                         <th style="color: red;">Max Amount </th>
                                                         <th>Min. Amount </th>                                                
                                                         <th style="color: red;">App-Charges</th>
+                                                        <th>Type</th>
                                                         <th>Date</th>
                                                         <th>Action </th>
                                                         
@@ -127,7 +128,7 @@
                                                  {% for trans in subjects.transacts.all %} 
                                                 <td>{{forloop.counter}}</td>
                                                 <td>{{trans.transact_id}}</td>
-                                                <td>{{trans.subject }}</td>
+                                                <td>{{trans.state }}</td>
                                                 <td style="color: red;">{{trans.max_amount }}</td>
                                                 <td>{{trans.min_amount }}</td>
 
@@ -139,8 +140,13 @@
                                                 {% endif %} 
                                                 {% else %} 
                                                 <td style="color: red;">N{{trans.merchant_commission }}</td> 
-                                                {% endif %}                                                                                         
-                                                <td>{{trans.trans_date | date:"d/m/Y"}}</td>  
+                                                {% endif %}  
+                                                {% if trans.remote_option %}  
+                                                <td>REMOTE</td> 
+                                                {% else %}                                                                                      
+                                                <td><strong>NORMAL</strong></td> 
+                                                {% endif%} 
+                                                <td>{{trans.trans_date | date:"d/m/Y"}}</td> 
                                                 <td ><button type="button" class="btn btn-success"><a href="{% url 'business:transact_detail' slug=trans.slug subject=subjects.slug state=trans.state.slug %}">View Trans.</button> </a></td>
                                                 </tr>
                                                  {% endfor %}
