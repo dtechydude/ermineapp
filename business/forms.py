@@ -29,7 +29,7 @@ class CommentForm(forms.ModelForm):
         labels = {"body":"Comment:"}
 
         widgets = {
-            'body': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Enter Your Comment"}),
+            'body': forms.Textarea(attrs={'class':'form-control', 'rows':4, 'cols':70, 'placeholder':"Subscriber: Enter Your Comment regarding this transaction"}),
         }
 
 
@@ -39,6 +39,6 @@ class ReplyForm(forms.ModelForm):
         fields = ('reply_body',)
 
         widgets = {
-            'reply_body': forms.Textarea(attrs={'class':'form-control', 'rows':2, 'cols':10, 'placeholder':"Enter Your Reply"}),
+            'reply_body': forms.Textarea(attrs={'class':'form-control', 'rows':2, 'cols':10, 'placeholder':"Subscriber/Merchant: Enter Your Reply to the above set transactions"}),
         }
 

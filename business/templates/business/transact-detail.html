@@ -14,8 +14,8 @@
 		
 		<div class="row page-titles">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item active"><a href="javascript:void(0)">{{ transacts.subject }}</a></li>
-				<li class="breadcrumb-item"><a href="javascript:void(0)">Trans ID : <strong> {{ transacts.transact_id }} </strong><span> - State : <strong>{{ transacts.state }}</strong></span></a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">LOCATION: <span style="color: brown;">{{ transacts.state }} State</span></a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Trans ID : <strong style="color: brown;"> {{ transacts.transact_id }} </strong></span></a></li>
 			</ol>
 		</div>
 		
@@ -35,16 +35,8 @@
 								<p><a href="{% url 'business:transact_delete' state=transacts.state.slug subject=transacts.subject.slug slug=transacts.slug %}" class="btn btn-danger">Delete Transaction</a></p>
 
 								{% else %}
-								<p><strong>Steps & Tips:</strong></p>
-								<p> - Respond to the transaction, <br>
-									- Indicating the amount you need,<br>
-									- Contact the merchant<br>
-									- Connect with th merchant<br>
-									- Locate the merchant<br>
-									- Use payment method
-
-								</p>
-
+								<p>Subscribers should initiate transaction by completing the Comment Form provided under the transaction detail:</p>
+								
 								{% endif %}
 							
 							</div>
@@ -57,70 +49,99 @@
 											<div class="media pt-3 d-sm-flex d-block justify-content-between">
 												<div class="clearfix mb-3 d-flex">
 													<div class="media-body me-2">
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created By Merchant :  </span> <a href="">{{ transacts.created_by}} </a></h5>
-														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ transacts.created_at}}</h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Transaction Created By Merchant :  </span> "{{ transacts.created_by}}" </h5>
+														<h5 class="text-primary mb-0 mt-1"><span style="color:black">Created on: </span> {{ transacts.created_at}} <span style="color: black;">location:</span>  {{transacts.state}} STATE"</h5>
 														
 													</div>
 												</div>
 												<div class="clearfix mb-3">
 													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-reply"></i> </a>
 													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fas fa-arrow-right"></i> </a>
-													<a href="javascript:void()" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-trash"></i></a>
 												</div>
 											</div>
-											<hr>
-											<div class="media mb-2 mt-3">
-												
-												<div class="media-body">
-													<h4 class="mb-4">Transaction Details:</h4>																								
 
-											<div>																													
-											</div>
-											
-											<div class="read-content-body">
-												
-												<p class="mb-2"><strong>Transaction's Highlights:</strong></p>
-												<p class="mb-2">Maximum Amount Available: <strong> N{{ transacts.max_amount}}</strong></p>
-												<p class="mb-2">Minimum Withdrawable Amount:<strong> N{{ transacts.min_amount}}</strong> </p>
-												<p class="mb-2">Prefered Payment Method: <strong>{{ transacts.prefered_method}}</strong> </p>
-												<p class="mb-2">Minimum Withdrawable Amount: <strong>{{ transacts.min_amount}}</strong> </p>
-												
-												<pclass="mb-2">Merchant Remark : <strong>{{ transacts.remark | safe }}</strong>	</p>									
-																																				
-											</div>
+											<div class="media mb-0 mt-3">												
+												<div class="media-body">													
+													<div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height260">
+														<ul class="timeline">
+															<li>
+																<div class="timeline-badge warning"></div>
+																<a class="timeline-panel text-muted" href="#">
+																	<h6>
+																	<span style="font-size: 20px; color: red;">Transaction Details:</span>
+																	<span>TRANSACTION ID: <strong>{{ transacts.transact_id}}</strong></span>
+																	<span class="mb-2">Total Available: <strong style="font-size: 16px;"> N{{ transacts.max_amount}}</strong>
+																	<span class="mb-2">Minimum Withdrawable:<strong style="font-size: 16px;"> N{{ transacts.min_amount}}</strong> </span>
+																	<span class="mb-2">Payment Method: <strong style="font-size: 12px;">{{ transacts.prefered_method}}</strong> </span>
+																	<span class="mb-2">Merchant Remark : <strong style="font-size: 12px;">{{ transacts.remark | safe }}</strong>	</span>									
+																</h6>
+																</a>																
+															</li>
+															</ul>
+															</div>														
+
+											<!-- <div>																													
+											</div>								 -->
+																					
 											<hr>
-											{% if transacts.trans_status %}
+											{% if transacts.payment_confirmed %}
 											<div class="mb-3 pt-3">												
-													<h6>For Subscriber Amount/Comment Area</h6>
+													<h5 style="color:red;">For Subscribers Only:</h5>
 													<div class="">														
-														<h6>Enter the Amount You need a comment to connect with the merchant:</h6>
+														<h6>Enter the Amount You need and comment to connect with the merchant:</h6>
 												<form method="post">
 												<div class="">
 												{% csrf_token %}
 												{{form|crispy}}
 												<input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
 												</div>
-												</form> <h1></h1>
+												</form> <hr>
+												
 												
 												{% for comment in transacts.comments.all %}
-												<h5> - {{comment.author}} :<small> a {{comment.author.profile.user_role}} needs cash - <i>posted on: {{comment.date_added}}</i></small></h5>
-												<p>
-													<span> - Cash Sum Needed: <strong>N{{comment.required_amount}}</strong></span><br>
-													<span> - Charges Due: <strong>N{{comment.charges_on_transaction}} - </strong>
-															Subscriber will pay total sum Of: <strong>N{{comment.total_payable}}</strong> to the merchant</span><br>
-													<span> - Subscriber's Remark: <strong>{{comment.body}}</strong></span>
-												</p>
-												{% for reply in comment.replies.all %}																					
-												<h5> - {{reply.author}}<small><i>- Posted a reply on: {{reply.date_added}}</i></small></h5>
+												<h4>Subscriber's Initiated Transaction</h4>												
+												<div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height170">
+													<ul class="timeline">
+														<li>
+															<div class="timeline-badge success"></div>
+															<a class="timeline-panel text-muted" href="#">
+																<span>{{comment.date_added}}</span>
+																<h6 class="mb-0"><span style="font-size: 16px;"></span>"{{comment.author}}" a {{comment.author.profile.user_role}} needs: <strong class="text-primary">N{{comment.required_amount}}</strong> 
+																<span>Charges:<strong class="text-primary" style="font-size: 14px;"> N{{ comment.charges_on_transaction}}</strong> -Total Payable: <strong class="text-primary" style="font-size: 14px;">N{{comment.total_payable}}</strong></span>
+																<span><strong>Subscriber Message:</strong> <i>{{ comment.body}}</i></span>
+																</h6>																	
+															</a>
+															
+														</li>
+														</ul>
+														</div>
+
+
+
+												{% for reply in comment.replies.all %}
+												<h4 style="color:green">Transaction Response</h4>																					
+												<!-- <p style="font-size: 14px;"> - {{reply.author}}<small>- Posted a reply on: {{reply.date_added}}</small></p>
 												
-                                                    <div class="subject">{{reply.reply_body}} </div>
+                                                    <div class="subject" style="color:brown">{{reply.reply_body}} </div> -->
+
+													<div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll height170">
+														<ul class="timeline">
+															<li>
+																<div class="timeline-badge primary"></div>
+																<a class="timeline-panel text-muted" href="#">																	
+																	<h6 class="mb-0"><span style="font-size: 16px;"><strong class="text-primary">"{{reply.author}}"</strong> a {{ reply.author.profile.user_role }}</span> Posted a reply on: <strong class="text-primary">{{reply.date_added}}</strong></h6>
+																	<span style="font-size: 14px; color: black;"><strong>- Detail:</strong> {{reply.reply_body}}</span>
+																</a>
+																
+															</li>
+															</ul>
+															</div>
                                                     </a>
 																																		
 												{% endfor %}
 												
 												
-												<!-- form to post reply -->
-												
+												<!-- form to post reply -->												
 												
 												<form method="post">
 												

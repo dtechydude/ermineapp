@@ -632,16 +632,12 @@
 							{% if user.is_superuser or user.is_staff%}
 							<li><a href="{% url 'transaction:transaction-history' %}">All Transactions</a></li>							
 							<li><a href="{% url 'transaction:pending-charges' %}">Pending Charges</a></li>
-							<li><a href="{% url 'transaction:successful-transaction' %}">Successful Transactions</a></li>	
+							<li><a href="{% url 'transaction:successful-transaction' %}">Successful Transactions</a></li>
+							<li><a href="{% url 'business:state_list' %}">Set New Transaction</a></li>	
+							<li><a href="{% url 'transaction:my-transaction' %}">My Set Transactions</a></li>
 							{% endif %}						
 							<li><a href="{% url 'merchant:available-merchant' %}">Available Merchant</a></li>
-							{% if user.profile.user_role == 'merchant'%}
-							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li>
-							<li><a href="{% url 'transaction:my-transaction' %}">My Set Transactions</a></li>
-							{% endif %}
-							{% if user.profile.user_role == 'subscriber' %}
-							<li><a href="{% url 'transaction:subscriber-self-transact' %}">My Transactions</a></li>
-							{% endif %}
+														
 						</ul>
 					</li>
 					{% if user.is_superuser or user.is_staff or user.profile.user_role == 'subscriber' %}
@@ -651,6 +647,8 @@
 						</a>
 						<ul aria-expanded="false">
 							<li><a href="{% url 'transaction:select-merchant' %}">Start Transaction</a></li>
+							<li><a href="{% url 'transaction:subscriber-self-transact' %}">My Transaction History</a></li>
+							<li><a href="{% url 'transaction:my-transaction' %}">My Ongoing Transactions</a></li>
 							<!-- <li><a href="./ui-alert.html">Successful Transactions</a></li>
 							<li><a href="./ui-badge.html">Cancelled Transactions</a></li>
 							<li><a href="./ui-button.html">Rated Merchant</a></li>
@@ -666,7 +664,10 @@
 							<span class="nav-text">Merchant Trans.</span>
 						</a>
 						<ul aria-expanded="false">
-							<li><a href="{% url 'business:state_list' %}">Merchant Set Transaction</a></li><!-- 
+							<li><a href="{% url 'business:state_list' %}">Start New Transaction</a></li>
+							<li><a href="{% url 'transaction:my-transaction' %}">My Set Transactions</a></li>
+							<li><a href="{% url 'transaction:my-transaction' %}">My Income History</a></li>
+							<!-- 
 							<li><a href="./form-element.html">Set Transaction</a></li>
 							<li><a href="./form-wizard.html">View Transaction</a></li>
 							<li><a href="./form-ckeditor.html">Complete Transaction</a></li>

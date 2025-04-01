@@ -114,9 +114,9 @@ class Transact(models.Model):
          
     ]
        
-    end_trans = models.CharField(max_length=50, choices=end_trans, default=active)
-    payment_confirmed = models.BooleanField(default=False, blank=True)
-    trans_status = models.BooleanField(default=False, help_text='ADMIN approves transaction after payment confirmed')
+    end_trans = models.CharField(max_length=50, choices=end_trans, default=pending)
+    payment_confirmed = models.BooleanField(default=False, blank=True, help_text='ADMIN approves transaction after payment confirmed')
+    trans_status = models.BooleanField(default=False, help_text='Transaction Completed')
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, blank=True)
 
@@ -164,7 +164,6 @@ class Comment(models.Model):
     transact_name = models.ForeignKey(Transact, null=True, on_delete=models.CASCADE, related_name='comments')
     comm_name = models. CharField(max_length=100, blank=True)
     required_amount = models.IntegerField(help_text='Enter Amount Needed', default= 0)
-    # reply = models.ForeignKey("comment", null=True, blank=True, on_delete=CASCADE, related_name='replies')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribers_comment')
     body = models.TextField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)
