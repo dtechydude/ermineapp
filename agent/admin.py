@@ -3,10 +3,10 @@ from .models import AgentList
 from import_export.admin import ImportExportModelAdmin
 
 
-class AgentProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class AgentListAdmin(ImportExportModelAdmin, admin.ModelAdmin):
            
-    list_display=('agent_id',)
-    list_filter  = ['agent_id',]
-    search_fields = ('agent_id',)
+    list_display=('username', 'first_name', 'last_name', 'phone', 'email', 'state')
+    list_filter  = ['state',]
+    search_fields = ('username', 'state')
 
-admin.site.register(AgentList, AgentProfileAdmin)
+admin.site.register(AgentList, AgentListAdmin)
