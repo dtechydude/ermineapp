@@ -28,12 +28,20 @@ def merchant_detail(request):
 
 #Displays all merchants
 def merchant_list(request):
-    allmerchant = Merchant.objects.all().order_by('-id')
+    allmerchant = Profile.objects.filter(user_role='merchant').order_by('-id')
     context = {
         'allmerchant': allmerchant
 
     }
     return render(request, 'merchant/merchant_list.html', context)
+
+def my_earning(request):
+    myearning = Transact.objects.filter(created_by=request.user).order_by('-id')
+    context = {
+        'myearning': myearning
+
+    }
+    return render(request, 'merchant/my_earning.html', context)
 
 
 #merchant create function

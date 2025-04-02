@@ -8,7 +8,7 @@
 	
 	<!-- PAGE TITLE HERE -->
     {% block title %}
-	<title>Subscribers-List</title>
+	<title>Verified Subscribers-List</title>
     {% endblock title %}
 	
 	<!-- FAVICONS ICON -->
@@ -86,18 +86,18 @@
 					<div class="card-action coin-tabs mb-3">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Subscribers</a>
+								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Verified Subscribers</a>
 							</li>
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Subscribers</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Subscribers</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<div class="d-flex align-items-center mb-3"> 
-						<a href="javascript:void(0);" class="btn btn-secondary">+ New Subscribers</a>
+						<a href="javascript:void(0);" class="btn btn-secondary">+ VERIFIED</a>
 						<div class="newest ms-3">
 							<select class="default-select">
 								<option>Newest</option>
@@ -125,12 +125,13 @@
 														<th>State & Address</th>
 														<th>Date Joined</th>
 														<th>Phone</th>
-														<th>Status</th>
-														<th class="bg-none"></th>
+														<th>Email</th>
+														
 													</tr>
 												</thead>
 												<tbody>
 													{% for sub in subscriber %}
+													{% if sub.nin_verified %}
 													
 													<tr>
 														<td>
@@ -140,204 +141,41 @@
 														</td>
 														<td>
 															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="{{ sub.profile.image.url }}" alt="">
+																<img class="me-3 rounded" src="{{ sub.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'subscriber:subscriber-detail' sub.id %}">{{sub.profile.user.username}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block">{{ sub.profile.user.first_name }} - {{ sub.profile.user.last_name}} </span>
-																	<span class=" fs-14  text-nowrap">{{ sub.job_status }}</span>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'users:profile-detail' sub.id %}">{{sub.user.username}}</a></h5>
+																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' sub.id %}">{{ sub.user.first_name }} - {{ sub.user.last_name}}</a> </span>
 																</div>
 															</div>
 														</td>
-														<td class="job-desk3">
-															<p class="mb-0">{{ sub.profile.state }} <br />{{ sub.profile.address }}</p>
+														<td class="">
+															<p class="mb-0">{{ sub.state }} <br />{{ sub.address }}</p>
 														</td>
 														<td>
 															<div>
-																<h5 class="text-nowrap">{{ sub.profile.created | date:"d/m/Y"}}</h5>
+																<h5 class="text-nowrap">{{ sub.created | date:"d/m/Y"}}</h5>
 																<span class="tex-secondary text-nowrap"></span>
 															</div>
 														</td>
 														<td>
 															<div>
 																
-																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>{{ sub.profile.phone }}</span>
+																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>{{ sub.user.profile.phone }}</span>
 															</div>
 														</td>
 														<td>
-															<span  class="font-w600 text-success">{{ sub.profile.user_status }}</span>
+															<span  class="font-w600 text-success">{{ sub.email }}</span>
 														</td>
-														<td>
-															<div class="dropdown dropend">
-																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																</a>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="https://fizcos.com">Edit</a>
-																	<a class="dropdown-item" href="https://schoolly.com.ng">Delete</a>
-																</div>
-															</div>
-														</td>
+												
 													</tr>
-													
+													{% endif %}
 													{% endfor %}
 													
 												</tbody>
 											</table>
 										</div>	
 									</div>
-									<!-- <div class="tab-pane" id="ActiveEmployee">
-										<div class="table-responsive">
-											<table class="table card-table display mb-4 shadow-hover table-responsive-lg" id="guestTable-all2">
-												<thead>
-													<tr>
-														<th class="bg-none">
-															<div class="form-check style-1">
-															  <input class="form-check-input" type="checkbox" value="" id="checkAll1">
-															</div>
-														</th>
-														<th>Name</th>
-														<th>Job Desk</th>
-														<th>Schedule</th>
-														<th>Contact</th>
-														<th>Status</th>
-														<th class="bg-none"></th>
-													</tr>
-												</thead>
-												<tbody>
-                                                   
-													<tr>
-														<td>
-															<div class="form-check style-1">
-															  <input class="form-check-input" type="checkbox" value="">
-															</div>
-														</td>
-														<td>
-															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="images/avatar/pic1.jpg" alt="">
-																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Adeola Ayodele</a></h5>
-																	<span class=" text-secondary fs-14 d-block">#12341225</span>
-																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
-																</div>
-															</div>
-														</td>
-														<td class="job-desk3">
-															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
-														</td>
-														<td>
-															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
-															</div>
-														</td>
-														<td>
-															<div>
-																
-																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
-															</div>
-														</td>
-														<td>
-															<span  class="font-w600 text-success">ACTIVE</span>
-														</td>
-														<td>
-															<div class="dropdown dropend">
-																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																</a>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
-																</div>
-															</div>
-														</td>
-													</tr>
-													
-												</tbody>
-											</table>
-										</div>		
-									</div> -->
-									<!-- <div class="tab-pane" id="InactiveEmployee">
-										<div class="table-responsive">
-											<table class="table card-table display mb-4 shadow-hover table-responsive-lg" id="guestTable-all3">
-												<thead>
-													<tr>
-														<th class="bg-none">
-															<div class="form-check style-1">
-															  <input class="form-check-input" type="checkbox" value="" id="checkAll2">
-															</div>
-														</th>
-														<th>Name</th>
-														<th>Job Desk</th>
-														<th>Schedule</th>
-														<th>Contact</th>
-														<th>Status</th>
-														<th class="bg-none"></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div class="form-check style-1">
-															  <input class="form-check-input" type="checkbox" value="">
-															</div>
-														</td>
-														<td>
-															<div class="concierge-list-bx d-flex align-items-center">
-																<img class="me-3 rounded" src="{% static 'pages/images/avatar/pic1.jpg'%}" alt="">
-																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="javascript:void(0);">Hamzat Idris</a></h5>
-																	<span class=" text-secondary fs-14 d-block">#12341225</span>
-																	<span class=" fs-14  text-nowrap">Joined on Aug 2th 2017</span>
-																</div>
-															</div>
-														</td>
-														<td class="job-desk3">
-															<p class="mb-0">Answering guest inquiries, directing phone calls, coordinating travel plans, and more.</p>
-														</td>
-														<td>
-															<div>
-																<h5 class="text-nowrap">Monday, Friday</h5>
-																<span class="tex-secondary text-nowrap">Check schedule</span>
-															</div>
-														</td>
-														<td>
-															<div>
-																
-																<span class="font-w600 text-nowrap"><i class="fas fa-phone-alt me-2 "></i>012 334 55512</span>
-															</div>
-														</td>
-														<td>
-															<span  class="font-w600 text-success">ACTIVE</span>
-														</td>
-														<td>
-															<div class="dropdown dropend">
-																<a href="javascript:void(0);" class="btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-																	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-																		<path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M18 12C18 12.5523 18.4477 13 19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																		<path d="M4 12C4 12.5523 4.44772 13 5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12Z" stroke="#262626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-																	</svg>
-																</a>
-																<div class="dropdown-menu">
-																	<a class="dropdown-item" href="javascript:void(0);">Edit</a>
-																	<a class="dropdown-item" href="javascript:void(0);">Delete</a>
-																</div>
-															</div>
-														</td>
-													</tr>
-													
-												</tbody>
-											</table>
-										</div>		
-									</div> -->
+									
 								</div>
 							</div>
 						</div>

@@ -42,10 +42,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class UserTwoUpdateForm(forms.ModelForm):
-    # email = forms.EmailField(required=False)
-    # first_name = forms.CharField()
-    # last_name = forms.CharField()
-
+   
     class Meta:
         model = User
         fields = [ 'last_name', ]

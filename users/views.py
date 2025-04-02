@@ -319,3 +319,10 @@ def currentstateprofile(request):
     }
 
     return render(request, 'users/current_state_update.html', context)
+
+def pending_kyc(request):
+    pending = Profile.objects.filter(nin_verified=False).order_by('-id')
+    context = {
+        'pending':pending
+    }
+    return render(request, 'users/members_pending_kyc_list.html', context)

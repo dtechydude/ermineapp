@@ -5,13 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 from django.urls import reverse, reverse_lazy
 from .forms import SubscriberRegisterForm, SubscriberUpdateForm
+from users.models import Profile
 
 
 
 
 # @login_required
 def subscriber_list(request):
-    subscriber = SubscriberList.objects.all().order_by('-id')
+    subscriber = Profile.objects.filter(user_role='subscriber').order_by('-id')
     context = {
         'subscriber' : subscriber,       
 

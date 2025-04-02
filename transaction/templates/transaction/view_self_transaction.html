@@ -122,11 +122,13 @@
                                                 <td>{{ trans.max_amount }}</td>
                                                 <td>{{ trans.min_amount }}</td>
                                                 <td>{{ trans.trans_date | date:"d/m/Y" }}</td>
-                                                {% if trans.trans_status == True %}
+                                                {% if trans.end_trans == 'complete' %}
                                                 <td style="color: green;">Completed</td>
-                                                {% else %}
+                                                {% elif trans.end_trans == 'pending' %}
                                                 <td style="color: red;">Pending</td>
-                                               
+                                                {% else %}
+                                                <td style="color: green;">Active</td>
+                                                                                               
                                                 {% endif%}
                                                 
                                             </tr>
@@ -137,9 +139,9 @@
                                             <tr>
                                                 <th>S/No.</th>
                                                 <th>Trans-ID</th>
-                                                <th>Merchant</th>
-                                                <th>Subscriber</th>
-                                                <th>Amount</th>
+                                                <th>State</th>
+                                                <th>Max Amount</th>
+                                                <th>Min Amount</th>                                                                                             
                                                 <th>Date</th>
                                                 <th>Status</th>
                                             </tr>

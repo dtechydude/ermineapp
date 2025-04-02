@@ -604,11 +604,8 @@
 							<li><a href="{% url 'transaction:company-income' %}">Company Income</a></li>						
 							<li><a href="{% url 'transaction:merchant-earning' %}">Merchant Earning</a></li>
 							<li><a href="{% url 'transaction:agent-earning' %}">Agent Earning</a></li>
-							<!-- <li><a href="concierge-list.html">Concierge List</a></li>
-							<li><a href="room-list.html">Room List</a></li>
-							<li><a href="reviews.html">Reviews</a></li>	 -->
-						</ul>
-						
+							
+						</ul>						
 					</li>
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="flaticon-050-info"></i>
@@ -617,9 +614,9 @@
 						<ul aria-expanded="false">
 							<li><a href="{% url 'users:members-list' %}">All Members List</a></li>
 							<li><a href="{% url 'merchant:merchant-list' %}">Verified Merchant</a></li>
-							<li><a href="./post-details.html">Verified Agent</a></li>
+							<li><a href="{% url 'agent:agent-list' %}">Verified Agent</a></li>
 							<li><a href="{% url 'subscriber:subscriber-list' %}">Verified Subscriber</a></li>
-							<li><a href="/admin/users/profile/">Update Members Profile</a></li>											
+							<li><a href="/admin/">Update Members Profile</a></li>											
 							
 						</ul>
 						{% endif %}
@@ -649,10 +646,6 @@
 							<li><a href="{% url 'transaction:select-merchant' %}">Start Transaction</a></li>
 							<li><a href="{% url 'transaction:subscriber-self-transact' %}">My Transaction History</a></li>
 							<li><a href="{% url 'transaction:my-transaction' %}">My Ongoing Transactions</a></li>
-							<!-- <li><a href="./ui-alert.html">Successful Transactions</a></li>
-							<li><a href="./ui-badge.html">Cancelled Transactions</a></li>
-							<li><a href="./ui-button.html">Rated Merchant</a></li>
-							<li><a href="./ui-modal.html">Transactions Report</a></li> -->
 							
 						</ul>
 					</li>
@@ -666,13 +659,8 @@
 						<ul aria-expanded="false">
 							<li><a href="{% url 'business:state_list' %}">Start New Transaction</a></li>
 							<li><a href="{% url 'transaction:my-transaction' %}">My Set Transactions</a></li>
-							<li><a href="{% url 'transaction:my-transaction' %}">My Income History</a></li>
-							<!-- 
-							<li><a href="./form-element.html">Set Transaction</a></li>
-							<li><a href="./form-wizard.html">View Transaction</a></li>
-							<li><a href="./form-ckeditor.html">Complete Transaction</a></li>
-							<li><a href="form-pickers.html">Cancelled Transaction</a></li>
-							<li><a href="form-validation.html">Pending Transaction</a></li> -->
+							<li><a href="{% url 'merchant:my-earning' %}">My Income History</a></li>
+							
 						</ul>
 					</li>
 					{% endif %}
@@ -684,7 +672,7 @@
 						{% if user.is_superuser or user.is_staff %}
 						<li><a href="{% url 'users:members-kyc-list' %}">All ID List</a></li>
 						<li><a href="/admin/">upload User KYC</a></li>
-						<li><a href="{% url 'pages:dashboard' %}">Pending KYC List</a></li>
+						<li><a href="{% url 'users:pending-kyc-list' %}">Pending KYC List</a></li>
 						
 						{% endif %}
 						{% if user.profile.user_role == 'merchant' or user.profile.user_role == 'subscriber'  %}
@@ -697,11 +685,16 @@
 						<span class="nav-text">Cooperative</span>
 					</a>
 				</li>
-				<li><a href="widget-basic.html" class="" aria-expanded="false">
-					<i class="flaticon-013-checkmark"></i>
-					<span class="nav-text">Referral Link</span>
-				</a>
-			</li>
+				
+			<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+				<i class="flaticon-022-copy"></i>
+				<span class="nav-text">My Referral Code</span>
+			</a>
+			<ul aria-expanded="false">							
+				<li><a href="#">{{user.profile.code}}</a></li>
+		
+			</ul>
+		</li>
 
 					<li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-043-menu"></i>

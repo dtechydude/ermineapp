@@ -6,7 +6,7 @@ from users.models import Profile
 
 
 class AgentList(models.Model):
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    agent_id = models.OneToOneField(User, on_delete=models.CASCADE)
     select = 'Select'
     business_owner = 'Business_Owner'
     employee = 'Employee' 
@@ -25,8 +25,8 @@ class AgentList(models.Model):
     business_phone = models.CharField(max_length=16, blank=True)
     
     class Meta:
-        ordering = ['profile']
+        ordering = ['agent_id']
 
     def __str__(self):
-        return f'{self.profile.user.username} - {self.profile.code}'
+        return f'{self.agent_id.username} - {self.agent_id.profile.code}'
 

@@ -11,6 +11,7 @@ urlpatterns = [
      path('create/', merchant_views.merchantform, name="merchant-form"),
      # path('merchant_detail/', merchant_views.merchant_detail, name='merchant-detail'),
      path('merchant_list/', merchant_views.merchant_list, name='merchant-list'),
+     path('my_earning/', merchant_views.my_earning, name='my-earning'),
      path('create/',MerchantCreateView.as_view(), name='merchant-create'),
      # path('create_merchant/',MerchantCreateView.as_view(), name='merchant-create'),
      path('<str:id>/', MerchantDetailView.as_view(), name="merchant-detail"), 

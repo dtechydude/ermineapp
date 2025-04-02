@@ -86,14 +86,9 @@
 					<div class="card-action coin-tabs mb-3">
 						<ul class="nav nav-tabs" role="tablist">
 							<li class="nav-item">
-								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Verified Merchant</a>
+								<a class="nav-link active" data-bs-toggle="tab" href="#AllEmployee">All Verified Agent</a>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#ActiveEmployee">Active Subscribers</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#InactiveEmployee">Inactive Subscribers</a>
-							</li> -->
+							
 						</ul>
 					</div>
 					<div class="d-flex align-items-center mb-3"> 
@@ -130,7 +125,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													{% for sub in allmerchant %}
+													{% for sub in allagent %}
 													{% if sub.nin_verified %}
 													
 													<tr>
@@ -143,8 +138,9 @@
 															<div class="concierge-list-bx d-flex align-items-center">
 																<img class="me-3 rounded" src="{{ sub.user.profile.image.url }}" alt="">
 																<div>
-																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'users:profile-detail' sub.id %}">{{sub.user.username}}</a></h5>
-																	<span class=" text-secondary fs-14 d-block"><a class="text-black" href="{% url 'users:profile-detail' sub.id %}">{{ sub.user.first_name }} - {{ sub.user.last_name}} </a></span>
+																	<h5 class="fs-16 mb-0 text-nowrap"><a class="text-black" href="{% url 'subscriber:subscriber-detail' sub.id %}">{{sub.user.username}}</a></h5>
+																	<span class=" text-secondary fs-14 d-block">{{ sub.user.first_name }} - {{ sub.user.last_name}} </span>
+																	<span class=" fs-14  text-nowrap">{{ sub.job_status }}</span>
 																</div>
 															</div>
 														</td>

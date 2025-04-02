@@ -11,6 +11,7 @@ urlpatterns = [
 
      path('members_list/', users_views.members_list, name='members-list'),
      path('members_kyc_list/', users_views.members_kyc_list, name='members-kyc-list'),
+     path('pending_kyc_list/', users_views.pending_kyc, name='pending-kyc-list'),
      path('register/', users_views.register, name='register'),
 
      path('profile/', users_views.profile, name="profile"),
